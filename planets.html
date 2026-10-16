@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>COSMOVerse | Interactive Solar System Map</title>
+    <!-- External CSS -->
+    <link href="style.css" rel="stylesheet" />
+    <style>
+      .image-map-container {
+        text-align: center;
+        margin: 25px 0;
+        overflow-x: auto;
+      }
+
+      .solar-map-img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 24px;
+        border: 4px solid var(--primary-purple);
+        box-shadow: 0 0 35px rgba(168, 85, 247, 0.55);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+      }
+
+      .solar-map-img:hover {
+        transform: scale(1.01);
+        box-shadow: 0 0 55px rgba(232, 121, 249, 0.85);
+      }
+
+      .planet-anchor {
+        scroll-margin-top: 100px;
+      }
+
+      .planet-header-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <a id="top" class="planet-anchor"></a>
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        <span class="nav-logo">COSMOVerse</span>
+      </a>
+
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Navigation">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="planets.html" class="nav-link active">Planets</a></li>
+        <li><a href="missions.html" class="nav-link">Exploration</a></li>
+        <li><a href="scientists.html" class="nav-link">Scientists</a></li>
+        <li><a href="careers.html" class="nav-link">Careers</a></li>
+        <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+        <li><a href="servlet-form.html" class="nav-link">Register</a></li>
+        <li><a href="login.html" class="nav-link nav-btn">Login</a></li>
+      </ul>
+    </nav>
+
+    <!-- ================= MAIN CONTAINER ================= -->
+    <main class="page-container">
+      <section class="glass-card" style="text-align: center;">
+        <div class="cosmic-badge">
+          <span class="pulse-dot"></span> Optical Clickable Telemetry Map
+        </div>
+
+        <h1 class="section-title">★ INTERACTIVE SOLAR SYSTEM IMAGE MAP ★</h1>
+        <p class="section-subtitle">Click any celestial body or planet name in the visual map below</p>
+        
+        <p style="font-size: 16.5px; max-width: 820px; margin: 0 auto 25px; color: var(--text-main);">
+          The Solar System consists of our Sun and eight unique planets gravitationally bound in orbital resonance. 
+          Use the interactive image map below or click any quick navigation capsule to view comprehensive planetary specifications.
+        </p>
+
+        <!-- CELESTIAL QUICK DOCK -->
+        <div class="planet-dock">
+          <a href="#sun" class="planet-dock-btn">☀ Sun</a>
+          <a href="#mercury" class="planet-dock-btn">☿ Mercury</a>
+          <a href="#venus" class="planet-dock-btn">♀ Venus</a>
+          <a href="#earth" class="planet-dock-btn">🌍 Earth</a>
+          <a href="#mars" class="planet-dock-btn">♂ Mars</a>
+          <a href="#jupiter" class="planet-dock-btn">♃ Jupiter</a>
+          <a href="#saturn" class="planet-dock-btn">♄ Saturn</a>
+          <a href="#uranus" class="planet-dock-btn">♅ Uranus</a>
+          <a href="#neptune" class="planet-dock-btn">♆ Neptune</a>
+        </div>
+
+        <!-- SOLAR SYSTEM IMAGE MAP -->
+        <div class="image-map-container">
+          <img
+            src="images/Solar.jpg"
+            usemap="#planetmap"
+            width="1000"
+            alt="Interactive Solar System Map"
+            class="solar-map-img"
+            onerror="this.src='../images/Solar.jpg';"
+          />
+
+          <map name="planetmap">
+            <!-- SUN -->
+            <area shape="circle" coords="122,122,88" href="#sun" alt="Sun" title="Explore the Sun" />
+            <area shape="rect" coords="85,255,170,298" href="#sun" alt="Sun" title="Explore the Sun" />
+
+            <!-- MERCURY -->
+            <area shape="circle" coords="244,293,22" href="#mercury" alt="Mercury" title="Explore Mercury" />
+            <area shape="rect" coords="190,372,308,420" href="#mercury" alt="Mercury" title="Explore Mercury" />
+
+            <!-- VENUS -->
+            <area shape="circle" coords="359,312,24" href="#venus" alt="Venus" title="Explore Venus" />
+            <area shape="rect" coords="312,181,410,230" href="#venus" alt="Venus" title="Explore Venus" />
+
+            <!-- EARTH -->
+            <area shape="circle" coords="415,396,27" href="#earth" alt="Earth" title="Explore Earth" />
+            <area shape="rect" coords="372,525,478,575" href="#earth" alt="Earth" title="Explore Earth" />
+
+            <!-- MARS -->
+            <area shape="circle" coords="532,403,25" href="#mars" alt="Mars" title="Explore Mars" />
+            <area shape="rect" coords="492,273,570,330" href="#mars" alt="Mars" title="Explore Mars" />
+
+            <!-- JUPITER -->
+            <area shape="circle" coords="703,229,61" href="#jupiter" alt="Jupiter" title="Explore Jupiter" />
+            <area shape="rect" coords="646,15,763,74" href="#jupiter" alt="Jupiter" title="Explore Jupiter" />
+
+            <!-- SATURN -->
+            <area shape="circle" coords="737,404,64" href="#saturn" alt="Saturn" title="Explore Saturn" />
+            <area shape="rect" coords="683,526,787,592" href="#saturn" alt="Saturn" title="Explore Saturn" />
+
+            <!-- URANUS -->
+            <area shape="circle" coords="884,293,45" href="#uranus" alt="Uranus" title="Explore Uranus" />
+            <area shape="rect" coords="845,98,960,160" href="#uranus" alt="Uranus" title="Explore Uranus" />
+
+            <!-- NEPTUNE -->
+            <area shape="circle" coords="947,420,35" href="#neptune" alt="Neptune" title="Explore Neptune" />
+            <area shape="rect" coords="908,527,1000,598" href="#neptune" alt="Neptune" title="Explore Neptune" />
+          </map>
+        </div>
+
+        <!-- PLANET CLASSIFICATION QUICK FILTER -->
+        <div class="filter-bar">
+          <button type="button" class="filter-btn active" onclick="filterPlanets('all', this)">✦ All 9 Celestial Bodies</button>
+          <button type="button" class="filter-btn" onclick="filterPlanets('star', this)">☀ Central Star (Sun)</button>
+          <button type="button" class="filter-btn" onclick="filterPlanets('terrestrial', this)">🪨 Terrestrial Rocky Planets</button>
+          <button type="button" class="filter-btn" onclick="filterPlanets('gas', this)">🌀 Gas Giants</button>
+          <button type="button" class="filter-btn" onclick="filterPlanets('ice', this)">❄️ Ice Giants</button>
+        </div>
+      </section>
+
+      <!-- ================= PLANET SPECIFICATION SECTIONS ================= -->
+
+      <!-- SUN -->
+      <section id="sun" class="glass-card planet-anchor" data-planet-type="star">
+        <div class="planet-header-bar">
+          <h2 style="color: var(--accent-gold); font-size: 32px; font-family: var(--font-heading); margin: 0;">☀ SUN ☀</h2>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <span class="data-chip">Type: Yellow Dwarf Star</span>
+            <span class="data-chip">Diameter: 1.39M km</span>
+            <span class="data-chip">Core Temp: 15 Million °C</span>
+          </div>
+        </div>
+
+        <p style="font-size: 17px; line-height: 1.8; margin-bottom: 25px;">
+          The Sun is the center of our Solar System and is the largest object in it. It is a massive ball of hot hydrogen and helium gases that produces energy through nuclear fusion. This energy provides light and heat to all the planets. The Sun's strong gravitational force keeps every planet, moon, asteroid and comet revolving around it. It was formed about 4.6 billion years ago and will continue shining for another 5 billion years.
+        </p>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Type</td><td>Star (G-Type Main-Sequence)</td></tr>
+              <tr><td>Diameter</td><td>1.39 Million km</td></tr>
+              <tr><td>Age</td><td>4.6 Billion Years</td></tr>
+              <tr><td>Surface Temperature</td><td>5500°C</td></tr>
+              <tr><td>Core Temperature</td><td>15 Million°C</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="text-align: right;">
+          <a href="#top" class="back-to-top">⬆ Back to Top</a>
+        </div>
+      </section>
+
+      <!-- MERCURY -->
+      <section id="mercury" class="glass-card planet-anchor" data-planet-type="terrestrial">
+        <div class="planet-header-bar">
+          <h2 style="color: #ffaa00; font-size: 32px; font-family: var(--font-heading); margin: 0;">☿ MERCURY ☿</h2>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <span class="data-chip">Position: 1st Planet</span>
+            <span class="data-chip">Orbit: 88 Days</span>
+            <span class="data-chip">Moons: 0</span>
+          </div>
+        </div>
+
+        <p style="font-size: 17px; line-height: 1.8; margin-bottom: 25px;">
+          Mercury is the smallest and the closest planet to the Sun. It has a rocky surface filled with craters, similar to Earth's Moon. Mercury has no natural satellites and almost no atmosphere, causing extremely hot days and freezing nights. It completes one orbit around the Sun in only 88 Earth days, making it the fastest planet in our Solar System.
+        </p>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Position</td><td>1st Planet</td></tr>
+              <tr><td>Diameter</td><td>4,879 km</td></tr>
+              <tr><td>Moons</td><td>0</td></tr>
+              <tr><td>Length of Day</td><td>176 Earth Days</td></tr>
+              <tr><td>Length of Year</td><td>88 Earth Days</td></tr>
+              <tr><td>Average Temperature</td><td>167°C</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="text-align: right;">
+          <a href="#top" class="back-to-top">⬆ Back to Top</a>
+        </div>
+      </section>
+
+      <!-- VENUS -->
+      <section id="venus" class="glass-card planet-anchor" data-planet-type="terrestrial">
+        <div class="planet-header-bar">
+          <h2 style="color: #ffd700; font-size: 32px; font-family: var(--font-heading); margin: 0;">♀ VENUS ♀</h2>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <span class="data-chip">Position: 2nd Planet</span>
+            <span class="data-chip">Temp: 465°C (Hottest)</span>
+            <span class="data-chip">Atmosphere: Dense CO₂</span>
+          </div>
+        </div>
+
+        <p style="font-size: 17px; line-height: 1.8; margin-bottom: 25px;">
+          Venus is the second planet from the Sun and is often called Earth's Twin because both planets are nearly the same size. However, Venus has a very thick carbon dioxide atmosphere that traps heat, making it the hottest planet in the Solar System. It rotates in the opposite direction compared to most planets and has no moons.
+        </p>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Position</td><td>2nd Planet</td></tr>
+              <tr><td>Diameter</td><td>12,104 km</td></tr>
+              <tr><td>Moons</td><td>0</td></tr>
+              <tr><td>Length of Day</td><td>243 Earth Days</td></tr>
+              <tr><td>Length of Year</td><td>225 Earth Days</td></tr>
+              <tr><td>Average Temperature</td><td>465°C</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="text-align: right;">
+          <a href="#top" class="back-to-top">⬆ Back to Top</a>
+        </div>
+      </section>
+
+      <!-- EARTH -->
+      <section id="earth" class="glass-card planet-anchor" data-planet-type="terrestrial">
+        <div class="planet-header-bar">
+          <h2 style="color: var(--accent-green); font-size: 32px; font-family: var(--font-heading); margin: 0;">🌍 EARTH 🌍</h2>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <span class="data-chip">Position: 3rd Planet</span>
+            <span class="data-chip">Water: 71% Surface</span>
+            <span class="data-chip">Moons: 1 (The Moon)</span>
+          </div>
+        </div>
+
+        <p style="font-size: 17px; line-height: 1.8; margin-bottom: 25px;">
+          Earth is the third planet from the Sun and the only known planet that supports life. Around 71% of Earth's surface is covered with water, while the remaining land contains mountains, forests, deserts and plains. Earth has one natural satellite, the Moon. Its atmosphere protects living organisms from harmful radiation and provides the oxygen needed for life.
+        </p>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Position</td><td>3rd Planet</td></tr>
+              <tr><td>Diameter</td><td>12,742 km</td></tr>
+              <tr><td>Moons</td><td>1</td></tr>
+              <tr><td>Length of Day</td><td>24 Hours</td></tr>
+              <tr><td>Length of Year</td><td>365.25 Days</td></tr>
+              <tr><td>Average Temperature</td><td>15°C</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="text-align: right;">
+          <a href="#top" class="back-to-top">⬆ Back to Top</a>
+        </div>
+      </section>
+
+      <!-- MARS -->
+      <section id="mars" class="glass-card planet-anchor" data-planet-type="terrestrial">
+        <div class="planet-header-bar">
+          <h2 style="color: var(--accent-red); font-size: 32px; font-family: var(--font-heading); margin: 0;">♂ MARS ♂</h2>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <span class="data-chip">Position: 4th Planet</span>
+            <span class="data-chip">Landmark: Olympus Mons</span>
+            <span class="data-chip">Moons: 2 (Phobos & Deimos)</span>
+          </div>
+        </div>
+
+        <p style="font-size: 17px; line-height: 1.8; margin-bottom: 25px;">
+          Mars is the fourth planet from the Sun and is known as the Red Planet because of the iron oxide (rust) covering its surface. Scientists believe that Mars once had rivers and lakes billions of years ago. It has two small moons named Phobos and Deimos. Mars is home to Olympus Mons, the largest volcano in the Solar System, and Valles Marineris, one of the largest canyons ever discovered.
+        </p>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Position</td><td>4th Planet</td></tr>
+              <tr><td>Diameter</td><td>6,779 km</td></tr>
+              <tr><td>Moons</td><td>2</td></tr>
+              <tr><td>Length of Day</td><td>24.6 Hours</td></tr>
+              <tr><td>Length of Year</td><td>687 Earth Days</td></tr>
+              <tr><td>Average Temperature</td><td>-63°C</td></tr>
+              <tr><td>Famous Landmark</td><td>Olympus Mons</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="text-align: right;">
+          <a href="#top" class="back-to-top">⬆ Back to Top</a>
+        </div>
+      </section>
+
+      <!-- JUPITER -->
+      <section id="jupiter" class="glass-card planet-anchor" data-planet-type="gas">
+        <div class="planet-header-bar">
+          <h2 style="color: #ffaa55; font-size: 32px; font-family: var(--font-heading); margin: 0;">♃ JUPITER ♃</h2>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <span class="data-chip">Position: 5th Planet</span>
+            <span class="data-chip">Type: Gas Giant (Largest)</span>
+            <span class="data-chip">Moons: 95+ (Ganymede)</span>
+          </div>
+        </div>
+
+        <p style="font-size: 17px; line-height: 1.8; margin-bottom: 25px;">
+          Jupiter is the fifth planet from the Sun and the largest planet in the Solar System. It is a gas giant made mostly of hydrogen and helium. Jupiter is famous for the Great Red Spot, a giant storm that has existed for hundreds of years. It has more than 95 known moons, including Ganymede, the largest moon in the Solar System.
+        </p>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Position</td><td>5th Planet</td></tr>
+              <tr><td>Diameter</td><td>139,820 km</td></tr>
+              <tr><td>Moons</td><td>95+</td></tr>
+              <tr><td>Length of Day</td><td>10 Hours</td></tr>
+              <tr><td>Length of Year</td><td>11.86 Earth Years</td></tr>
+              <tr><td>Planet Type</td><td>Gas Giant</td></tr>
+              <tr><td>Famous Feature</td><td>Great Red Spot</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="text-align: right;">
+          <a href="#top" class="back-to-top">⬆ Back to Top</a>
+        </div>
+      </section>
+
+      <!-- SATURN -->
+      <section id="saturn" class="glass-card planet-anchor" data-planet-type="gas">
+        <div class="planet-header-bar">
+          <h2 style="color: #e6c280; font-size: 32px; font-family: var(--font-heading); margin: 0;">♄ SATURN ♄</h2>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <span class="data-chip">Position: 6th Planet</span>
+            <span class="data-chip">Feature: Ring System</span>
+            <span class="data-chip">Moons: 146+ (Titan)</span>
+          </div>
+        </div>
+
+        <p style="font-size: 17px; line-height: 1.8; margin-bottom: 25px;">
+          Saturn is the sixth planet from the Sun and is well known for its magnificent ring system made of billions of particles of ice, dust and rock. It is the second-largest planet in our Solar System and belongs to the gas giant family. Saturn has more than 140 confirmed moons, with Titan being the largest. Saturn is the least dense planet in the Solar System.
+        </p>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Position</td><td>6th Planet</td></tr>
+              <tr><td>Diameter</td><td>116,460 km</td></tr>
+              <tr><td>Moons</td><td>146+</td></tr>
+              <tr><td>Length of Day</td><td>10.7 Hours</td></tr>
+              <tr><td>Length of Year</td><td>29.5 Earth Years</td></tr>
+              <tr><td>Planet Type</td><td>Gas Giant</td></tr>
+              <tr><td>Famous Feature</td><td>Beautiful Ring System</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="text-align: right;">
+          <a href="#top" class="back-to-top">⬆ Back to Top</a>
+        </div>
+      </section>
+
+      <!-- URANUS -->
+      <section id="uranus" class="glass-card planet-anchor" data-planet-type="ice">
+        <div class="planet-header-bar">
+          <h2 style="color: #70d6ff; font-size: 32px; font-family: var(--font-heading); margin: 0;">♅ URANUS ♅</h2>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <span class="data-chip">Position: 7th Planet</span>
+            <span class="data-chip">Type: Ice Giant</span>
+            <span class="data-chip">Temp: -224°C</span>
+          </div>
+        </div>
+
+        <p style="font-size: 17px; line-height: 1.8; margin-bottom: 25px;">
+          Uranus is the seventh planet from the Sun and is known as an Ice Giant. It was discovered by William Herschel in 1781, making it the first planet discovered with a telescope. Uranus appears blue-green because methane gas in its atmosphere absorbs red light. Unlike most planets, Uranus rotates almost completely on its side, causing extremely long seasons.
+        </p>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Position</td><td>7th Planet</td></tr>
+              <tr><td>Diameter</td><td>50,724 km</td></tr>
+              <tr><td>Moons</td><td>27</td></tr>
+              <tr><td>Length of Day</td><td>17 Hours</td></tr>
+              <tr><td>Length of Year</td><td>84 Earth Years</td></tr>
+              <tr><td>Planet Type</td><td>Ice Giant</td></tr>
+              <tr><td>Average Temperature</td><td>-224°C</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="text-align: right;">
+          <a href="#top" class="back-to-top">⬆ Back to Top</a>
+        </div>
+      </section>
+
+      <!-- NEPTUNE -->
+      <section id="neptune" class="glass-card planet-anchor" data-planet-type="ice">
+        <div class="planet-header-bar">
+          <h2 style="color: #818cf8; font-size: 32px; font-family: var(--font-heading); margin: 0;">♆ NEPTUNE ♆</h2>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <span class="data-chip">Position: 8th Planet</span>
+            <span class="data-chip">Orbit: 165 Earth Years</span>
+            <span class="data-chip">Winds: 2,000+ km/h</span>
+          </div>
+        </div>
+
+        <p style="font-size: 17px; line-height: 1.8; margin-bottom: 25px;">
+          Neptune is the eighth and farthest planet from the Sun. It is an Ice Giant with a deep blue appearance due to methane in its atmosphere. Neptune has the fastest winds in the Solar System, reaching speeds of over 2,000 kilometres per hour. It was discovered in 1846 through mathematical predictions before being directly observed.
+        </p>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Position</td><td>8th Planet</td></tr>
+              <tr><td>Diameter</td><td>49,244 km</td></tr>
+              <tr><td>Moons</td><td>16</td></tr>
+              <tr><td>Length of Day</td><td>16 Hours</td></tr>
+              <tr><td>Length of Year</td><td>165 Earth Years</td></tr>
+              <tr><td>Planet Type</td><td>Ice Giant</td></tr>
+              <tr><td>Average Temperature</td><td>-214°C</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="text-align: right;">
+          <a href="#top" class="back-to-top">⬆ Back to Top</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+      <p class="footer-quote">🌌 Thank You for Exploring the Solar System! 🌌</p>
+      
+      <div class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="planets.html">Planets</a>
+        <a href="missions.html">Exploration</a>
+        <a href="scientists.html">Scientists</a>
+        <a href="careers.html">Careers</a>
+        <a href="quiz.html">Space Quiz</a>
+        <a href="servlet-form.html">Join Cadet Program</a>
+        <a href="login.html">Explorer Login</a>
+      </div>
+
+      <p class="footer-text">COSMOVerse Solar System Interactive Image Map | Planetary Exploration Portal</p>
+    </footer>
+
+    <script>
+      function toggleMenu() {
+        document.getElementById('navLinks').classList.toggle('show');
+      }
+
+      function filterPlanets(type, btnElement) {
+        document.querySelectorAll('.filter-bar .filter-btn').forEach(btn => btn.classList.remove('active'));
+        if (btnElement) btnElement.classList.add('active');
+
+        const sections = document.querySelectorAll('main > section[data-planet-type]');
+        sections.forEach(sec => {
+          if (type === 'all' || sec.getAttribute('data-planet-type') === type) {
+            sec.style.display = 'block';
+            sec.style.opacity = '1';
+          } else {
+            sec.style.display = 'none';
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

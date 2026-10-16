@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COSMOVerse | Fleet Cadet Roster & XML Protocol</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ================= NAVBAR ================= -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-logo">COSMOVerse</span>
+    </a>
+
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Navigation">☰</button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="planets.html" class="nav-link">Planets</a></li>
+      <li><a href="missions.html" class="nav-link">Exploration</a></li>
+      <li><a href="scientists.html" class="nav-link">Scientists</a></li>
+      <li><a href="careers.html" class="nav-link">Careers</a></li>
+      <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+      <li><a href="servlet-form.html" class="nav-link">Register</a></li>
+      <li><a href="login.html" class="nav-link nav-btn">Login</a></li>
+    </ul>
+  </nav>
+
+  <!-- ================= MAIN CONTAINER ================= -->
+  <main class="page-container">
+    <section class="glass-card" style="max-width: 1050px; margin: 0 auto 35px;">
+      <div style="text-align: center;">
+        <div class="cosmic-badge">
+          <span class="pulse-dot"></span> Standardized Space Data Interchange
+        </div>
+        <h1 class="section-title">📜 FLEET CADET ROSTER & XML PROTOCOL</h1>
+        <p class="section-subtitle">Structured Planetary Cadet Interchange & XSLT Transformation Engine</p>
+      </div>
+
+      <!-- TERMINAL STATUS BAR -->
+      <div class="terminal-status-bar">
+        <span>PROTOCOL: W3C XML 1.0</span>
+        <span>SCHEMA: COSMOVERSE.XSD (VALIDATED)</span>
+        <span>TRANSFORM: XSLT STYLESHEET ACTIVE</span>
+      </div>
+
+      <!-- INTERACTIVE 3-TAB SWITCHER -->
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchXmlTab('visual', this)">
+          ✨ 1. Transformed Cadet Grid (XSLT View)
+        </button>
+        <button class="tab-btn" onclick="switchXmlTab('xml', this)">
+          📜 2. Raw XML Telemetry Stream
+        </button>
+        <button class="tab-btn" onclick="switchXmlTab('xsd', this)">
+          📐 3. XSD Schema Rules
+        </button>
+      </div>
+
+      <!-- TAB 1: VISUAL TRANSFORMED CADET DIRECTORY -->
+      <div id="tab-visual" class="tab-pane active">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+          <h3 style="font-family: var(--font-heading); color: var(--accent-neon-purple); font-size: 20px;">
+            🎨 XSLT TRANSFORMED CADET DIRECTORY (10 RECORDS)
+          </h3>
+          <span class="data-chip" style="font-size: 11px;">Schema Validated: OK</span>
+        </div>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Cadet ID</th>
+                <th>Cadet Name</th>
+                <th>Assigned Outpost</th>
+                <th>Mission Specialization</th>
+                <th>Clearance Tier</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code style="color: var(--accent-neon-purple);">CAD-101</code></td><td><strong>Alex Mercer</strong></td><td style="color: var(--accent-gold);">Mars Colony</td><td>Pilot Commander</td><td><span class="data-chip">Level 5 Alpha</span></td></tr>
+              <tr><td><code style="color: var(--accent-neon-purple);">CAD-102</code></td><td><strong>Sophia Turner</strong></td><td style="color: var(--accent-gold);">Jupiter Station</td><td>Astrophysicist</td><td><span class="data-chip">Level 4 Beta</span></td></tr>
+              <tr><td><code style="color: var(--accent-neon-purple);">CAD-103</code></td><td><strong>David Miller</strong></td><td style="color: var(--accent-gold);">Saturn Outpost</td><td>Orbital Engineer</td><td><span class="data-chip">Level 4 Gamma</span></td></tr>
+              <tr><td><code style="color: var(--accent-neon-purple);">CAD-104</code></td><td><strong>Elena Rostova</strong></td><td style="color: var(--accent-gold);">Neptune Cryo Lab</td><td>Exoplanet Researcher</td><td><span class="data-chip">Level 5 Omega</span></td></tr>
+              <tr><td><code style="color: var(--accent-neon-purple);">CAD-105</code></td><td><strong>Lucas Vance</strong></td><td style="color: var(--accent-gold);">Venus Aerostat</td><td>Atmospheric Specialist</td><td><span class="data-chip">Level 3 Delta</span></td></tr>
+              <tr><td><code style="color: var(--accent-neon-purple);">CAD-106</code></td><td><strong>Hannah Abbott</strong></td><td style="color: var(--accent-gold);">Mercury Solar Base</td><td>Thermal Shield Dynamics</td><td><span class="data-chip">Level 4 Alpha</span></td></tr>
+              <tr><td><code style="color: var(--accent-neon-purple);">CAD-107</code></td><td><strong>Gabriel Thorne</strong></td><td style="color: var(--accent-gold);">Uranus Station</td><td>Cryogenic Analyst</td><td><span class="data-chip">Level 4 Beta</span></td></tr>
+              <tr><td><code style="color: var(--accent-neon-purple);">CAD-108</code></td><td><strong>Chloe Bennett</strong></td><td style="color: var(--accent-gold);">Earth Moon Base</td><td>Telemetry Operations</td><td><span class="data-chip">Level 5 Alpha</span></td></tr>
+              <tr><td><code style="color: var(--accent-neon-purple);">CAD-109</code></td><td><strong>Nathan Drake</strong></td><td style="color: var(--accent-gold);">Kuiper Belt Outpost</td><td>Deep Space Recon</td><td><span class="data-chip">Level 3 Gamma</span></td></tr>
+              <tr><td><code style="color: var(--accent-neon-purple);">CAD-110</code></td><td><strong>Zoe Kravitz</strong></td><td style="color: var(--accent-gold);">Alpha Centauri Mission</td><td>Interstellar Navigation</td><td><span class="data-chip">Level 5 Omega</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 2: RAW XML TELEMETRY STREAM -->
+      <div id="tab-xml" class="tab-pane">
+        <div class="code-console-wrapper">
+          <div class="code-console-header">
+            <span>FILE: cosmoverse.xml • ENCODING: UTF-8</span>
+            <button type="button" class="copy-token-btn" onclick="copyXmlCode()">
+              📋 Copy XML Data
+            </button>
+          </div>
+          <pre class="code-console-body" id="xmlCodeContent">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;?xml-stylesheet type="text/xsl" href="cosmoverse.xsl"?&gt;
+&lt;cosmoverse&gt;
+  &lt;cadet id="CAD-101"&gt;
+    &lt;name&gt;Alex Mercer&lt;/name&gt;
+    &lt;assignedPlanet&gt;Mars&lt;/assignedPlanet&gt;
+    &lt;missionRole&gt;Pilot Commander&lt;/missionRole&gt;
+    &lt;clearanceLevel&gt;Level 5 Alpha&lt;/clearanceLevel&gt;
+  &lt;/cadet&gt;
+  &lt;cadet id="CAD-102"&gt;
+    &lt;name&gt;Sophia Turner&lt;/name&gt;
+    &lt;assignedPlanet&gt;Jupiter&lt;/assignedPlanet&gt;
+    &lt;missionRole&gt;Astrophysicist&lt;/missionRole&gt;
+    &lt;clearanceLevel&gt;Level 4 Beta&lt;/clearanceLevel&gt;
+  &lt;/cadet&gt;
+  &lt;cadet id="CAD-103"&gt;
+    &lt;name&gt;David Miller&lt;/name&gt;
+    &lt;assignedPlanet&gt;Saturn&lt;/assignedPlanet&gt;
+    &lt;missionRole&gt;Orbital Engineer&lt;/missionRole&gt;
+    &lt;clearanceLevel&gt;Level 4 Gamma&lt;/clearanceLevel&gt;
+  &lt;/cadet&gt;
+  &lt;cadet id="CAD-104"&gt;
+    &lt;name&gt;Elena Rostova&lt;/name&gt;
+    &lt;assignedPlanet&gt;Neptune&lt;/assignedPlanet&gt;
+    &lt;missionRole&gt;Exoplanet Researcher&lt;/missionRole&gt;
+    &lt;clearanceLevel&gt;Level 5 Omega&lt;/clearanceLevel&gt;
+  &lt;/cadet&gt;
+  &lt;cadet id="CAD-105"&gt;
+    &lt;name&gt;Lucas Vance&lt;/name&gt;
+    &lt;assignedPlanet&gt;Venus&lt;/assignedPlanet&gt;
+    &lt;missionRole&gt;Atmospheric Specialist&lt;/missionRole&gt;
+    &lt;clearanceLevel&gt;Level 3 Delta&lt;/clearanceLevel&gt;
+  &lt;/cadet&gt;
+&lt;/cosmoverse&gt;</pre>
+        </div>
+      </div>
+
+      <!-- TAB 3: XSD VALIDATION SCHEMA -->
+      <div id="tab-xsd" class="tab-pane">
+        <div class="code-console-wrapper">
+          <div class="code-console-header">
+            <span>FILE: cosmoverse.xsd • XML SCHEMA DEFINITION</span>
+            <button type="button" class="copy-token-btn" onclick="copyXsdCode()">
+              📋 Copy XSD Schema
+            </button>
+          </div>
+          <pre class="code-console-body" id="xsdCodeContent">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;xs:element name="cosmoverse"&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:sequence&gt;
+        &lt;xs:element name="cadet" maxOccurs="unbounded"&gt;
+          &lt;xs:complexType&gt;
+            &lt;xs:sequence&gt;
+              &lt;xs:element name="name" type="xs:string"/&gt;
+              &lt;xs:element name="assignedPlanet" type="xs:string"/&gt;
+              &lt;xs:element name="missionRole" type="xs:string"/&gt;
+              &lt;xs:element name="clearanceLevel" type="xs:string"/&gt;
+            &lt;/xs:sequence&gt;
+            &lt;xs:attribute name="id" type="xs:string" use="required"/&gt;
+          &lt;/xs:complexType&gt;
+        &lt;/xs:element&gt;
+      &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+&lt;/xs:schema&gt;</pre>
+        </div>
+      </div>
+
+      <div class="btn-group" style="margin-top: 30px; justify-content: center;">
+        <a href="cosmoverse.xml" target="_blank" class="btn btn-primary">📄 Open cosmoverse.xml Source</a>
+        <a href="db-explorer.html" class="btn btn-secondary">🗄️ Explorer Registry →</a>
+        <a href="index.html" class="btn btn-accent">🏠 Return Home</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <p class="footer-quote">🌌 "Somewhere, something incredible is waiting to be known." — Carl Sagan 🌌</p>
+    
+    <div class="footer-nav">
+      <a href="index.html">Home</a>
+      <a href="planets.html">Planets</a>
+      <a href="missions.html">Exploration</a>
+      <a href="scientists.html">Scientists</a>
+      <a href="careers.html">Careers</a>
+      <a href="quiz.html">Space Quiz</a>
+      <a href="servlet-form.html">Join Cadet Program</a>
+      <a href="login.html">Explorer Login</a>
+    </div>
+
+    <p class="footer-text">COSMOVerse Standardized Space Data Protocol & XML Catalog Engine</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('show');
+    }
+
+    function switchXmlTab(tabKey, btnElement) {
+      document.querySelectorAll('.tab-bar .tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+
+      if (btnElement) btnElement.classList.add('active');
+      const targetPane = document.getElementById('tab-' + tabKey);
+      if (targetPane) targetPane.classList.add('active');
+    }
+
+    function copyXmlCode() {
+      const code = document.getElementById('xmlCodeContent').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        alert("✓ Raw XML Data copied to clipboard!");
+      });
+    }
+
+    function copyXsdCode() {
+      const code = document.getElementById('xsdCodeContent').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        alert("✓ XSD Schema Definition copied to clipboard!");
+      });
+    }
+  </script>
+</body>
+</html>

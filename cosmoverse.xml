@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="cosmoverse.xsl"?>
+<cosmoverse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="cosmoverse.xsd">
+    
+    <cadet id="CAD-101">
+        <name>Alex Mercer</name>
+        <assignedPlanet>Mars</assignedPlanet>
+        <missionRole>Pilot Commander</missionRole>
+        <clearanceLevel>Level 5 Alpha</clearanceLevel>
+    </cadet>
+    
+    <cadet id="CAD-102">
+        <name>Sophia Turner</name>
+        <assignedPlanet>Jupiter</assignedPlanet>
+        <missionRole>Astrophysicist</missionRole>
+        <clearanceLevel>Level 4 Beta</clearanceLevel>
+    </cadet>
+
+    <cadet id="CAD-103">
+        <name>David Miller</name>
+        <assignedPlanet>Saturn</assignedPlanet>
+        <missionRole>Orbital Engineer</missionRole>
+        <clearanceLevel>Level 4 Gamma</clearanceLevel>
+    </cadet>
+
+    <cadet id="CAD-104">
+        <name>Elena Rostova</name>
+        <assignedPlanet>Neptune</assignedPlanet>
+        <missionRole>Exoplanet Researcher</missionRole>
+        <clearanceLevel>Level 5 Omega</clearanceLevel>
+    </cadet>
+
+    <cadet id="CAD-105">
+        <name>Lucas Vance</name>
+        <assignedPlanet>Venus</assignedPlanet>
+        <missionRole>Atmospheric Specialist</missionRole>
+        <clearanceLevel>Level 3 Delta</clearanceLevel>
+    </cadet>
+
+    <cadet id="CAD-106">
+        <name>Hannah Abbott</name>
+        <assignedPlanet>Mercury</assignedPlanet>
+        <missionRole>Thermal Shield Dynamics</missionRole>
+        <clearanceLevel>Level 4 Alpha</clearanceLevel>
+    </cadet>
+
+    <cadet id="CAD-107">
+        <name>Gabriel Thorne</name>
+        <assignedPlanet>Uranus</assignedPlanet>
+        <missionRole>Cryogenic Analyst</missionRole>
+        <clearanceLevel>Level 4 Beta</clearanceLevel>
+    </cadet>
+
+    <cadet id="CAD-108">
+        <name>Chloe Bennett</name>
+        <assignedPlanet>Earth Moon Base</assignedPlanet>
+        <missionRole>Telemetry Operations</missionRole>
+        <clearanceLevel>Level 5 Alpha</clearanceLevel>
+    </cadet>
+
+    <cadet id="CAD-109">
+        <name>Nathan Drake</name>
+        <assignedPlanet>Kuiper Belt</assignedPlanet>
+        <missionRole>Deep Space Recon</missionRole>
+        <clearanceLevel>Level 3 Gamma</clearanceLevel>
+    </cadet>
+
+    <cadet id="CAD-110">
+        <name>Zoe Kravitz</name>
+        <assignedPlanet>Alpha Centauri Mission</assignedPlanet>
+        <missionRole>Interstellar Navigation</missionRole>
+        <clearanceLevel>Level 5 Omega</clearanceLevel>
+    </cadet>
+
+</cosmoverse>

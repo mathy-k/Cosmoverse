@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>COSMOVerse | Brilliant Astronomers & Scientists</title>
+    <!-- External CSS -->
+    <link href="style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        <span class="nav-logo">COSMOVerse</span>
+      </a>
+
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Navigation">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="planets.html" class="nav-link">Planets</a></li>
+        <li><a href="missions.html" class="nav-link">Exploration</a></li>
+        <li><a href="scientists.html" class="nav-link active">Scientists</a></li>
+        <li><a href="careers.html" class="nav-link">Careers</a></li>
+        <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+        <li><a href="servlet-form.html" class="nav-link">Register</a></li>
+        <li><a href="login.html" class="nav-link nav-btn">Login</a></li>
+      </ul>
+    </nav>
+
+    <!-- ================= MAIN CONTAINER ================= -->
+    <main class="page-container">
+      <section class="glass-card" style="text-align: center;">
+        <div class="cosmic-badge">
+          <span class="pulse-dot"></span> Hall of Cosmic Pioneers & Theoretical Geniuses
+        </div>
+
+        <h1 class="section-title">🔭 PIONEERING SCIENTISTS & ASTRONOMERS</h1>
+        <p class="section-subtitle">The brilliant minds who reshaped humanity's understanding of the cosmos</p>
+        
+        <p style="max-width: 850px; margin: 0 auto; color: var(--text-main); font-size: 17px;">
+          From the early heliocentric models to relativity, quantum gravity, and orbital flight calculations, explore the legendary thinkers 
+          who unlocked the fundamental secrets of planetary motion, space-time, and deep universe cosmology.
+        </p>
+
+        <!-- INTERACTIVE FIELD FILTER BAR -->
+        <div class="filter-bar">
+          <button class="filter-btn active" onclick="filterScientists('all', this)">✦ All Pioneers</button>
+          <button class="filter-btn" onclick="filterScientists('heliocentric', this)">☀️ Heliocentrism & Early Optics</button>
+          <button class="filter-btn" onclick="filterScientists('gravity', this)">📐 Gravity & Orbital Laws</button>
+          <button class="filter-btn" onclick="filterScientists('cosmology', this)">🌌 Spacetime & Cosmology</button>
+          <button class="filter-btn" onclick="filterScientists('spaceflight', this)">🚀 Spaceflight Trajectory Math</button>
+        </div>
+      </section>
+
+      <div class="card-grid" id="scientistsGrid">
+        <!-- COPERNICUS -->
+        <div class="feature-card scientist-card" data-category="heliocentric">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span class="data-chip">1473 – 1543</span>
+              <span class="data-chip" style="color: var(--accent-gold); border-color: rgba(251, 191, 36, 0.4);">Renaissance Astronomy</span>
+            </div>
+            <h3>☀️ Nicolaus Copernicus</h3>
+            <p>Formulated the groundbreaking heliocentric model proposing that Earth and planets revolve around the Sun at the center of the solar system, replacing the geocentric Ptolemaic paradigm.</p>
+            <div class="scientist-quote">
+              "To know that we know what we know, and to know that we do not know what we do not know, that is true knowledge."
+            </div>
+          </div>
+          <div style="border-top: 1px solid var(--border-purple); padding-top: 12px; font-size: 13px; color: var(--accent-light-purple);">
+            <b>Key Landmark:</b> <i>De revolutionibus orbium coelestium (1543)</i>
+          </div>
+        </div>
+
+        <!-- GALILEO -->
+        <div class="feature-card scientist-card" data-category="heliocentric">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span class="data-chip">1564 – 1642</span>
+              <span class="data-chip" style="color: var(--primary-purple); border-color: var(--border-purple);">Observational Astronomy</span>
+            </div>
+            <h3>🔭 Galileo Galilei</h3>
+            <p>Pioneered the astronomical use of the telescope, discovering Jupiter's four largest moons (Io, Europa, Ganymede, Callisto), the phases of Venus, lunar craters, and sunspots.</p>
+            <div class="scientist-quote">
+              "The universe cannot be read until we have learnt the language and become familiar with the characters in which it is written. It is written in mathematical language."
+            </div>
+          </div>
+          <div style="border-top: 1px solid var(--border-purple); padding-top: 12px; font-size: 13px; color: var(--accent-light-purple);">
+            <b>Key Landmark:</b> Discovery of the Galilean Moons of Jupiter
+          </div>
+        </div>
+
+        <!-- KEPLER -->
+        <div class="feature-card scientist-card" data-category="gravity">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span class="data-chip">1571 – 1630</span>
+              <span class="data-chip" style="color: var(--accent-neon-purple); border-color: rgba(232, 121, 249, 0.4);">Planetary Dynamics</span>
+            </div>
+            <h3>📐 Johannes Kepler</h3>
+            <p>Discovered the Three Laws of Planetary Motion, demonstrating conclusively that planetary orbits are ellipses with the Sun at one focus rather than perfect circles.</p>
+            <div class="scientist-quote">
+              "I was merely thinking God's thoughts after him. Nature uses as little as possible of anything."
+            </div>
+          </div>
+          <div style="border-top: 1px solid var(--border-purple); padding-top: 12px; font-size: 13px; color: var(--accent-light-purple);">
+            <b>Key Landmark:</b> The Three Laws of Planetary Motion (Elliptical Orbits)
+          </div>
+        </div>
+
+        <!-- NEWTON -->
+        <div class="feature-card scientist-card" data-category="gravity">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span class="data-chip">1643 – 1727</span>
+              <span class="data-chip" style="color: var(--accent-green); border-color: rgba(52, 211, 153, 0.4);">Universal Gravitation</span>
+            </div>
+            <h3>🍎 Sir Isaac Newton</h3>
+            <p>Formulated the Law of Universal Gravitation and the three fundamental laws of motion, unifying celestial mechanics with Earthly physics and inventing calculus.</p>
+            <div class="scientist-quote">
+              "If I have seen further, it is by standing on the shoulders of Giants."
+            </div>
+          </div>
+          <div style="border-top: 1px solid var(--border-purple); padding-top: 12px; font-size: 13px; color: var(--accent-light-purple);">
+            <b>Key Landmark:</b> <i>Philosophiæ Naturalis Principia Mathematica (1687)</i>
+          </div>
+        </div>
+
+        <!-- EINSTEIN -->
+        <div class="feature-card scientist-card" data-category="cosmology">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span class="data-chip">1879 – 1955</span>
+              <span class="data-chip" style="color: var(--accent-neon-purple); border-color: rgba(232, 121, 249, 0.4);">General Relativity</span>
+            </div>
+            <h3>🌌 Albert Einstein</h3>
+            <p>Revolutionized physics with Special and General Relativity, revealing that gravity is the geometric curvature of 4D spacetime produced by matter and energy.</p>
+            <div class="scientist-quote">
+              "The most incomprehensible thing about the universe is that it is comprehensible."
+            </div>
+          </div>
+          <div style="border-top: 1px solid var(--border-purple); padding-top: 12px; font-size: 13px; color: var(--accent-light-purple);">
+            <b>Key Landmark:</b> General Relativity, $E = mc^2$, & Gravitational Waves
+          </div>
+        </div>
+
+        <!-- CARL SAGAN -->
+        <div class="feature-card scientist-card" data-category="cosmology">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span class="data-chip">1934 – 1996</span>
+              <span class="data-chip" style="color: var(--accent-gold); border-color: rgba(251, 191, 36, 0.4);">Planetary Science & SETI</span>
+            </div>
+            <h3>💫 Carl Sagan</h3>
+            <p>Pioneered planetary atmosphere research (Venus greenhouse effect), conceived the Voyager Golden Record, and inspired millions through the legendary series <i>Cosmos</i>.</p>
+            <div class="scientist-quote">
+              "We are a way for the cosmos to know itself. We are made of starstuff."
+            </div>
+          </div>
+          <div style="border-top: 1px solid var(--border-purple); padding-top: 12px; font-size: 13px; color: var(--accent-light-purple);">
+            <b>Key Landmark:</b> The Pale Blue Dot Reflection & Voyager Golden Record
+          </div>
+        </div>
+
+        <!-- STEPHEN HAWKING -->
+        <div class="feature-card scientist-card" data-category="cosmology">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span class="data-chip">1942 – 2018</span>
+              <span class="data-chip" style="color: var(--primary-purple); border-color: var(--border-purple);">Quantum Cosmology</span>
+            </div>
+            <h3>🕳️ Stephen Hawking</h3>
+            <p>Proved that black holes emit thermal radiation (Hawking Radiation) via quantum effects near the event horizon, bridging general relativity and quantum mechanics.</p>
+            <div class="scientist-quote">
+              "Remember to look up at the stars and not down at your feet. Be curious."
+            </div>
+          </div>
+          <div style="border-top: 1px solid var(--border-purple); padding-top: 12px; font-size: 13px; color: var(--accent-light-purple);">
+            <b>Key Landmark:</b> Hawking Radiation & Black Hole Thermodynamics
+          </div>
+        </div>
+
+        <!-- KATHERINE JOHNSON -->
+        <div class="feature-card scientist-card" data-category="spaceflight">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span class="data-chip">1918 – 2020</span>
+              <span class="data-chip" style="color: var(--accent-green); border-color: rgba(52, 211, 153, 0.4);">Orbital Mathematics</span>
+            </div>
+            <h3>🧮 Katherine Johnson</h3>
+            <p>Calculated precise orbital flight trajectories, launch windows, and emergency return paths for Project Mercury, John Glenn's orbit, and the Apollo 11 lunar mission.</p>
+            <div class="scientist-quote">
+              "Like what you do, and then you will do your best. I counted everything. That's just the way I was."
+            </div>
+          </div>
+          <div style="border-top: 1px solid var(--border-purple); padding-top: 12px; font-size: 13px; color: var(--accent-light-purple);">
+            <b>Key Landmark:</b> Apollo 11 Lunar Flight & Return Trajectory Mathematics
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+      <p class="footer-quote">🌌 "Somewhere, something incredible is waiting to be known." — Carl Sagan 🌌</p>
+      
+      <div class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="planets.html">Planets</a>
+        <a href="missions.html">Exploration</a>
+        <a href="scientists.html">Scientists</a>
+        <a href="careers.html">Careers</a>
+        <a href="quiz.html">Space Quiz</a>
+        <a href="servlet-form.html">Join Cadet Program</a>
+        <a href="login.html">Explorer Login</a>
+      </div>
+
+      <p class="footer-text">COSMOVerse Scientists Portal | Space Exploration Educational Resources</p>
+    </footer>
+
+    <script>
+      function toggleMenu() {
+        document.getElementById('navLinks').classList.toggle('show');
+      }
+
+      function filterScientists(category, btnElement) {
+        // Toggle active button
+        document.querySelectorAll('.filter-bar .filter-btn').forEach(btn => btn.classList.remove('active'));
+        if (btnElement) btnElement.classList.add('active');
+
+        // Filter cards
+        const cards = document.querySelectorAll('.scientist-card');
+        cards.forEach(card => {
+          if (category === 'all' || card.getAttribute('data-category') === category) {
+            card.style.display = 'flex';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

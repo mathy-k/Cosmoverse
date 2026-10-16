@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CosmoVerse Web Technology Lab Record - Exercises 5(i) to 7</title>
+  <style>
+    @media print {
+      body { margin: 0; padding: 15mm; font-size: 12pt; }
+      .page-break { page-break-before: always; }
+      .no-print { display: none; }
+    }
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      line-height: 1.6;
+      color: #000;
+      background: #fff;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+    h1.record-main-title {
+      text-align: center;
+      font-size: 22pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      letter-spacing: 1px;
+    }
+    h2.record-sub-title {
+      text-align: center;
+      font-size: 14pt;
+      font-weight: normal;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #000;
+      padding-bottom: 10px;
+    }
+    .exercise-container {
+      margin-bottom: 45px;
+    }
+    h2.ex-header {
+      font-size: 15pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-align: center;
+      margin-top: 30px;
+      margin-bottom: 20px;
+      background: #f0f0f0;
+      padding: 8px;
+      border: 1px solid #000;
+    }
+    h3.section-heading {
+      font-size: 13pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: underline;
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+    p, li {
+      font-size: 12pt;
+      text-align: justify;
+    }
+    ol, ul {
+      margin-top: 5px;
+      padding-left: 25px;
+    }
+    pre {
+      background: #f8f9fa;
+      border: 1px solid #ccc;
+      padding: 12px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 10pt;
+      white-space: pre-wrap;
+      word-break: break-all;
+      overflow-x: auto;
+      line-height: 1.4;
+      margin-top: 10px;
+      margin-bottom: 15px;
+    }
+    .output-box {
+      border: 2px dashed #666;
+      background: #fafafa;
+      padding: 30px 20px;
+      text-align: center;
+      margin: 20px 0;
+      border-radius: 6px;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .output-box p.box-title {
+      font-weight: bold;
+      font-size: 12pt;
+      color: #333;
+      margin-bottom: 5px;
+    }
+    .output-box p.box-desc {
+      font-size: 10pt;
+      color: #666;
+      margin: 0;
+    }
+    .result-text {
+      font-weight: normal;
+      font-style: italic;
+      background: #fdfdfd;
+      padding: 10px;
+      border-left: 3px solid #000;
+    }
+    .print-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #000;
+      color: #fff;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 25px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 9999;
+    }
+    .print-btn:hover {
+      background: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="print-btn no-print" onclick="window.print()">🖨️ PRINT / SAVE AS PDF</button>
+
+  <h1 class="record-main-title">COSMOVERSE WEB TECHNOLOGY LAB RECORD</h1>
+  <h2 class="record-sub-title">DEPARTMENT OF COMPUTER SCIENCE &amp; ENGINEERING | EXERCISES 5(i) TO 7</h2>
+
+  <!-- ==========================================
+       EXERCISE 5(i)
+       ========================================== -->
+  <div class="exercise-container">
+    <h2 class="ex-header">EXERCISE 5(i): INVOKING JAVA SERVLETS FROM HTML FORMS</h2>
+
+    <h3 class="section-heading">AIM:</h3>
+    <p>
+      To create an interactive HTML form and invoke a Java Servlet (<code>HttpServlet</code>) using the POST method to extract form parameters and dynamically display explorer registration details.
+    </p>
+
+    <h3 class="section-heading">ALGORITHM:</h3>
+    <ol>
+      <li><strong>HTML Form Design</strong>: Create <code>servlet-form.html</code> styled with CosmoVerse cosmic themes. Add form controls for Explorer Name, Email Address, Favorite Planet, Space Interest, and Message. Set form <code>action="ExplorerServlet"</code> and <code>method="post"</code>.</li>
+      <li><strong>Servlet Development</strong>: Create Java Servlet class <code>ExplorerServlet</code> extending <code>javax.servlet.http.HttpServlet</code>. Override <code>doPost()</code> method.</li>
+      <li><strong>Parameter Extraction</strong>: Extract submitted form parameter values using <code>request.getParameter()</code>.</li>
+      <li><strong>Dynamic Output Generation</strong>: Set response content-type to HTML (<code>response.setContentType("text/html;charset=UTF-8")</code>) and use <code>PrintWriter</code> to render a responsive confirmation response.</li>
+      <li><strong>Deployment Descriptor Mapping</strong>: Map servlet endpoint <code>/ExplorerServlet</code> in <code>WEB-INF/web.xml</code> and test form submission in browser.</li>
+    </ol>
+
+    <h3 class="section-heading">PROGRAM:</h3>
+    
+    <p><strong>1. HTML Form Interface (<code>servlet-form.html</code>):</strong></p>
+<pre>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;title&gt;COSMOVERSE | Explorer Registration&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css" /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div class="explorer-container"&gt;
+      &lt;div class="home-title"&gt;COSMOVerse&lt;/div&gt;
+      &lt;h1&gt;🚀 JOIN THE EXPLORER PROGRAM&lt;/h1&gt;
+      &lt;form class="explorer-form" action="ExplorerServlet" method="post"&gt;
+        &lt;div class="form-grid"&gt;
+          &lt;div class="form-group"&gt;
+            &lt;label for="name"&gt;Explorer Name&lt;/label&gt;
+            &lt;input type="text" id="name" name="name" required /&gt;
+          &lt;/div&gt;
+          &lt;div class="form-group"&gt;
+            &lt;label for="email"&gt;Email Address&lt;/label&gt;
+            &lt;input type="email" id="email" name="email" required /&gt;
+          &lt;/div&gt;
+          &lt;div class="form-group"&gt;
+            &lt;label for="planet"&gt;Favourite Planet&lt;/label&gt;
+            &lt;select id="planet" name="planet" required&gt;
+              &lt;option value="Mars"&gt;Mars&lt;/option&gt;
+              &lt;option value="Jupiter"&gt;Jupiter&lt;/option&gt;
+              &lt;option value="Saturn"&gt;Saturn&lt;/option&gt;
+            &lt;/select&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;button type="submit" class="explore-button"&gt;🚀 START EXPLORATION&lt;/button&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+
+    <p><strong>2. Java Servlet (<code>ExplorerServlet.java</code>):</strong></p>
+<pre>import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/ExplorerServlet")
+public class ExplorerServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+
+        String explorerName = request.getParameter("name");
+        String email = request.getParameter("email");
+        String favoritePlanet = request.getParameter("planet");
+
+        String missionId = "COSMO-" + (int)(Math.random() * 90000 + 10000);
+
+        out.println("&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;Registration Confirmed&lt;/title&gt;&lt;/head&gt;&lt;body&gt;");
+        out.println("&lt;h1&gt;★ EXPLORER REGISTRATION CONFIRMED ★&lt;/h1&gt;");
+        out.println("&lt;p&gt;Mission ID: " + missionId + "&lt;/p&gt;");
+        out.println("&lt;p&gt;Explorer Name: " + explorerName + "&lt;/p&gt;");
+        out.println("&lt;p&gt;Email: " + email + "&lt;/p&gt;");
+        out.println("&lt;p&gt;Planet: " + favoritePlanet + "&lt;/p&gt;");
+        out.println("&lt;/body&gt;&lt;/html&gt;");
+    }
+}</pre>
+
+    <h3 class="section-heading">OUTPUT:</h3>
+    <div class="output-box">
+      <p class="box-title">[ PASTE EXERCISE 5(i) OUTPUT SCREENSHOT HERE ]</p>
+      <p class="box-desc">Take a screenshot of `servlet-form.html` in Microsoft Edge showing registration form inputs and servlet confirmation page.</p>
+    </div>
+
+    <h3 class="section-heading">RESULT:</h3>
+    <p class="result-text">
+      Thus, the web application for invoking Java Servlets from an HTML form was created successfully, and the output was verified.
+    </p>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==========================================
+       EXERCISE 5(ii)
+       ========================================== -->
+  <div class="exercise-container">
+    <h2 class="ex-header">EXERCISE 5(ii): SESSION TRACKING USING JAVA SERVLET</h2>
+
+    <h3 class="section-heading">AIM:</h3>
+    <p>
+      To implement session tracking in Java Servlets using the <code>HttpSession</code> API to track user visit count, session creation time, last access time, and session metadata across multiple HTTP requests.
+    </p>
+
+    <h3 class="section-heading">ALGORITHM:</h3>
+    <ol>
+      <li><strong>Session Initialization</strong>: In <code>SessionTrackingServlet.java</code>, invoke <code>request.getSession(true)</code> to fetch active session or create a new session.</li>
+      <li><strong>Access Counter Update</strong>: Retrieve attribute <code>visitCount</code>. If null, initialize to 1; otherwise increment counter. Store updated value back using <code>session.setAttribute("visitCount", visitCount)</code>.</li>
+      <li><strong>Session Metadata Extraction</strong>: Extract unique Session ID (<code>getId()</code>), Creation Timestamp (<code>getCreationTime()</code>), and Last Access Time (<code>getLastAccessedTime()</code>).</li>
+      <li><strong>UI Presentation</strong>: Render session status metrics into styled HTML container cards.</li>
+    </ol>
+
+    <h3 class="section-heading">PROGRAM:</h3>
+
+    <p><strong>1. HTML Session Tracking Interface (<code>session-tracking.html</code>):</strong></p>
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;CosmoVerse | Session Tracking Portal&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="home-content"&gt;
+    &lt;div class="home-title"&gt;COSMOVerse&lt;/div&gt;
+    &lt;div class="home-subtitle"&gt;★ SESSION TRACKING PORTAL ★&lt;/div&gt;
+    &lt;p class="home-description"&gt;
+      Session state tracked using &lt;strong&gt;HttpSession API (javax.servlet.http.HttpSession)&lt;/strong&gt;.
+    &lt;/p&gt;
+
+    &lt;div class="home-features"&gt;
+      &lt;div class="feature-card"&gt;
+        &lt;h3&gt;Session Status&lt;/h3&gt;
+        &lt;p id="sessStatus" style="color: #5cff8d;"&gt;Active Session&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="feature-card"&gt;
+        &lt;h3&gt;Visit Count&lt;/h3&gt;
+        &lt;p id="visitCount"&gt;1 time(s)&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="feature-card" style="flex: 1 1 100%;"&gt;
+        &lt;h3&gt;Unique Session ID&lt;/h3&gt;
+        &lt;p id="sessionId" style="font-family: monospace; color: #67e8f9;"&gt;COSMO-SESS-8F9A7B2C&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div style="margin-top: 25px;"&gt;
+      &lt;a href="servlet-form.html" class="explore-button"&gt;← BACK TO FORM&lt;/a&gt;
+      &lt;a href="SessionTrackingServlet" class="explore-button"&gt;🔑 INVOKE SESSION SERVLET&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+    <p><strong>2. Java Session Servlet (<code>SessionTrackingServlet.java</code>):</strong></p>
+<pre>import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet("/SessionTrackingServlet")
+public class SessionTrackingServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+
+        HttpSession session = request.getSession(true);
+
+        Integer visitCount = (Integer) session.getAttribute("visitCount");
+        if (visitCount == null) {
+            visitCount = 1;
+        } else {
+            visitCount += 1;
+        }
+        session.setAttribute("visitCount", visitCount);
+
+        out.println("&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;Session Tracking&lt;/title&gt;&lt;/head&gt;&lt;body&gt;");
+        out.println("&lt;h1&gt;🔑 HTTP SESSION MANAGEMENT (SERVLET)&lt;/h1&gt;");
+        out.println("&lt;p&gt;Session ID: " + session.getId() + "&lt;/p&gt;");
+        out.println("&lt;p&gt;Visit Count: " + visitCount + "&lt;/p&gt;");
+        out.println("&lt;p&gt;Creation Time: " + new Date(session.getCreationTime()) + "&lt;/p&gt;");
+        out.println("&lt;/body&gt;&lt;/html&gt;");
+    }
+}</pre>
+
+    <h3 class="section-heading">OUTPUT:</h3>
+    <div class="output-box">
+      <p class="box-title">[ PASTE EXERCISE 5(ii) OUTPUT SCREENSHOT HERE ]</p>
+      <p class="box-desc">Take a screenshot of `session-tracking.html` in Microsoft Edge showing active session metrics and visit counter.</p>
+    </div>
+
+    <h3 class="section-heading">RESULT:</h3>
+    <p class="result-text">
+      Thus, session tracking using Java Servlets (<code>HttpSession</code> API) was implemented successfully, and the visit count and session metadata were verified.
+    </p>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==========================================
+       EXERCISE 6(i)
+       ========================================== -->
+  <div class="exercise-container">
+    <h2 class="ex-header">EXERCISE 6(i): THREE-TIER APPLICATION USING JSP AND DATABASES FOR CONDUCTING ONLINE EXAMINATION</h2>
+
+    <h3 class="section-heading">AIM:</h3>
+    <p>
+      To build a comprehensive three-tier web application using JSP and MySQL database server (<code>cosmoverse_db</code>) to conduct a 10-Question Astronomy Online Examination (<code>exam-cosmo.jsp</code> and <code>exam-cosmo.html</code>), complete with a 15-minute countdown timer, automated 100-mark evaluation engine, database storage mapping (<code>online_exam_results</code>), and dynamic grade rendering.
+    </p>
+
+    <h3 class="section-heading">ALGORITHM:</h3>
+    <ol>
+      <li><strong>Frontend Form & Timer Setup</strong>: Create <code>exam-cosmo.html</code> containing candidate registration fields and 10 multiple-choice questions (10 marks each, 100 total). Integrate a JavaScript 15-minute countdown timer with auto-submit trigger. Set <code>action="exam-cosmo.jsp"</code> and <code>method="post"</code>.</li>
+      <li><strong>Server-Side Evaluation</strong>: In <code>exam-cosmo.jsp</code>, retrieve candidate register number, candidate name, and answers for Questions Q1 through Q10 via <code>request.getParameter()</code>.</li>
+      <li><strong>Score & Percentage Calculation</strong>: Compare candidate responses against the answer key (Q1: Mars, Q2: Jupiter, Q3: Andromeda Galaxy, Q4: Venus, Q5: Moon, Q6: Saturn, Q7: Corona, Q8: Event Horizon, Q9: Proxima Centauri, Q10: James Webb Space Telescope). Calculate total score out of 100 and percentage. Assign performance status (PASSED ★ if score >= 50).</li>
+      <li><strong>Database Insertion</strong>: Load MySQL JDBC driver (<code>com.mysql.cj.jdbc.Driver</code>), establish connection to <code>cosmoverse_db</code>, and execute SQL command <code>INSERT INTO online_exam_results (reg_no, candidate_name, score, percentage, status) VALUES (?, ?, ?, ?, ?)</code> using <code>PreparedStatement</code>.</li>
+      <li><strong>Response Rendering</strong>: Display candidate result card containing register number, candidate name, score breakdown (out of 100), percentage, pass/fail badge, and database persistence status.</li>
+    </ol>
+
+    <h3 class="section-heading">PROGRAM:</h3>
+
+    <p><strong>1. Online Examination Form Interface with 10 Questions (<code>exam-cosmo.html</code>):</strong></p>
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;CosmoVerse | Online Examination System (JSP &amp; DB)&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="explorer-container"&gt;
+    &lt;div class="home-title"&gt;COSMOVerse&lt;/div&gt;
+    &lt;h1&gt;📝 ONLINE EXAMINATION PORTAL (10 QUESTIONS | 100 MARKS)&lt;/h1&gt;
+    
+    &lt;div id="timer" class="timer-badge"&gt;⏱️ Time Remaining: 15:00&lt;/div&gt;
+
+    &lt;form id="examForm" action="exam-cosmo.jsp" method="post"&gt;
+      &lt;div class="form-grid"&gt;
+        &lt;div class="form-group"&gt;
+          &lt;label&gt;Register No / Candidate ID&lt;/label&gt;
+          &lt;input type="text" id="regNo" name="regNo" value="CS-2026-101" required&gt;
+        &lt;/div&gt;
+        &lt;div class="form-group"&gt;
+          &lt;label&gt;Candidate Name&lt;/label&gt;
+          &lt;input type="text" id="candidateName" name="candidateName" value="Alex Mercer" required&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Question 1 --&gt;
+      &lt;div class="question-block"&gt;
+        &lt;div class="question-title"&gt;Q1. Which planet is known as the Red Planet in our Solar System? [10 Marks]&lt;/div&gt;
+        &lt;label&gt;&lt;input type="radio" name="q1" value="Mars" required&gt; Mars&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q1" value="Venus"&gt; Venus&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q1" value="Jupiter"&gt; Jupiter&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q1" value="Mercury"&gt; Mercury&lt;/label&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Question 2 --&gt;
+      &lt;div class="question-block"&gt;
+        &lt;div class="question-title"&gt;Q2. What is the largest planet in our Solar System? [10 Marks]&lt;/div&gt;
+        &lt;label&gt;&lt;input type="radio" name="q2" value="Jupiter" required&gt; Jupiter&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q2" value="Saturn"&gt; Saturn&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q2" value="Neptune"&gt; Neptune&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q2" value="Uranus"&gt; Uranus&lt;/label&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Question 3 --&gt;
+      &lt;div class="question-block"&gt;
+        &lt;div class="question-title"&gt;Q3. Which galaxy is the closest major galaxy to our Milky Way? [10 Marks]&lt;/div&gt;
+        &lt;label&gt;&lt;input type="radio" name="q3" value="Andromeda Galaxy" required&gt; Andromeda Galaxy&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q3" value="Triangulum Galaxy"&gt; Triangulum Galaxy&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q3" value="Sombrero Galaxy"&gt; Sombrero Galaxy&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q3" value="Whirlpool Galaxy"&gt; Whirlpool Galaxy&lt;/label&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Question 4 --&gt;
+      &lt;div class="question-block"&gt;
+        &lt;div class="question-title"&gt;Q4. Which planet has the highest surface temperature in the Solar System? [10 Marks]&lt;/div&gt;
+        &lt;label&gt;&lt;input type="radio" name="q4" value="Venus" required&gt; Venus&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q4" value="Mercury"&gt; Mercury&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q4" value="Mars"&gt; Mars&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q4" value="Jupiter"&gt; Jupiter&lt;/label&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Question 5 --&gt;
+      &lt;div class="question-block"&gt;
+        &lt;div class="question-title"&gt;Q5. What is the name of Earth's only natural satellite? [10 Marks]&lt;/div&gt;
+        &lt;label&gt;&lt;input type="radio" name="q5" value="Moon" required&gt; Moon&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q5" value="Phobos"&gt; Phobos&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q5" value="Europa"&gt; Europa&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q5" value="Titan"&gt; Titan&lt;/label&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Question 6 --&gt;
+      &lt;div class="question-block"&gt;
+        &lt;div class="question-title"&gt;Q6. Which planet is famous for its prominent ring system? [10 Marks]&lt;/div&gt;
+        &lt;label&gt;&lt;input type="radio" name="q6" value="Saturn" required&gt; Saturn&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q6" value="Jupiter"&gt; Jupiter&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q6" value="Uranus"&gt; Uranus&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q6" value="Neptune"&gt; Neptune&lt;/label&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Question 7 --&gt;
+      &lt;div class="question-block"&gt;
+        &lt;div class="question-title"&gt;Q7. What is the outermost atmosphere layer of the Sun called? [10 Marks]&lt;/div&gt;
+        &lt;label&gt;&lt;input type="radio" name="q7" value="Corona" required&gt; Corona&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q7" value="Photosphere"&gt; Photosphere&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q7" value="Chromosphere"&gt; Chromosphere&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q7" value="Core"&gt; Core&lt;/label&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Question 8 --&gt;
+      &lt;div class="question-block"&gt;
+        &lt;div class="question-title"&gt;Q8. What is the theoretical boundary around a black hole beyond which nothing can escape? [10 Marks]&lt;/div&gt;
+        &lt;label&gt;&lt;input type="radio" name="q8" value="Event Horizon" required&gt; Event Horizon&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q8" value="Singularity"&gt; Singularity&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q8" value="Accretion Disk"&gt; Accretion Disk&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q8" value="Photon Sphere"&gt; Photon Sphere&lt;/label&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Question 9 --&gt;
+      &lt;div class="question-block"&gt;
+        &lt;div class="question-title"&gt;Q9. Which star is the closest to Earth after the Sun? [10 Marks]&lt;/div&gt;
+        &lt;label&gt;&lt;input type="radio" name="q9" value="Proxima Centauri" required&gt; Proxima Centauri&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q9" value="Alpha Centauri A"&gt; Alpha Centauri A&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q9" value="Sirius"&gt; Sirius&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q9" value="Betelgeuse"&gt; Betelgeuse&lt;/label&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Question 10 --&gt;
+      &lt;div class="question-block"&gt;
+        &lt;div class="question-title"&gt;Q10. What space telescope was launched in December 2021 to succeed Hubble? [10 Marks]&lt;/div&gt;
+        &lt;label&gt;&lt;input type="radio" name="q10" value="James Webb Space Telescope" required&gt; James Webb Space Telescope&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q10" value="Kepler Space Telescope"&gt; Kepler Space Telescope&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q10" value="Spitzer Space Telescope"&gt; Spitzer Space Telescope&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" name="q10" value="Chandra Observatory"&gt; Chandra Observatory&lt;/label&gt;
+      &lt;/div&gt;
+
+      &lt;button type="submit" class="explore-button"&gt;📝 SUBMIT EXAMINATION (100 MARKS)&lt;/button&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+    <p><strong>2. JSP Processing Engine (<code>exam-cosmo.jsp</code>):</strong></p>
+<pre>&lt;%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%&gt;
+&lt;%@ page import="java.sql.*" %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;CosmoVerse | Online Exam Result&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;%
+    String regNo = request.getParameter("regNo");
+    String name = request.getParameter("candidateName");
+
+    // Extract 10 answers
+    String q1 = request.getParameter("q1");
+    String q2 = request.getParameter("q2");
+    String q3 = request.getParameter("q3");
+    String q4 = request.getParameter("q4");
+    String q5 = request.getParameter("q5");
+    String q6 = request.getParameter("q6");
+    String q7 = request.getParameter("q7");
+    String q8 = request.getParameter("q8");
+    String q9 = request.getParameter("q9");
+    String q10 = request.getParameter("q10");
+
+    int score = 0;
+    if ("Mars".equalsIgnoreCase(q1)) score += 10;
+    if ("Jupiter".equalsIgnoreCase(q2)) score += 10;
+    if ("Andromeda Galaxy".equalsIgnoreCase(q3)) score += 10;
+    if ("Venus".equalsIgnoreCase(q4)) score += 10;
+    if ("Moon".equalsIgnoreCase(q5)) score += 10;
+    if ("Saturn".equalsIgnoreCase(q6)) score += 10;
+    if ("Corona".equalsIgnoreCase(q7)) score += 10;
+    if ("Event Horizon".equalsIgnoreCase(q8)) score += 10;
+    if ("Proxima Centauri".equalsIgnoreCase(q9)) score += 10;
+    if ("James Webb Space Telescope".equalsIgnoreCase(q10)) score += 10;
+
+    int percentage = score; // Out of 100
+    String resultStatus = (score &gt;= 50) ? "PASSED ★" : "FAILED";
+
+    boolean dbSaved = false;
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cosmoverse_db", "root", "admin");
+        String sql = "INSERT INTO online_exam_results (reg_no, candidate_name, score, percentage, status) VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, regNo);
+        pstmt.setString(2, name);
+        pstmt.setInt(3, score);
+        pstmt.setInt(4, percentage);
+        pstmt.setString(5, resultStatus);
+        pstmt.executeUpdate();
+        conn.close();
+        dbSaved = true;
+    } catch (Exception e) {
+        dbSaved = false;
+    }
+  %&gt;
+
+  &lt;div class="explorer-container"&gt;
+    &lt;h1&gt;EXAMINATION RESULT: &lt;%= resultStatus %&gt;&lt;/h1&gt;
+    &lt;p&gt;Register No: &lt;%= regNo %&gt;&lt;/p&gt;
+    &lt;p&gt;Candidate Name: &lt;%= name %&gt;&lt;/p&gt;
+    &lt;p&gt;Total Score: &lt;%= score %&gt; / 100&lt;/p&gt;
+    &lt;p&gt;Percentage: &lt;%= percentage %&gt;%&lt;/p&gt;
+    &lt;p&gt;Database Record Status: &lt;%= dbSaved ? "Saved to cosmoverse_db" : "Processed in memory" %&gt;&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+    <h3 class="section-heading">OUTPUT:</h3>
+    <div class="output-box">
+      <p class="box-title">[ PASTE EXERCISE 6(i) OUTPUT SCREENSHOT HERE ]</p>
+      <p class="box-desc">Take a screenshot of `exam-cosmo.html` showing test questions and submitted 10-question evaluation result card in Microsoft Edge.</p>
+    </div>
+
+    <h3 class="section-heading">RESULT:</h3>
+    <p class="result-text">
+      Thus, the three-tier web application using JSP and Database for conducting a 10-question Online Examination was created successfully, and candidate scores were evaluated and stored in the database.
+    </p>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==========================================
+       EXERCISE 6(ii)
+       ========================================== -->
+  <div class="exercise-container">
+    <h2 class="ex-header">EXERCISE 6(ii): THREE-TIER APPLICATION USING JSP AND DATABASES FOR DISPLAYING STUDENT MARK LIST</h2>
+
+    <h3 class="section-heading">AIM:</h3>
+    <p>
+      To build a three-tier web application using JSP and MySQL database server (<code>cosmoverse_db</code>) to retrieve, process, and display a comprehensive Student Mark List containing 10 cadet academic records (<code>marklist-cosmo.jsp</code> and <code>marklist-cosmo.html</code>), complete with summary statistics, total marks, percentage, letter grade evaluation (O, A+, A), and database lookup.
+    </p>
+
+    <h3 class="section-heading">ALGORITHM:</h3>
+    <ol>
+      <li><strong>UI Search Interface</strong>: Design <code>marklist-cosmo.html</code> with student search form, statistic summary cards (Class Average, Highest Score, Pass Rate), and fallback datasets for 10 cadets (`CS-101` to `CS-110`).</li>
+      <li><strong>JSP Database Connection</strong>: In <code>marklist-cosmo.jsp</code>, load MySQL JDBC driver and establish database connection to <code>cosmoverse_db</code>.</li>
+      <li><strong>Data Retrieval</strong>: Execute SQL query <code>SELECT * FROM student_marks</code> using JDBC <code>Statement</code> or filter by `studentId` using <code>PreparedStatement</code>.</li>
+      <li><strong>Academic Computation</strong>: For each record, extract marks in Astronomy, Astrophysics, and Orbital Mechanics. Compute Total Marks (out of 300), Percentage, and assign Grade (`O` for >=90%, `A+` for >=80%, `A` for >=70%).</li>
+      <li><strong>Dynamic Table Rendering</strong>: Render student mark list table dynamically, highlighting pass status and individual course performance.</li>
+    </ol>
+
+    <h3 class="section-heading">PROGRAM:</h3>
+
+    <p><strong>1. Mark List Search & Table Interface (<code>marklist-cosmo.html</code>):</strong></p>
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;CosmoVerse | Student Mark List System&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="explorer-container"&gt;
+    &lt;div class="home-title"&gt;COSMOVerse&lt;/div&gt;
+    &lt;h1&gt;📊 STUDENT MARK LIST SYSTEM (10 CADETS | JSP &amp; DB)&lt;/h1&gt;
+    
+    &lt;form action="marklist-cosmo.jsp" method="get" class="search-form"&gt;
+      &lt;input type="text" name="studentId" value="CS-101" placeholder="Register No (e.g. CS-101)"&gt;
+      &lt;button type="submit" class="explore-button"&gt;🔍 FETCH ACADEMIC MARK LIST&lt;/button&gt;
+    &lt;/form&gt;
+
+    &lt;table class="marklist-table"&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;Reg No&lt;/th&gt;
+          &lt;th&gt;Cadet Name&lt;/th&gt;
+          &lt;th&gt;Astronomy&lt;/th&gt;
+          &lt;th&gt;Astrophysics&lt;/th&gt;
+          &lt;th&gt;Orbital Mech&lt;/th&gt;
+          &lt;th&gt;Total (300)&lt;/th&gt;
+          &lt;th&gt;Percentage&lt;/th&gt;
+          &lt;th&gt;Grade&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;&lt;td&gt;CS-101&lt;/td&gt;&lt;td&gt;Alex Mercer&lt;/td&gt;&lt;td&gt;95&lt;/td&gt;&lt;td&gt;88&lt;/td&gt;&lt;td&gt;92&lt;/td&gt;&lt;td&gt;275&lt;/td&gt;&lt;td&gt;91.7%&lt;/td&gt;&lt;td&gt;O&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;CS-102&lt;/td&gt;&lt;td&gt;Sophia Turner&lt;/td&gt;&lt;td&gt;89&lt;/td&gt;&lt;td&gt;94&lt;/td&gt;&lt;td&gt;90&lt;/td&gt;&lt;td&gt;273&lt;/td&gt;&lt;td&gt;91.0%&lt;/td&gt;&lt;td&gt;O&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;CS-103&lt;/td&gt;&lt;td&gt;Ethan Vance&lt;/td&gt;&lt;td&gt;78&lt;/td&gt;&lt;td&gt;82&lt;/td&gt;&lt;td&gt;80&lt;/td&gt;&lt;td&gt;240&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td&gt;A+&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;CS-104&lt;/td&gt;&lt;td&gt;Maya Lin&lt;/td&gt;&lt;td&gt;92&lt;/td&gt;&lt;td&gt;90&lt;/td&gt;&lt;td&gt;96&lt;/td&gt;&lt;td&gt;278&lt;/td&gt;&lt;td&gt;92.7%&lt;/td&gt;&lt;td&gt;O&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;CS-105&lt;/td&gt;&lt;td&gt;Lucas Haze&lt;/td&gt;&lt;td&gt;85&lt;/td&gt;&lt;td&gt;87&lt;/td&gt;&lt;td&gt;84&lt;/td&gt;&lt;td&gt;256&lt;/td&gt;&lt;td&gt;85.3%&lt;/td&gt;&lt;td&gt;A+&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;CS-106&lt;/td&gt;&lt;td&gt;Aria Stark&lt;/td&gt;&lt;td&gt;98&lt;/td&gt;&lt;td&gt;96&lt;/td&gt;&lt;td&gt;99&lt;/td&gt;&lt;td&gt;293&lt;/td&gt;&lt;td&gt;97.7%&lt;/td&gt;&lt;td&gt;O&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;CS-107&lt;/td&gt;&lt;td&gt;Noah Cent&lt;/td&gt;&lt;td&gt;74&lt;/td&gt;&lt;td&gt;79&lt;/td&gt;&lt;td&gt;76&lt;/td&gt;&lt;td&gt;229&lt;/td&gt;&lt;td&gt;76.3%&lt;/td&gt;&lt;td&gt;A&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;CS-108&lt;/td&gt;&lt;td&gt;Zoe Krav&lt;/td&gt;&lt;td&gt;91&lt;/td&gt;&lt;td&gt;93&lt;/td&gt;&lt;td&gt;89&lt;/td&gt;&lt;td&gt;273&lt;/td&gt;&lt;td&gt;91.0%&lt;/td&gt;&lt;td&gt;O&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;CS-109&lt;/td&gt;&lt;td&gt;Leo Fitz&lt;/td&gt;&lt;td&gt;88&lt;/td&gt;&lt;td&gt;85&lt;/td&gt;&lt;td&gt;90&lt;/td&gt;&lt;td&gt;263&lt;/td&gt;&lt;td&gt;87.7%&lt;/td&gt;&lt;td&gt;A+&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;CS-110&lt;/td&gt;&lt;td&gt;Jemma Sim&lt;/td&gt;&lt;td&gt;96&lt;/td&gt;&lt;td&gt;98&lt;/td&gt;&lt;td&gt;94&lt;/td&gt;&lt;td&gt;288&lt;/td&gt;&lt;td&gt;96.0%&lt;/td&gt;&lt;td&gt;O&lt;/td&gt;&lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+    <p><strong>2. JSP Database Query Engine (<code>marklist-cosmo.jsp</code>):</strong></p>
+<pre>&lt;%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%&gt;
+&lt;%@ page import="java.sql.*" %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;CosmoVerse | Student Mark List&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="explorer-container"&gt;
+    &lt;h1&gt;📊 STUDENT MARK LIST (DATABASE SERVER)&lt;/h1&gt;
+    &lt;table class="marklist-table"&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;Reg No&lt;/th&gt;
+          &lt;th&gt;Cadet Name&lt;/th&gt;
+          &lt;th&gt;Astronomy&lt;/th&gt;
+          &lt;th&gt;Astrophysics&lt;/th&gt;
+          &lt;th&gt;Orbital Mech&lt;/th&gt;
+          &lt;th&gt;Total&lt;/th&gt;
+          &lt;th&gt;Percentage&lt;/th&gt;
+          &lt;th&gt;Grade&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;%
+          try {
+              Class.forName("com.mysql.cj.jdbc.Driver");
+              Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cosmoverse_db", "root", "admin");
+              Statement stmt = conn.createStatement();
+              ResultSet rs = stmt.executeQuery("SELECT * FROM student_marks");
+
+              while (rs.next()) {
+                  int m1 = rs.getInt("astronomy");
+                  int m2 = rs.getInt("astrophysics");
+                  int m3 = rs.getInt("orbital_mech");
+                  int total = m1 + m2 + m3;
+                  double pct = total / 3.0;
+                  String grade = (pct &gt;= 90) ? "O" : (pct &gt;= 80) ? "A+" : "A";
+        %&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;%= rs.getString("reg_no") %&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;%= rs.getString("student_name") %&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;%= m1 %&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;%= m2 %&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;%= m3 %&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;%= total %&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;%= String.format("%.1f", pct) %&gt;%&lt;/td&gt;
+          &lt;td&gt;&lt;%= grade %&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;%
+              }
+              conn.close();
+          } catch (Exception e) {
+              e.printStackTrace();
+          }
+        %&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+    <h3 class="section-heading">OUTPUT:</h3>
+    <div class="output-box">
+      <p class="box-title">[ PASTE EXERCISE 6(ii) OUTPUT SCREENSHOT HERE ]</p>
+      <p class="box-desc">Take a screenshot of `marklist-cosmo.html` showing 10 student database query records and summary statistics in Microsoft Edge.</p>
+    </div>
+
+    <h3 class="section-heading">RESULT:</h3>
+    <p class="result-text">
+      Thus, the three-tier web application using JSP and Database for displaying Student Mark Lists was implemented successfully, and 10 student records were dynamically processed and rendered.
+    </p>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==========================================
+       EXERCISE 7
+       ========================================== -->
+  <div class="exercise-container">
+    <h2 class="ex-header">EXERCISE 7: PROGRAMS USING XML, XML SCHEMA (XSD), AND XSLT / XSL</h2>
+
+    <h3 class="section-heading">AIM:</h3>
+    <p>
+      To develop a complete XML data management application comprising a 10-record XML document (<code>cosmoverse.xml</code>), an XML Schema Definition for structure validation (<code>cosmoverse.xsd</code>), and an XSLT transformation stylesheet (<code>cosmoverse.xsl</code> and <code>xml-cosmo.html</code>) to dynamically render XML records into a styled HTML data table.
+    </p>
+
+    <h3 class="section-heading">ALGORITHM:</h3>
+    <ol>
+      <li><strong>XML Catalog Structuring</strong>: Construct <code>cosmoverse.xml</code> containing 10 cadet records (`CAD-101` through `CAD-110`) with child tags for `<name>`, `<assignedPlanet>`, `<missionRole>`, and `<clearanceLevel>`. Link the XSLT stylesheet processing instruction.</li>
+      <li><strong>Schema Definition (XSD)</strong>: Create <code>cosmoverse.xsd</code> defining element hierarchy, sequence constraints, required attribute `id`, and string data types to enforce structural integrity.</li>
+      <li><strong>XSLT Stylesheet Construction</strong>: Design <code>cosmoverse.xsl</code> utilizing `<xsl:stylesheet>`, `<xsl:template match="/">`, and `<xsl:for-each select="cosmoverse/cadet">` to transform raw XML elements into a styled HTML table.</li>
+      <li><strong>Browser Transformation & Integration</strong>: Create <code>xml-cosmo.html</code> wrapper featuring interactive tabbed views for XML, XSD, XSLT source code, and live XSLT-rendered output table.</li>
+    </ol>
+
+    <h3 class="section-heading">PROGRAM:</h3>
+
+    <p><strong>1. XML Data Catalog with 10 Records (<code>cosmoverse.xml</code>):</strong></p>
+<pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;?xml-stylesheet type="text/xsl" href="cosmoverse.xsl"?&gt;
+&lt;cosmoverse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="cosmoverse.xsd"&gt;
+    
+    &lt;cadet id="CAD-101"&gt;
+        &lt;name&gt;Alex Mercer&lt;/name&gt;
+        &lt;assignedPlanet&gt;Mars&lt;/assignedPlanet&gt;
+        &lt;missionRole&gt;Pilot Commander&lt;/missionRole&gt;
+        &lt;clearanceLevel&gt;Level 5 Alpha&lt;/clearanceLevel&gt;
+    &lt;/cadet&gt;
+    
+    &lt;cadet id="CAD-102"&gt;
+        &lt;name&gt;Sophia Turner&lt;/name&gt;
+        &lt;assignedPlanet&gt;Jupiter&lt;/assignedPlanet&gt;
+        &lt;missionRole&gt;Astrophysicist&lt;/missionRole&gt;
+        &lt;clearanceLevel&gt;Level 4 Beta&lt;/clearanceLevel&gt;
+    &lt;/cadet&gt;
+
+    &lt;cadet id="CAD-103"&gt;
+        &lt;name&gt;Ethan Vance&lt;/name&gt;
+        &lt;assignedPlanet&gt;Saturn&lt;/assignedPlanet&gt;
+        &lt;missionRole&gt;Navigation Specialist&lt;/missionRole&gt;
+        &lt;clearanceLevel&gt;Level 3 Gamma&lt;/clearanceLevel&gt;
+    &lt;/cadet&gt;
+
+    &lt;cadet id="CAD-104"&gt;
+        &lt;name&gt;Maya Lin&lt;/name&gt;
+        &lt;assignedPlanet&gt;Neptune&lt;/assignedPlanet&gt;
+        &lt;missionRole&gt;Exoplanet Geologist&lt;/missionRole&gt;
+        &lt;clearanceLevel&gt;Level 4 Alpha&lt;/clearanceLevel&gt;
+    &lt;/cadet&gt;
+
+    &lt;cadet id="CAD-105"&gt;
+        &lt;name&gt;Lucas Haze&lt;/name&gt;
+        &lt;assignedPlanet&gt;Venus&lt;/assignedPlanet&gt;
+        &lt;missionRole&gt;Atmospheric Analyst&lt;/missionRole&gt;
+        &lt;clearanceLevel&gt;Level 3 Beta&lt;/clearanceLevel&gt;
+    &lt;/cadet&gt;
+
+    &lt;cadet id="CAD-106"&gt;
+        &lt;name&gt;Aria Stark&lt;/name&gt;
+        &lt;assignedPlanet&gt;Uranus&lt;/assignedPlanet&gt;
+        &lt;missionRole&gt;Quantum Systems Engineer&lt;/missionRole&gt;
+        &lt;clearanceLevel&gt;Level 5 Omega&lt;/clearanceLevel&gt;
+    &lt;/cadet&gt;
+
+    &lt;cadet id="CAD-107"&gt;
+        &lt;name&gt;Noah Cent&lt;/name&gt;
+        &lt;assignedPlanet&gt;Mercury&lt;/assignedPlanet&gt;
+        &lt;missionRole&gt;Solar Radiation Officer&lt;/missionRole&gt;
+        &lt;clearanceLevel&gt;Level 2 Gamma&lt;/clearanceLevel&gt;
+    &lt;/cadet&gt;
+
+    &lt;cadet id="CAD-108"&gt;
+        &lt;name&gt;Zoe Krav&lt;/name&gt;
+        &lt;assignedPlanet&gt;Pluto&lt;/assignedPlanet&gt;
+        &lt;missionRole&gt;Deep Space Communications&lt;/missionRole&gt;
+        &lt;clearanceLevel&gt;Level 4 Alpha&lt;/clearanceLevel&gt;
+    &lt;/cadet&gt;
+
+    &lt;cadet id="CAD-109"&gt;
+        &lt;name&gt;Leo Fitz&lt;/name&gt;
+        &lt;assignedPlanet&gt;Titan Moon&lt;/assignedPlanet&gt;
+        &lt;missionRole&gt;Bio-Dome Environmental Specialist&lt;/missionRole&gt;
+        &lt;clearanceLevel&gt;Level 3 Alpha&lt;/clearanceLevel&gt;
+    &lt;/cadet&gt;
+
+    &lt;cadet id="CAD-110"&gt;
+        &lt;name&gt;Jemma Sim&lt;/name&gt;
+        &lt;assignedPlanet&gt;Europa Moon&lt;/assignedPlanet&gt;
+        &lt;missionRole&gt;Sub-Surface Oceanographer&lt;/missionRole&gt;
+        &lt;clearanceLevel&gt;Level 5 Beta&lt;/clearanceLevel&gt;
+    &lt;/cadet&gt;
+
+&lt;/cosmoverse&gt;</pre>
+
+    <p><strong>2. XML Schema Definition (<code>cosmoverse.xsd</code>):</strong></p>
+<pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
+
+    &lt;xs:element name="cosmoverse"&gt;
+        &lt;xs:complexType&gt;
+            &lt;xs:sequence&gt;
+                &lt;xs:element name="cadet" maxOccurs="unbounded"&gt;
+                    &lt;xs:complexType&gt;
+                        &lt;xs:sequence&gt;
+                            &lt;xs:element name="name" type="xs:string"/&gt;
+                            &lt;xs:element name="assignedPlanet" type="xs:string"/&gt;
+                            &lt;xs:element name="missionRole" type="xs:string"/&gt;
+                            &lt;xs:element name="clearanceLevel" type="xs:string"/&gt;
+                        &lt;/xs:sequence&gt;
+                        &lt;xs:attribute name="id" type="xs:string" use="required"/&gt;
+                    &lt;/xs:complexType&gt;
+                &lt;/xs:element&gt;
+            &lt;/xs:sequence&gt;
+        &lt;/xs:complexType&gt;
+    &lt;/xs:element&gt;
+
+&lt;/xs:schema&gt;</pre>
+
+    <p><strong>3. XSLT Transformation Stylesheet (<code>cosmoverse.xsl</code>):</strong></p>
+<pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+    &lt;xsl:template match="/"&gt;
+        &lt;html&gt;
+        &lt;head&gt;
+            &lt;title&gt;CosmoVerse | XML-XSLT Cadet Directory&lt;/title&gt;
+            &lt;style&gt;
+                body { font-family: Verdana, sans-serif; background: #040a1e; color: white; padding: 30px; }
+                h1 { color: #00e5ff; text-align: center; }
+                table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+                th { background: rgba(0, 229, 255, 0.25); color: #00e5ff; padding: 12px; border: 1px solid #00e5ff; }
+                td { padding: 10px; border: 1px solid rgba(255,255,255,0.2); }
+                tr:nth-child(even) { background: rgba(255,255,255,0.05); }
+            &lt;/style&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+            &lt;h1&gt;🚀 COSMOVERSE CADET DIRECTORY (XML &amp;amp; XSLT TRANSFORMED)&lt;/h1&gt;
+            &lt;table&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;Cadet ID&lt;/th&gt;
+                    &lt;th&gt;Cadet Name&lt;/th&gt;
+                    &lt;th&gt;Assigned Planet&lt;/th&gt;
+                    &lt;th&gt;Mission Role&lt;/th&gt;
+                    &lt;th&gt;Clearance Level&lt;/th&gt;
+                &lt;/tr&gt;
+                &lt;xsl:for-each select="cosmoverse/cadet"&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;&lt;strong&gt;&lt;xsl:value-of select="@id"/&gt;&lt;/strong&gt;&lt;/td&gt;
+                    &lt;td&gt;&lt;xsl:value-of select="name"/&gt;&lt;/td&gt;
+                    &lt;td&gt;&lt;xsl:value-of select="assignedPlanet"/&gt;&lt;/td&gt;
+                    &lt;td&gt;&lt;xsl:value-of select="missionRole"/&gt;&lt;/td&gt;
+                    &lt;td&gt;&lt;xsl:value-of select="clearanceLevel"/&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;/xsl:for-each&gt;
+            &lt;/table&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+    &lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;</pre>
+
+    <h3 class="section-heading">OUTPUT:</h3>
+    <div class="output-box">
+      <p class="box-title">[ PASTE EXERCISE 7 OUTPUT SCREENSHOT HERE ]</p>
+      <p class="box-desc">Take a screenshot of `xml-cosmo.html` showing source code tabs and rendered 10-record XML-XSLT table in Microsoft Edge.</p>
+    </div>
+
+    <h3 class="section-heading">RESULT:</h3>
+    <p class="result-text">
+      Thus, programs using XML, XML Schema (XSD), and XSLT/XSL transformation were created successfully, and the output table rendering with 10 records was verified.
+    </p>
+  </div>
+
+</body>
+</html>

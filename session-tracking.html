@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COSMOVerse | Orbital Flight Session & Telemetry Monitor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        <span class="nav-logo">COSMOVerse</span>
+      </a>
+
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Navigation">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="planets.html" class="nav-link">Planets</a></li>
+        <li><a href="missions.html" class="nav-link">Exploration</a></li>
+        <li><a href="scientists.html" class="nav-link">Scientists</a></li>
+        <li><a href="careers.html" class="nav-link">Careers</a></li>
+        <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+        <li><a href="servlet-form.html" class="nav-link">Register</a></li>
+        <li><a href="login.html" class="nav-link nav-btn">Login</a></li>
+      </ul>
+    </nav>
+
+    <!-- ================= MAIN CONTAINER ================= -->
+    <main class="page-container">
+      <section class="glass-card" style="max-width: 980px; margin: 0 auto 35px; text-align: center;">
+        <div class="cosmic-badge">
+          <span class="pulse-dot"></span> Mission Control Live Telemetry Engine
+        </div>
+
+        <h1 class="section-title">📡 ORBITAL FLIGHT SESSION & TELEMETRY MONITOR</h1>
+        <p class="section-subtitle">Real-Time Deep Space Telemetry Token & Session Lifecycle State</p>
+
+        <!-- TERMINAL STATUS BAR -->
+        <div class="terminal-status-bar">
+          <span>● TELEMETRY ENGINE: ONLINE</span>
+          <span>SECURITY: TLS 1.3 / PERSISTENT ENCRYPTION</span>
+          <span id="liveClockDisplay">UTC TELEMETRY: SYNCING...</span>
+        </div>
+
+        <!-- KPI METRICS SUMMARY -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-label">Telemetry Status</div>
+            <div class="kpi-value" id="sessStatus" style="color: var(--accent-green); font-size: 20px;">Active Session</div>
+            <span class="data-chip" style="font-size: 11px;">● 0ms Latency</span>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-label">Telemetry Visits</div>
+            <div class="kpi-value" id="visitCount" style="color: var(--primary-purple);">1 Cycle(s)</div>
+            <span class="data-chip" style="font-size: 11px;">Persistent State</span>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-label">Heartbeat Timeout</div>
+            <div class="kpi-value" style="color: var(--accent-gold); font-size: 22px;">1800s</div>
+            <span class="data-chip" style="font-size: 11px;">30m Keep-Alive</span>
+          </div>
+        </div>
+
+        <!-- DETAILED TELEMETRY TOKEN CARD -->
+        <div class="feature-card" style="text-align: left; margin-bottom: 25px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+            <div style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; color: var(--accent-neon-purple);">
+              🔑 ACTIVE ORBITAL SESSION TOKEN
+            </div>
+            <button type="button" class="copy-token-btn" onclick="copySessionToken()">
+              📋 Copy Session Token
+            </button>
+          </div>
+          <p id="sessionId" style="font-family: monospace; font-size: 17px; color: #fff; word-break: break-all; background: rgba(14, 5, 28, 0.85); padding: 14px 18px; border-radius: 12px; border: 1px solid var(--border-purple); margin-bottom: 15px;">
+            COSMO-SESS-8F9A7B2C-4192
+          </p>
+          <div id="copyToast" style="display: none; color: var(--accent-green); font-size: 12px; font-weight: 600; margin-bottom: 10px;">
+            ✓ Session Token copied to clipboard!
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 15px; margin-top: 15px; border-top: 1px dashed var(--border-purple); padding-top: 15px;">
+            <div>
+              <span style="font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Session Initiated</span>
+              <p id="creationTime" style="font-size: 14.5px; color: #e9d5ff; font-weight: 600; margin-top: 3px;">-</p>
+            </div>
+            <div>
+              <span style="font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Last Telemetry Handshake</span>
+              <p id="lastAccessTime" style="font-size: 14.5px; color: #e9d5ff; font-weight: 600; margin-top: 3px;">-</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-group" style="justify-content: center; margin-top: 30px;">
+          <button class="btn btn-primary" onclick="refreshSession()">🔄 Refresh Telemetry</button>
+          <button class="btn btn-accent" onclick="resetSession()">🗑️ Reset Telemetry Session</button>
+          <a href="db-explorer.html" class="btn btn-secondary">🗄️ Explorer Registry →</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+      <p class="footer-quote">🌌 "Somewhere, something incredible is waiting to be known." — Carl Sagan 🌌</p>
+      
+      <div class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="planets.html">Planets</a>
+        <a href="missions.html">Exploration</a>
+        <a href="scientists.html">Scientists</a>
+        <a href="careers.html">Careers</a>
+        <a href="quiz.html">Space Quiz</a>
+        <a href="servlet-form.html">Join Cadet Program</a>
+        <a href="login.html">Explorer Login</a>
+      </div>
+
+      <p class="footer-text">COSMOVerse Deep Space Telemetry & Session Monitoring Engine</p>
+    </footer>
+
+    <script>
+      function initSession() {
+        let sessionData = sessionStorage.getItem("cosmoSession");
+        let now = new Date().toLocaleString();
+
+        if (!sessionData) {
+          let newSession = {
+            id: "COSMO-SESS-" + Math.random().toString(36).substring(2, 10).toUpperCase() + "-" + Math.floor(Math.random() * 9000 + 1000),
+            created: now,
+            lastAccess: now,
+            visits: 1,
+            isNew: true
+          };
+          sessionStorage.setItem("cosmoSession", JSON.stringify(newSession));
+          renderSession(newSession);
+        } else {
+          let session = JSON.parse(sessionData);
+          session.visits += 1;
+          session.lastAccess = now;
+          session.isNew = false;
+          sessionStorage.setItem("cosmoSession", JSON.stringify(session));
+          renderSession(session);
+        }
+      }
+
+      function renderSession(session) {
+        document.getElementById("sessStatus").innerText = session.isNew ? "New Session Active" : "Persistent Session Online";
+        document.getElementById("sessStatus").style.color = session.isNew ? "#e879f9" : "#34d399";
+        document.getElementById("visitCount").innerText = session.visits + " Cycle(s)";
+        document.getElementById("sessionId").innerText = session.id;
+        document.getElementById("creationTime").innerText = session.created;
+        document.getElementById("lastAccessTime").innerText = session.lastAccess;
+      }
+
+      function copySessionToken() {
+        const token = document.getElementById("sessionId").innerText;
+        navigator.clipboard.writeText(token).then(() => {
+          const toast = document.getElementById("copyToast");
+          toast.style.display = "block";
+          setTimeout(() => { toast.style.display = "none"; }, 2500);
+        });
+      }
+
+      function refreshSession() {
+        location.reload();
+      }
+
+      function resetSession() {
+        sessionStorage.removeItem("cosmoSession");
+        location.reload();
+      }
+
+      function toggleMenu() {
+        document.getElementById('navLinks').classList.toggle('show');
+      }
+
+      // Live Telemetry Clock
+      setInterval(() => {
+        const now = new Date();
+        document.getElementById("liveClockDisplay").innerText = "UTC TELEMETRY: " + now.toUTCString().slice(17, 25) + " GMT";
+      }, 1000);
+
+      initSession();
+    </script>
+</body>
+</html>

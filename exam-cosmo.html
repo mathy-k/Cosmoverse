@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COSMOVerse | Cadet Flight Certification & Evaluation</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .timer-badge {
+      font-weight: bold;
+      color: var(--primary-cyan);
+      font-size: 16px;
+      letter-spacing: 1px;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 8px 18px;
+      border-radius: 14px;
+      border: 1px solid var(--border-cyan);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-logo">COSMOVerse</span>
+    </a>
+
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Navigation">☰</button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="planets.html" class="nav-link">Planets</a></li>
+      <li><a href="missions.html" class="nav-link">Exploration</a></li>
+      <li><a href="scientists.html" class="nav-link">Scientists</a></li>
+      <li><a href="careers.html" class="nav-link">Careers</a></li>
+      <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+      <li><a href="servlet-form.html" class="nav-link">Register</a></li>
+      <li><a href="login.html" class="nav-link nav-btn">Login</a></li>
+    </ul>
+  </nav>
+
+  <!-- MAIN SECTION -->
+  <main class="page-container">
+    <section class="glass-card" style="max-width: 950px; margin: 0 auto 35px;">
+      <h1 class="section-title">🎯 CADET FLIGHT CERTIFICATION & EVALUATION</h1>
+      <p class="section-subtitle">Real-Time Astral Flight Readiness & Knowledge Assessment Protocol</p>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(168, 85, 247, 0.1); border: 1px solid var(--border-purple); padding: 16px 25px; border-radius: 20px; margin-bottom: 30px; flex-wrap: wrap; gap: 15px;">
+        <div>Total Questions: <strong style="color: var(--primary-purple);">10 Questions</strong> | Max Score: <strong style="color: var(--primary-purple);">100 Marks</strong></div>
+        <div class="timer-badge">⏳ Time Remaining: <span id="timer">15:00</span></div>
+      </div>
+
+      <form action="exam-cosmo.jsp" method="post" id="examForm">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 30px; background: rgba(255, 255, 255, 0.04); padding: 25px; border-radius: 20px; border: 1px solid var(--border-purple);">
+          <div class="form-group">
+            <label for="regNo" class="form-label">🆔 Register No / Candidate ID</label>
+            <input type="text" id="regNo" name="regNo" class="form-input" placeholder="e.g. CS-2026-105" value="CS-2026-101" required>
+          </div>
+          <div class="form-group">
+            <label for="candidateName" class="form-label">👤 Candidate Name</label>
+            <input type="text" id="candidateName" name="candidateName" class="form-input" placeholder="Enter Your Name" value="Alex Mercer" required>
+          </div>
+        </div>
+
+        <!-- Q1 -->
+        <div class="feature-card" style="margin-bottom: 22px;">
+          <h3 style="font-size: 16px;">Q1. Which planet is known as the Red Planet in our Solar System? [10 Marks]</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 12px;">
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q1" value="Venus" required style="accent-color: var(--primary-purple);"> Venus</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q1" value="Mars" style="accent-color: var(--primary-purple);"> Mars</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q1" value="Jupiter" style="accent-color: var(--primary-purple);"> Jupiter</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q1" value="Saturn" style="accent-color: var(--primary-purple);"> Saturn</label>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="feature-card" style="margin-bottom: 22px;">
+          <h3 style="font-size: 16px;">Q2. What is the hottest planet in our Solar System? [10 Marks]</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 12px;">
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q2" value="Mercury" required style="accent-color: var(--primary-purple);"> Mercury</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q2" value="Venus" style="accent-color: var(--primary-purple);"> Venus</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q2" value="Mars" style="accent-color: var(--primary-purple);"> Mars</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q2" value="Sun" style="accent-color: var(--primary-purple);"> Sun</label>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="feature-card" style="margin-bottom: 22px;">
+          <h3 style="font-size: 16px;">Q3. Which galaxy contains our Solar System? [10 Marks]</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 12px;">
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q3" value="Andromeda" required style="accent-color: var(--primary-purple);"> Andromeda</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q3" value="Milky Way" style="accent-color: var(--primary-purple);"> Milky Way</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q3" value="Triangulum" style="accent-color: var(--primary-purple);"> Triangulum</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q3" value="Sombrero" style="accent-color: var(--primary-purple);"> Sombrero</label>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="feature-card" style="margin-bottom: 22px;">
+          <h3 style="font-size: 16px;">Q4. What is the largest planet in our Solar System? [10 Marks]</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 12px;">
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q4" value="Saturn" required style="accent-color: var(--primary-purple);"> Saturn</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q4" value="Neptune" style="accent-color: var(--primary-purple);"> Neptune</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q4" value="Jupiter" style="accent-color: var(--primary-purple);"> Jupiter</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q4" value="Uranus" style="accent-color: var(--primary-purple);"> Uranus</label>
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="feature-card" style="margin-bottom: 22px;">
+          <h3 style="font-size: 16px;">Q5. Which celestial body is at the center of our Solar System? [10 Marks]</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 12px;">
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q5" value="Earth" required style="accent-color: var(--primary-purple);"> Earth</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q5" value="Sun" style="accent-color: var(--primary-purple);"> Sun</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q5" value="Moon" style="accent-color: var(--primary-purple);"> Moon</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q5" value="Jupiter" style="accent-color: var(--primary-purple);"> Jupiter</label>
+          </div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="feature-card" style="margin-bottom: 22px;">
+          <h3 style="font-size: 16px;">Q6. Which planet is famous for its prominent planetary ring system? [10 Marks]</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 12px;">
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q6" value="Jupiter" required style="accent-color: var(--primary-purple);"> Jupiter</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q6" value="Saturn" style="accent-color: var(--primary-purple);"> Saturn</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q6" value="Mars" style="accent-color: var(--primary-purple);"> Mars</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q6" value="Mercury" style="accent-color: var(--primary-purple);"> Mercury</label>
+          </div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="feature-card" style="margin-bottom: 22px;">
+          <h3 style="font-size: 16px;">Q7. What is the approximate age of our Universe according to the Big Bang Theory? [10 Marks]</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 12px;">
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q7" value="4.5 Billion Years" required style="accent-color: var(--primary-purple);"> 4.5 Billion Years</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q7" value="13.8 Billion Years" style="accent-color: var(--primary-purple);"> 13.8 Billion Years</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q7" value="20.1 Billion Years" style="accent-color: var(--primary-purple);"> 20.1 Billion Years</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q7" value="100 Billion Years" style="accent-color: var(--primary-purple);"> 100 Billion Years</label>
+          </div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="feature-card" style="margin-bottom: 22px;">
+          <h3 style="font-size: 16px;">Q8. Which space telescope succeeded the Hubble Space Telescope in 2021? [10 Marks]</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 12px;">
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q8" value="Kepler Telescope" required style="accent-color: var(--primary-purple);"> Kepler Space Telescope</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q8" value="James Webb Space Telescope" style="accent-color: var(--primary-purple);"> James Webb Space Telescope</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q8" value="Spitzer Telescope" style="accent-color: var(--primary-purple);"> Spitzer Space Telescope</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q8" value="Chandra Observatory" style="accent-color: var(--primary-purple);"> Chandra X-ray Observatory</label>
+          </div>
+        </div>
+
+        <!-- Q9 -->
+        <div class="feature-card" style="margin-bottom: 22px;">
+          <h3 style="font-size: 16px;">Q9. What is the nearest star system to our Sun? [10 Marks]</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 12px;">
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q9" value="Sirius" required style="accent-color: var(--primary-purple);"> Sirius</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q9" value="Alpha Centauri / Proxima Centauri" style="accent-color: var(--primary-purple);"> Alpha Centauri / Proxima Centauri</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q9" value="Betelgeuse" style="accent-color: var(--primary-purple);"> Betelgeuse</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q9" value="Polaris" style="accent-color: var(--primary-purple);"> Polaris</label>
+          </div>
+        </div>
+
+        <!-- Q10 -->
+        <div class="feature-card" style="margin-bottom: 22px;">
+          <h3 style="font-size: 16px;">Q10. What force holds planets in orbit around the Sun? [10 Marks]</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 12px;">
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q10" value="Magnetism" required style="accent-color: var(--primary-purple);"> Magnetism</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q10" value="Gravitational Force" style="accent-color: var(--primary-purple);"> Gravitational Force</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q10" value="Nuclear Force" style="accent-color: var(--primary-purple);"> Nuclear Force</label>
+            <label class="form-input" style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="radio" name="q10" value="Centrifugal Force" style="accent-color: var(--primary-purple);"> Centrifugal Force</label>
+          </div>
+        </div>
+
+        <div class="btn-group" style="margin-top: 35px;">
+          <button type="submit" class="btn btn-primary">📝 SUBMIT EXAMINATION (100 MARKS)</button>
+        </div>
+      </form>
+
+      <div id="examResultArea" style="display: none;"></div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <p class="footer-quote">🌌 CosmoVerse Online Evaluation & Assessment Engine 🌌</p>
+    
+    <div class="footer-nav">
+      <a href="index.html">Home</a>
+      <a href="planets.html">Planets</a>
+      <a href="missions.html">Exploration</a>
+      <a href="scientists.html">Scientists</a>
+      <a href="careers.html">Careers</a>
+      <a href="quiz.html">Space Quiz</a>
+      <a href="servlet-form.html">Join Cadet Program</a>
+      <a href="login.html">Explorer Login</a>
+    </div>
+
+    <p class="footer-text">COSMOVerse Planetary Exploration & Telemetry Network &copy; 2026. Cadet Certification Protocol.</p>
+  </footer>
+
+  <script>
+    let timeLeft = 900;
+    const timerElem = document.getElementById('timer');
+    setInterval(() => {
+      if (timeLeft > 0) {
+        timeLeft--;
+        const mins = Math.floor(timeLeft / 60);
+        const secs = timeLeft % 60;
+        timerElem.innerText = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+      }
+    }, 1000);
+
+    document.getElementById('examForm').addEventListener('submit', function(e) {
+      const regNo = document.getElementById('regNo').value.trim() || 'CS-2026-101';
+      const name = document.getElementById('candidateName').value.trim() || 'Alex Mercer';
+      
+      let score = 0;
+      if (document.querySelector('input[name="q1"]:checked')?.value === 'Mars') score += 10;
+      if (document.querySelector('input[name="q2"]:checked')?.value === 'Venus') score += 10;
+      if (document.querySelector('input[name="q3"]:checked')?.value === 'Milky Way') score += 10;
+      if (document.querySelector('input[name="q4"]:checked')?.value === 'Jupiter') score += 10;
+      if (document.querySelector('input[name="q5"]:checked')?.value === 'Sun') score += 10;
+      if (document.querySelector('input[name="q6"]:checked')?.value === 'Saturn') score += 10;
+      if (document.querySelector('input[name="q7"]:checked')?.value === '13.8 Billion Years') score += 10;
+      if (document.querySelector('input[name="q8"]:checked')?.value === 'James Webb Space Telescope') score += 10;
+      if (document.querySelector('input[name="q9"]:checked')?.value === 'Alpha Centauri / Proxima Centauri') score += 10;
+      if (document.querySelector('input[name="q10"]:checked')?.value === 'Gravitational Force') score += 10;
+
+      const total = 100;
+      const percentage = score;
+      const status = score >= 50 ? 'PASSED ★' : 'FAILED';
+      const statusColor = score >= 50 ? 'var(--accent-green)' : 'var(--accent-red)';
+      const grade = score >= 90 ? 'O (Outstanding)' : score >= 80 ? 'A+' : score >= 70 ? 'A' : score >= 50 ? 'B' : 'F';
+
+      const m1 = Math.min(100, Math.max(45, Math.round(score * 0.96)));
+      const m2 = Math.min(100, Math.max(45, Math.round(score * 1.0)));
+      const m3 = Math.min(100, Math.max(45, Math.round(score * 1.04)));
+      const markTotal = m1 + m2 + m3;
+      const markPct = (markTotal / 3.0).toFixed(1) + '%';
+
+      let savedRecords = [];
+      try {
+        savedRecords = JSON.parse(localStorage.getItem('cosmoverse_marklist')) || [];
+      } catch (err) {
+        savedRecords = [];
+      }
+
+      const existingIdx = savedRecords.findIndex(r => r.regNo.toLowerCase() === regNo.toLowerCase());
+      const newRecord = {
+        regNo: regNo,
+        name: name,
+        m1: m1,
+        m2: m2,
+        m3: m3,
+        total: markTotal,
+        pct: markPct,
+        grade: grade,
+        status: status.includes('PASSED') ? 'PASS' : 'FAIL',
+        isNew: true
+      };
+
+      if (existingIdx >= 0) {
+        savedRecords[existingIdx] = newRecord;
+      } else {
+        savedRecords.unshift(newRecord);
+      }
+
+      localStorage.setItem('cosmoverse_marklist', JSON.stringify(savedRecords));
+
+      if (window.location.protocol === 'file:') {
+        e.preventDefault();
+
+        const resultArea = document.getElementById('examResultArea');
+        resultArea.style.display = 'block';
+        resultArea.innerHTML = `
+          <div class="cert-card">
+            <div class="cert-seal">🚀</div>
+            <span style="background: rgba(92, 255, 141, 0.2); color: var(--accent-green); border: 1px solid var(--accent-green); padding: 5px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; display: inline-block; margin-bottom: 15px;">CERTIFICATION RECORD STORED TO FLIGHT REGISTRY</span>
+            <h2 style="color: ${statusColor}; font-size: 30px; margin-bottom: 8px;">ASTRAL FLIGHT ASSESSMENT: ${status}</h2>
+            <p style="font-size: 16px; color: var(--text-muted); margin-bottom: 25px;">Candidate <strong style="color: #fff;">${name}</strong> (<span style="color: var(--primary-cyan); font-family: var(--font-mono);">${regNo}</span>) has completed the Mission Telemetry & Flight Evaluation Protocol.</p>
+            
+            <div class="kpi-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-bottom: 25px;">
+              <div class="kpi-card">
+                <div class="kpi-label">CADET CALLSIGN</div>
+                <div class="kpi-value" style="font-size: 20px; color: var(--primary-cyan);">${regNo}</div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-label">FLIGHT SCORE</div>
+                <div class="kpi-value" style="color: #fff;">${score} / ${total}</div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-label">EVALUATION ACCURACY</div>
+                <div class="kpi-value" style="color: var(--accent-green);">${percentage}%</div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-label">RANK GRADE</div>
+                <div class="kpi-value" style="color: var(--accent-gold);">${grade}</div>
+              </div>
+            </div>
+
+            <div class="btn-group" style="justify-content: center; gap: 15px;">
+              <a href="exam-cosmo.html" class="btn btn-secondary">↺ Re-Take Assessment</a>
+              <a href="marklist-cosmo.html" class="btn btn-primary">📊 View Academy Mark List & Ranks →</a>
+            </div>
+          </div>
+        `;
+        resultArea.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('show');
+    }
+  </script>
+</body>
+</html>

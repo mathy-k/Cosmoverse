@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COSMOVerse | Academy Flight Assessment & Cadet Ranks</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .badge-pass {
+      background: rgba(92, 255, 141, 0.2);
+      color: var(--accent-green);
+      padding: 4px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--accent-green);
+      font-weight: bold;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .badge-fail {
+      background: rgba(255, 79, 112, 0.2);
+      color: var(--accent-red);
+      padding: 4px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--accent-red);
+      font-weight: bold;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .badge-new {
+      background: rgba(255, 215, 0, 0.2);
+      color: var(--accent-gold);
+      border: 1px solid var(--accent-gold);
+      padding: 3px 9px;
+      border-radius: 10px;
+      font-size: 10.5px;
+      font-weight: bold;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .col-candidate {
+      min-width: 240px;
+      text-align: left !important;
+      padding-left: 20px !important;
+    }
+    .candidate-cell-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .candidate-name-text {
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+    .candidate-badges-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-logo">COSMOVerse</span>
+    </a>
+
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Navigation">☰</button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="planets.html" class="nav-link">Planets</a></li>
+      <li><a href="missions.html" class="nav-link">Exploration</a></li>
+      <li><a href="scientists.html" class="nav-link">Scientists</a></li>
+      <li><a href="careers.html" class="nav-link">Careers</a></li>
+      <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+      <li><a href="servlet-form.html" class="nav-link">Register</a></li>
+      <li><a href="login.html" class="nav-link nav-btn">Login</a></li>
+    </ul>
+  </nav>
+
+  <!-- MAIN SECTION -->
+  <main class="page-container">
+    <section class="glass-card" style="max-width: 1100px; margin: 0 auto 35px;">
+      <h1 class="section-title">📊 ACADEMY FLIGHT ASSESSMENT & CADET RANKS</h1>
+      <p class="section-subtitle">Real-Time Astral Cadet Performance Metrics & Evaluated Flight Records</p>
+
+      <!-- DYNAMIC KPI STATS SUMMARY -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">TOTAL EVALUATED CADETS</div>
+          <div class="kpi-value" id="statTotalCount" style="color: var(--primary-cyan);">10 Cadets</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">ACADEMY BENCHMARK AVG</div>
+          <div class="kpi-value" id="statClassAvg" style="color: var(--accent-neon-purple);">87.4%</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">TOP ORBITAL SCORE</div>
+          <div class="kpi-value" id="statHighest" style="color: var(--accent-gold);">289 / 300</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">QUALIFICATION RATE</div>
+          <div class="kpi-value" id="statPassRate" style="color: var(--accent-green);">100% Passed</div>
+        </div>
+      </div>
+
+      <!-- SEARCH FORM -->
+      <form action="marklist-cosmo.jsp" method="get" id="searchForm" onsubmit="return handleSearch(event)">
+        <div style="display: flex; gap: 15px; max-width: 650px; margin: 0 auto 30px auto;">
+          <input type="text" id="searchInput" name="studentId" class="form-input" placeholder="🔍 Search Candidate Name or Register No (e.g. Shanmathy / CS-101)..." onkeyup="filterTable()">
+          <button type="submit" class="btn btn-primary" style="white-space: nowrap;">🔍 QUERY DATABASE</button>
+        </div>
+      </form>
+
+      <!-- MARK LIST TABLE -->
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Reg No</th>
+              <th class="col-candidate">Candidate Name</th>
+              <th>Astronomy</th>
+              <th>Astrophysics</th>
+              <th>Orbital Mech</th>
+              <th>Total (300)</th>
+              <th>Percentage</th>
+              <th>Grade</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="markListBody">
+            <!-- Dynamic JS Injection -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="btn-group" style="margin-top: 30px;">
+        <button onclick="resetDefaultData()" class="btn btn-secondary" style="font-size: 13px;">🔄 Reset Default 10 Candidates</button>
+        <a href="exam-cosmo.html" class="btn btn-primary">🎯 TAKE FLIGHT EVALUATION TO ADD CADET</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p class="footer-quote">🌌 COSMOVerse Astral Academy & Cadet Evaluation Network 🌌</p>
+    
+    <div class="footer-nav">
+      <a href="index.html">Home</a>
+      <a href="planets.html">Planets</a>
+      <a href="missions.html">Exploration</a>
+      <a href="scientists.html">Scientists</a>
+      <a href="careers.html">Careers</a>
+      <a href="quiz.html">Space Quiz</a>
+      <a href="servlet-form.html">Join Cadet Program</a>
+      <a href="login.html">Explorer Login</a>
+    </div>
+
+    <p class="footer-text">COSMOVerse Planetary Exploration & Telemetry Network &copy; 2026. Cadet Flight Assessment Protocol.</p>
+  </footer>
+
+  <script>
+    const defaultCandidates = [
+      { regNo: 'CS-101', name: 'Alex Mercer', m1: 92, m2: 88, m3: 95, total: 275, pct: '91.6%', grade: 'A+', status: 'PASS' },
+      { regNo: 'CS-102', name: 'Sophia Turner', m1: 85, m2: 90, m3: 89, total: 264, pct: '88.0%', grade: 'A', status: 'PASS' },
+      { regNo: 'CS-103', name: 'David Miller', m1: 78, m2: 82, m3: 80, total: 240, pct: '80.0%', grade: 'A', status: 'PASS' },
+      { regNo: 'CS-104', name: 'Elena Rostova', m1: 95, m2: 96, m3: 98, total: 289, pct: '96.3%', grade: 'O (Outstanding)', status: 'PASS' },
+      { regNo: 'CS-105', name: 'Lucas Vance', m1: 84, m2: 88, m3: 86, total: 258, pct: '86.0%', grade: 'A', status: 'PASS' },
+      { regNo: 'CS-106', name: 'Hannah Abbott', m1: 90, m2: 92, m3: 91, total: 273, pct: '91.0%', grade: 'A+', status: 'PASS' },
+      { regNo: 'CS-107', name: 'Gabriel Thorne', m1: 88, m2: 85, m3: 90, total: 263, pct: '87.6%', grade: 'A', status: 'PASS' },
+      { regNo: 'CS-108', name: 'Chloe Bennett', m1: 94, m2: 93, m3: 96, total: 283, pct: '94.3%', grade: 'O (Outstanding)', status: 'PASS' },
+      { regNo: 'CS-109', name: 'Nathan Drake', m1: 81, m2: 79, m3: 85, total: 245, pct: '81.6%', grade: 'A', status: 'PASS' },
+      { regNo: 'CS-110', name: 'Zoe Kravitz', m1: 93, m2: 89, m3: 94, total: 276, pct: '92.0%', grade: 'A+', status: 'PASS' }
+    ];
+
+    function getStoredMarkList() {
+      try {
+        const stored = localStorage.getItem('cosmoverse_marklist');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            const regNos = new Set(parsed.map(r => r.regNo.toLowerCase()));
+            defaultCandidates.forEach(d => {
+              if (!regNos.has(d.regNo.toLowerCase())) {
+                parsed.push(d);
+              }
+            });
+            return parsed;
+          }
+        }
+      } catch (e) {}
+      localStorage.setItem('cosmoverse_marklist', JSON.stringify(defaultCandidates));
+      return defaultCandidates;
+    }
+
+    let currentList = getStoredMarkList();
+
+    function renderTable(dataList) {
+      const tbody = document.getElementById('markListBody');
+      tbody.innerHTML = '';
+
+      if (dataList.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; padding: 25px; color: var(--text-muted);">No candidate records found matching your query.</td></tr>`;
+        return;
+      }
+
+      const sortedScores = [...currentList].map(c => c.total).sort((a,b) => b - a);
+      const top1 = sortedScores[0];
+      const top2 = sortedScores[1];
+      const top3 = sortedScores[2];
+
+      dataList.forEach(item => {
+        const tr = document.createElement('tr');
+        if (item.isNew) {
+          tr.style.background = 'rgba(168, 85, 247, 0.18)';
+        }
+        let rankTag = '';
+        if (item.total === top1) {
+          rankTag = ` <span class="rank-badge-gold">🥇 TOP CADET</span>`;
+        } else if (item.total === top2) {
+          rankTag = ` <span class="rank-badge-silver">🥈 WING LEADER</span>`;
+        } else if (item.total === top3) {
+          rankTag = ` <span class="rank-badge-bronze">🥉 FLIGHT ACE</span>`;
+        }
+
+        const badgeHtml = item.status === 'PASS' 
+          ? `<span class="badge-pass">PASS</span>` 
+          : `<span class="badge-fail">FAIL</span>`;
+        const newBadge = item.isNew ? `<span class="badge-new">✨ RECENT EVAL</span>` : '';
+
+        let badgesHtml = '';
+        if (rankTag || newBadge) {
+          badgesHtml = `<div class="candidate-badges-wrap">${rankTag}${newBadge}</div>`;
+        }
+
+        tr.innerHTML = `
+          <td><strong style="color: var(--primary-purple);">${item.regNo}</strong></td>
+          <td class="col-candidate">
+            <div class="candidate-cell-box">
+              <span class="candidate-name-text">👤 ${item.name}</span>
+              ${badgesHtml}
+            </div>
+          </td>
+          <td>${item.m1}</td>
+          <td>${item.m2}</td>
+          <td>${item.m3}</td>
+          <td><strong style="color: var(--primary-violet);">${item.total}</strong></td>
+          <td>${item.pct}</td>
+          <td><span style="color: var(--accent-gold); font-weight: bold;">${item.grade}</span></td>
+          <td>${badgeHtml}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      updateStats(dataList);
+    }
+
+    function updateStats(dataList) {
+      const totalCount = dataList.length;
+      document.getElementById('statTotalCount').innerText = `${totalCount} Candidates`;
+
+      if (totalCount > 0) {
+        const sumPct = dataList.reduce((acc, r) => acc + parseFloat(r.pct), 0);
+        const avg = (sumPct / totalCount).toFixed(1);
+        document.getElementById('statClassAvg').innerText = `${avg}%`;
+
+        const maxScore = Math.max(...dataList.map(r => r.total));
+        document.getElementById('statHighest').innerText = `${maxScore} / 300`;
+
+        const passCount = dataList.filter(r => r.status === 'PASS').length;
+        const passRate = ((passCount / totalCount) * 100).toFixed(0);
+        document.getElementById('statPassRate').innerText = `${passRate}% Passed`;
+      }
+    }
+
+    function filterTable() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      if (!query) {
+        renderTable(currentList);
+        return;
+      }
+      const filtered = currentList.filter(item => 
+        item.name.toLowerCase().includes(query) || 
+        item.regNo.toLowerCase().includes(query)
+      );
+      renderTable(filtered);
+    }
+
+    function handleSearch(e) {
+      if (window.location.protocol === 'file:') {
+        e.preventDefault();
+        filterTable();
+      }
+    }
+
+    function resetDefaultData() {
+      localStorage.setItem('cosmoverse_marklist', JSON.stringify(defaultCandidates));
+      currentList = defaultCandidates;
+      document.getElementById('searchInput').value = '';
+      renderTable(currentList);
+    }
+
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('show');
+    }
+
+    renderTable(currentList);
+  </script>
+</body>
+</html>

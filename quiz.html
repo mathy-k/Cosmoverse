@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>COSMOVerse | Space Knowledge Challenge</title>
+    <!-- External CSS -->
+    <link href="style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        <span class="nav-logo">COSMOVerse</span>
+      </a>
+
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Navigation">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="planets.html" class="nav-link">Planets</a></li>
+        <li><a href="missions.html" class="nav-link">Exploration</a></li>
+        <li><a href="scientists.html" class="nav-link">Scientists</a></li>
+        <li><a href="careers.html" class="nav-link">Careers</a></li>
+        <li><a href="quiz.html" class="nav-link active">Quiz</a></li>
+        <li><a href="servlet-form.html" class="nav-link">Register</a></li>
+        <li><a href="login.html" class="nav-link nav-btn">Login</a></li>
+      </ul>
+    </nav>
+
+    <!-- ================= MAIN CONTAINER ================= -->
+    <main class="page-container">
+      <section class="glass-card" style="max-width: 960px; margin: 0 auto 35px;">
+        <div style="text-align: center;">
+          <div class="cosmic-badge">
+            <span class="pulse-dot"></span> Interactive Telemetry Evaluation Engine
+          </div>
+          <h1 class="section-title">⚡ SPACE KNOWLEDGE CHALLENGE</h1>
+          <p class="section-subtitle">Real-Time Astral Pilot Readiness & Telemetry Flight Validation</p>
+          
+          <p style="color: var(--text-main); margin-bottom: 25px; font-size: 15.5px; max-width: 720px; margin-left: auto; margin-right: auto;">
+            Test your planetary and astrophysical knowledge across 10 mission phases. Your answers are verified with instant telemetry feedback and scientific flight evaluation!
+          </p>
+        </div>
+
+        <hr class="glow-hr" />
+
+        <!-- INTERACTIVE QUIZ PROGRESS METER -->
+        <div class="quiz-meter-container">
+          <div style="font-family: var(--font-heading); font-size: 14.5px; font-weight: 700; color: var(--accent-neon-purple); display: flex; align-items: center; gap: 8px;">
+            <span>⚡ TELEMETRY FLIGHT PROGRESS:</span>
+            <span id="progressText" style="color: #fff; font-family: var(--font-mono);">0%</span>
+          </div>
+          <div class="quiz-meter-track">
+            <div class="quiz-meter-fill" id="progressFill"></div>
+          </div>
+          <div style="font-size: 12.5px; color: var(--text-muted);">
+            <span id="fieldsCompleted">0 / 12</span> Modules Verified
+          </div>
+        </div>
+
+        <!-- ================= QUIZ FORM ================= -->
+        <form id="quizForm" onsubmit="return validateForm();">
+          
+          <!-- CADET PROFILE STRIP -->
+          <div style="background: rgba(22, 9, 44, 0.7); border: 1px solid var(--border-purple); border-radius: 20px; padding: 22px; margin-bottom: 25px;">
+            <div style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-neon-purple); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+              <span>🆔 CADET IDENTIFICATION & DESIGNATION</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px;">
+              <!-- NAME -->
+              <div class="form-group" style="margin-bottom: 0;">
+                <label for="name" class="form-label">👤 Full Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  class="form-input"
+                  placeholder="Enter your name"
+                  oninput="validateName(); updateQuizProgress();"
+                />
+                <span id="nameError" class="validation-message"></span>
+              </div>
+
+              <!-- EMAIL -->
+              <div class="form-group" style="margin-bottom: 0;">
+                <label for="email" class="form-label">📧 Communication Email</label>
+                <input
+                  type="text"
+                  id="email"
+                  class="form-input"
+                  placeholder="e.g. cadet@cosmoverse.org"
+                  oninput="validateEmail(); updateQuizProgress();"
+                />
+                <span id="emailError" class="validation-message"></span>
+              </div>
+
+              <!-- PLANET SELECT -->
+              <div class="form-group" style="margin-bottom: 0;">
+                <label for="planet" class="form-label">🪐 Assigned Sector</label>
+                <select id="planet" class="form-select" onchange="validatePlanet(); updateQuizProgress();">
+                  <option value="">-- Select Planetary Sector --</option>
+                  <option value="Mercury">Mercury</option>
+                  <option value="Venus">Venus</option>
+                  <option value="Earth">Earth</option>
+                  <option value="Mars" selected>Mars</option>
+                  <option value="Jupiter">Jupiter</option>
+                  <option value="Saturn">Saturn</option>
+                  <option value="Uranus">Uranus</option>
+                  <option value="Neptune">Neptune</option>
+                </select>
+                <span id="planetError" class="validation-message"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEPPER HUD CONTAINER -->
+          <div id="quizStepperBox" class="quiz-stepper-box">
+            
+            <!-- QUESTION NAVIGATION DOTS MATRIX (1 to 10 + Debrief) -->
+            <div class="quiz-nav-dots" id="quizNavDots">
+              <button type="button" class="quiz-dot active" onclick="goToSlide(1)" title="Question 1">1</button>
+              <button type="button" class="quiz-dot" onclick="goToSlide(2)" title="Question 2">2</button>
+              <button type="button" class="quiz-dot" onclick="goToSlide(3)" title="Question 3">3</button>
+              <button type="button" class="quiz-dot" onclick="goToSlide(4)" title="Question 4">4</button>
+              <button type="button" class="quiz-dot" onclick="goToSlide(5)" title="Question 5">5</button>
+              <button type="button" class="quiz-dot" onclick="goToSlide(6)" title="Question 6">6</button>
+              <button type="button" class="quiz-dot" onclick="goToSlide(7)" title="Question 7">7</button>
+              <button type="button" class="quiz-dot" onclick="goToSlide(8)" title="Question 8">8</button>
+              <button type="button" class="quiz-dot" onclick="goToSlide(9)" title="Question 9">9</button>
+              <button type="button" class="quiz-dot" onclick="goToSlide(10)" title="Question 10">10</button>
+              <button type="button" class="quiz-dot" onclick="goToSlide(11)" title="Final Briefing" style="font-size: 15px;">📋</button>
+            </div>
+
+            <!-- SLIDE 1 -->
+            <div class="quiz-slide active" id="slide-1">
+              <div class="quiz-q-header">
+                <span class="quiz-q-tag">🪐 PHASE 1: SOLAR SYSTEM MECHANICS</span>
+                <span style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-gold);">+10 MARKS</span>
+              </div>
+              <h3 class="quiz-q-title">Q1. Which planet is known as the "Red Planet" in our Solar System due to iron oxide minerals?</h3>
+              <div class="quiz-options-grid">
+                <div class="quiz-option-card" onclick="selectOption('q1', 'Earth', this)">
+                  <span class="quiz-opt-indicator">A</span>
+                  <input type="radio" name="q1" value="Earth" style="display:none;" />
+                  <span class="quiz-opt-text">Earth</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q1', 'Mars', this)">
+                  <span class="quiz-opt-indicator">B</span>
+                  <input type="radio" name="q1" value="Mars" style="display:none;" />
+                  <span class="quiz-opt-text">Mars</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q1', 'Jupiter', this)">
+                  <span class="quiz-opt-indicator">C</span>
+                  <input type="radio" name="q1" value="Jupiter" style="display:none;" />
+                  <span class="quiz-opt-text">Jupiter</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q1', 'Venus', this)">
+                  <span class="quiz-opt-indicator">D</span>
+                  <input type="radio" name="q1" value="Venus" style="display:none;" />
+                  <span class="quiz-opt-text">Venus</span>
+                </div>
+              </div>
+              <span id="q1Error" class="validation-message"></span>
+            </div>
+
+            <!-- SLIDE 2 -->
+            <div class="quiz-slide" id="slide-2">
+              <div class="quiz-q-header">
+                <span class="quiz-q-tag">🪐 PHASE 1: SOLAR SYSTEM MECHANICS</span>
+                <span style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-gold);">+10 MARKS</span>
+              </div>
+              <h3 class="quiz-q-title">Q2. What is the largest planet in our Solar System, with more mass than all other planets combined?</h3>
+              <div class="quiz-options-grid">
+                <div class="quiz-option-card" onclick="selectOption('q2', 'Saturn', this)">
+                  <span class="quiz-opt-indicator">A</span>
+                  <input type="radio" name="q2" value="Saturn" style="display:none;" />
+                  <span class="quiz-opt-text">Saturn</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q2', 'Jupiter', this)">
+                  <span class="quiz-opt-indicator">B</span>
+                  <input type="radio" name="q2" value="Jupiter" style="display:none;" />
+                  <span class="quiz-opt-text">Jupiter</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q2', 'Neptune', this)">
+                  <span class="quiz-opt-indicator">C</span>
+                  <input type="radio" name="q2" value="Neptune" style="display:none;" />
+                  <span class="quiz-opt-text">Neptune</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q2', 'Uranus', this)">
+                  <span class="quiz-opt-indicator">D</span>
+                  <input type="radio" name="q2" value="Uranus" style="display:none;" />
+                  <span class="quiz-opt-text">Uranus</span>
+                </div>
+              </div>
+              <span id="q2Error" class="validation-message"></span>
+            </div>
+
+            <!-- SLIDE 3 -->
+            <div class="quiz-slide" id="slide-3">
+              <div class="quiz-q-header">
+                <span class="quiz-q-tag">☀️ PHASE 1: ATMOSPHERIC EXTREMES</span>
+                <span style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-gold);">+10 MARKS</span>
+              </div>
+              <h3 class="quiz-q-title">Q3. Which planet in our Solar System has the hottest average surface temperature (~465°C)?</h3>
+              <div class="quiz-options-grid">
+                <div class="quiz-option-card" onclick="selectOption('q3', 'Mercury', this)">
+                  <span class="quiz-opt-indicator">A</span>
+                  <input type="radio" name="q3" value="Mercury" style="display:none;" />
+                  <span class="quiz-opt-text">Mercury</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q3', 'Venus', this)">
+                  <span class="quiz-opt-indicator">B</span>
+                  <input type="radio" name="q3" value="Venus" style="display:none;" />
+                  <span class="quiz-opt-text">Venus</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q3', 'Mars', this)">
+                  <span class="quiz-opt-indicator">C</span>
+                  <input type="radio" name="q3" value="Mars" style="display:none;" />
+                  <span class="quiz-opt-text">Mars</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q3', 'Sun', this)">
+                  <span class="quiz-opt-indicator">D</span>
+                  <input type="radio" name="q3" value="Sun" style="display:none;" />
+                  <span class="quiz-opt-text">Sun</span>
+                </div>
+              </div>
+              <span id="q3Error" class="validation-message"></span>
+            </div>
+
+            <!-- SLIDE 4 -->
+            <div class="quiz-slide" id="slide-4">
+              <div class="quiz-q-header">
+                <span class="quiz-q-tag">🪐 PHASE 1: RING SYSTEMS</span>
+                <span style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-gold);">+10 MARKS</span>
+              </div>
+              <h3 class="quiz-q-title">Q4. Which gas giant features the most extensive ring system, primarily composed of pure water ice particles?</h3>
+              <div class="quiz-options-grid">
+                <div class="quiz-option-card" onclick="selectOption('q4', 'Jupiter', this)">
+                  <span class="quiz-opt-indicator">A</span>
+                  <input type="radio" name="q4" value="Jupiter" style="display:none;" />
+                  <span class="quiz-opt-text">Jupiter</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q4', 'Saturn', this)">
+                  <span class="quiz-opt-indicator">B</span>
+                  <input type="radio" name="q4" value="Saturn" style="display:none;" />
+                  <span class="quiz-opt-text">Saturn</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q4', 'Uranus', this)">
+                  <span class="quiz-opt-indicator">C</span>
+                  <input type="radio" name="q4" value="Uranus" style="display:none;" />
+                  <span class="quiz-opt-text">Uranus</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q4', 'Neptune', this)">
+                  <span class="quiz-opt-indicator">D</span>
+                  <input type="radio" name="q4" value="Neptune" style="display:none;" />
+                  <span class="quiz-opt-text">Neptune</span>
+                </div>
+              </div>
+              <span id="q4Error" class="validation-message"></span>
+            </div>
+
+            <!-- SLIDE 5 -->
+            <div class="quiz-slide" id="slide-5">
+              <div class="quiz-q-header">
+                <span class="quiz-q-tag">🌌 PHASE 2: GALAXIES & DEEP SPACE</span>
+                <span style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-gold);">+10 MARKS</span>
+              </div>
+              <h3 class="quiz-q-title">Q5. Which major spiral galaxy is situated approximately 2.5 million light-years away from our Milky Way?</h3>
+              <div class="quiz-options-grid">
+                <div class="quiz-option-card" onclick="selectOption('q5', 'Triangulum', this)">
+                  <span class="quiz-opt-indicator">A</span>
+                  <input type="radio" name="q5" value="Triangulum" style="display:none;" />
+                  <span class="quiz-opt-text">Triangulum Galaxy</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q5', 'Andromeda', this)">
+                  <span class="quiz-opt-indicator">B</span>
+                  <input type="radio" name="q5" value="Andromeda" style="display:none;" />
+                  <span class="quiz-opt-text">Andromeda Galaxy</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q5', 'Sombrero', this)">
+                  <span class="quiz-opt-indicator">C</span>
+                  <input type="radio" name="q5" value="Sombrero" style="display:none;" />
+                  <span class="quiz-opt-text">Sombrero Galaxy</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q5', 'Whirlpool', this)">
+                  <span class="quiz-opt-indicator">D</span>
+                  <input type="radio" name="q5" value="Whirlpool" style="display:none;" />
+                  <span class="quiz-opt-text">Whirlpool Galaxy</span>
+                </div>
+              </div>
+              <span id="q5Error" class="validation-message"></span>
+            </div>
+
+            <!-- SLIDE 6 -->
+            <div class="quiz-slide" id="slide-6">
+              <div class="quiz-q-header">
+                <span class="quiz-q-tag">🕳️ PHASE 2: RELATIVITY & BLACK HOLES</span>
+                <span style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-gold);">+10 MARKS</span>
+              </div>
+              <h3 class="quiz-q-title">Q6. What is the theoretical boundary around a black hole beyond which escape velocity exceeds the speed of light?</h3>
+              <div class="quiz-options-grid">
+                <div class="quiz-option-card" onclick="selectOption('q6', 'Accretion Disk', this)">
+                  <span class="quiz-opt-indicator">A</span>
+                  <input type="radio" name="q6" value="Accretion Disk" style="display:none;" />
+                  <span class="quiz-opt-text">Accretion Disk</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q6', 'Event Horizon', this)">
+                  <span class="quiz-opt-indicator">B</span>
+                  <input type="radio" name="q6" value="Event Horizon" style="display:none;" />
+                  <span class="quiz-opt-text">Event Horizon</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q6', 'Photon Sphere', this)">
+                  <span class="quiz-opt-indicator">C</span>
+                  <input type="radio" name="q6" value="Photon Sphere" style="display:none;" />
+                  <span class="quiz-opt-text">Photon Sphere</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q6', 'Singularity', this)">
+                  <span class="quiz-opt-indicator">D</span>
+                  <input type="radio" name="q6" value="Singularity" style="display:none;" />
+                  <span class="quiz-opt-text">Singularity Point</span>
+                </div>
+              </div>
+              <span id="q6Error" class="validation-message"></span>
+            </div>
+
+            <!-- SLIDE 7 -->
+            <div class="quiz-slide" id="slide-7">
+              <div class="quiz-q-header">
+                <span class="quiz-q-tag">🔭 PHASE 3: ASTRONOMICAL OBSERVATORIES</span>
+                <span style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-gold);">+10 MARKS</span>
+              </div>
+              <h3 class="quiz-q-title">Q7. Which flagship infrared space telescope, launched on Christmas 2021, operates at the Sun-Earth L2 Lagrange Point?</h3>
+              <div class="quiz-options-grid">
+                <div class="quiz-option-card" onclick="selectOption('q7', 'Hubble Space Telescope', this)">
+                  <span class="quiz-opt-indicator">A</span>
+                  <input type="radio" name="q7" value="Hubble Space Telescope" style="display:none;" />
+                  <span class="quiz-opt-text">Hubble Space Telescope</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q7', 'James Webb Space Telescope', this)">
+                  <span class="quiz-opt-indicator">B</span>
+                  <input type="radio" name="q7" value="James Webb Space Telescope" style="display:none;" />
+                  <span class="quiz-opt-text">James Webb Space Telescope</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q7', 'Spitzer Space Telescope', this)">
+                  <span class="quiz-opt-indicator">C</span>
+                  <input type="radio" name="q7" value="Spitzer Space Telescope" style="display:none;" />
+                  <span class="quiz-opt-text">Spitzer Space Telescope</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q7', 'Kepler Observatory', this)">
+                  <span class="quiz-opt-indicator">D</span>
+                  <input type="radio" name="q7" value="Kepler Observatory" style="display:none;" />
+                  <span class="quiz-opt-text">Kepler Space Observatory</span>
+                </div>
+              </div>
+              <span id="q7Error" class="validation-message"></span>
+            </div>
+
+            <!-- SLIDE 8 -->
+            <div class="quiz-slide" id="slide-8">
+              <div class="quiz-q-header">
+                <span class="quiz-q-tag">🛰️ PHASE 3: HISTORIC SPACE MISSIONS</span>
+                <span style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-gold);">+10 MARKS</span>
+              </div>
+              <h3 class="quiz-q-title">Q8. What was the name of humanity's first artificial satellite, launched into Earth orbit on October 4, 1957?</h3>
+              <div class="quiz-options-grid">
+                <div class="quiz-option-card" onclick="selectOption('q8', 'Explorer 1', this)">
+                  <span class="quiz-opt-indicator">A</span>
+                  <input type="radio" name="q8" value="Explorer 1" style="display:none;" />
+                  <span class="quiz-opt-text">Explorer 1</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q8', 'Sputnik 1', this)">
+                  <span class="quiz-opt-indicator">B</span>
+                  <input type="radio" name="q8" value="Sputnik 1" style="display:none;" />
+                  <span class="quiz-opt-text">Sputnik 1</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q8', 'Vostok 1', this)">
+                  <span class="quiz-opt-indicator">C</span>
+                  <input type="radio" name="q8" value="Vostok 1" style="display:none;" />
+                  <span class="quiz-opt-text">Vostok 1</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q8', 'Apollo 11', this)">
+                  <span class="quiz-opt-indicator">D</span>
+                  <input type="radio" name="q8" value="Apollo 11" style="display:none;" />
+                  <span class="quiz-opt-text">Apollo 11</span>
+                </div>
+              </div>
+              <span id="q8Error" class="validation-message"></span>
+            </div>
+
+            <!-- SLIDE 9 -->
+            <div class="quiz-slide" id="slide-9">
+              <div class="quiz-q-header">
+                <span class="quiz-q-tag">🔴 PHASE 3: MARS SURFACE EXPLORATION</span>
+                <span style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-gold);">+10 MARKS</span>
+              </div>
+              <h3 class="quiz-q-title">Q9. Which active NASA rover is currently exploring Jezero Crater on Mars, caching rock samples for future return?</h3>
+              <div class="quiz-options-grid">
+                <div class="quiz-option-card" onclick="selectOption('q9', 'Curiosity', this)">
+                  <span class="quiz-opt-indicator">A</span>
+                  <input type="radio" name="q9" value="Curiosity" style="display:none;" />
+                  <span class="quiz-opt-text">Curiosity</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q9', 'Perseverance', this)">
+                  <span class="quiz-opt-indicator">B</span>
+                  <input type="radio" name="q9" value="Perseverance" style="display:none;" />
+                  <span class="quiz-opt-text">Perseverance</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q9', 'Opportunity', this)">
+                  <span class="quiz-opt-indicator">C</span>
+                  <input type="radio" name="q9" value="Opportunity" style="display:none;" />
+                  <span class="quiz-opt-text">Opportunity</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q9', 'Spirit', this)">
+                  <span class="quiz-opt-indicator">D</span>
+                  <input type="radio" name="q9" value="Spirit" style="display:none;" />
+                  <span class="quiz-opt-text">Spirit</span>
+                </div>
+              </div>
+              <span id="q9Error" class="validation-message"></span>
+            </div>
+
+            <!-- SLIDE 10 -->
+            <div class="quiz-slide" id="slide-10">
+              <div class="quiz-q-header">
+                <span class="quiz-q-tag">🌌 PHASE 3: COSMOLOGY & BIG BANG</span>
+                <span style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-gold);">+10 MARKS</span>
+              </div>
+              <h3 class="quiz-q-title">Q10. What is the scientifically estimated age of our Universe based on Cosmic Microwave Background radiation measurements?</h3>
+              <div class="quiz-options-grid">
+                <div class="quiz-option-card" onclick="selectOption('q10', '4.5 Billion Years', this)">
+                  <span class="quiz-opt-indicator">A</span>
+                  <input type="radio" name="q10" value="4.5 Billion Years" style="display:none;" />
+                  <span class="quiz-opt-text">4.5 Billion Years</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q10', '10.2 Billion Years', this)">
+                  <span class="quiz-opt-indicator">B</span>
+                  <input type="radio" name="q10" value="10.2 Billion Years" style="display:none;" />
+                  <span class="quiz-opt-text">10.2 Billion Years</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q10', '13.8 Billion Years', this)">
+                  <span class="quiz-opt-indicator">C</span>
+                  <input type="radio" name="q10" value="13.8 Billion Years" style="display:none;" />
+                  <span class="quiz-opt-text">13.8 Billion Years</span>
+                </div>
+                <div class="quiz-option-card" onclick="selectOption('q10', '25.0 Billion Years', this)">
+                  <span class="quiz-opt-indicator">D</span>
+                  <input type="radio" name="q10" value="25.0 Billion Years" style="display:none;" />
+                  <span class="quiz-opt-text">25.0 Billion Years</span>
+                </div>
+              </div>
+              <span id="q10Error" class="validation-message"></span>
+            </div>
+
+            <!-- SLIDE 11: FINAL BRIEFING (INTERESTS & FEEDBACK) -->
+            <div class="quiz-slide" id="slide-11">
+              <div class="quiz-q-header">
+                <span class="quiz-q-tag">📋 MISSION DEBRIEF & DISPATCH LOG</span>
+                <span style="font-family: var(--font-mono); font-size: 12px; color: var(--primary-cyan);">FINAL PHASE</span>
+              </div>
+              <h3 class="quiz-q-title">Cadet Debriefing: Topic Interests & Flight Telemetry Log</h3>
+              
+              <!-- INTERESTS CHECKBOXES -->
+              <div class="form-group">
+                <label class="form-label">🔭 Which astronomical disciplines interest you the most?</label>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 10px;">
+                  <label class="quiz-option-card" style="padding: 12px 16px;">
+                    <input type="checkbox" name="interest" value="Planets" checked onchange="validateInterests(); updateQuizProgress();" style="accent-color: var(--accent-neon-purple); transform: scale(1.2);" />
+                    <span class="quiz-opt-text">Planetary Geology</span>
+                  </label>
+                  <label class="quiz-option-card" style="padding: 12px 16px;">
+                    <input type="checkbox" name="interest" value="Stars" onchange="validateInterests(); updateQuizProgress();" style="accent-color: var(--accent-neon-purple); transform: scale(1.2);" />
+                    <span class="quiz-opt-text">Stellar Evolution</span>
+                  </label>
+                  <label class="quiz-option-card" style="padding: 12px 16px;">
+                    <input type="checkbox" name="interest" value="Missions" checked onchange="validateInterests(); updateQuizProgress();" style="accent-color: var(--accent-neon-purple); transform: scale(1.2);" />
+                    <span class="quiz-opt-text">Interplanetary Missions</span>
+                  </label>
+                  <label class="quiz-option-card" style="padding: 12px 16px;">
+                    <input type="checkbox" name="interest" value="Black Holes" onchange="validateInterests(); updateQuizProgress();" style="accent-color: var(--accent-neon-purple); transform: scale(1.2);" />
+                    <span class="quiz-opt-text">Black Holes & Relativity</span>
+                  </label>
+                </div>
+                <span id="interestError" class="validation-message"></span>
+              </div>
+
+              <!-- FEEDBACK TEXTAREA -->
+              <div class="form-group" style="margin-top: 20px;">
+                <label for="feedback" class="form-label">💬 Cadet Flight Log & Telemetry Observations</label>
+                <textarea
+                  id="feedback"
+                  class="form-textarea"
+                  maxlength="150"
+                  placeholder="Share your thoughts or observations about CosmoVerse exploration systems..."
+                  oninput="updateCount(); updateQuizProgress();"
+                >Exploring our universe with real-time astronomy telemetry!</textarea>
+                <div id="charCount" class="character-count">56 / 150 characters</div>
+                <span id="feedbackError" class="validation-message"></span>
+              </div>
+            </div>
+
+            <!-- STEPPER CONTROLS FOOTER -->
+            <div class="quiz-stepper-footer">
+              <button type="button" class="btn btn-secondary" id="prevBtn" onclick="prevSlide()" style="font-size: 13.5px; padding: 10px 22px;">
+                ⬅ Previous
+              </button>
+
+              <div style="font-family: var(--font-mono); font-size: 13px; color: var(--accent-light-purple); font-weight: 700;">
+                <span id="slideIndicator">Phase 1 of 11</span>
+              </div>
+
+              <div style="display: flex; gap: 10px;">
+                <button type="button" class="btn btn-primary" id="nextBtn" onclick="nextSlide()" style="font-size: 13.5px; padding: 10px 24px;">
+                  Next Phase ➡
+                </button>
+                <button type="submit" class="btn btn-primary" id="submitBtn" style="display: none; font-size: 13.5px; padding: 10px 26px; background: linear-gradient(135deg, #10b981, #059669); border-color: #34d399;">
+                  🚀 Evaluate Flight Telemetry
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- SUCCESS MESSAGE / SCORECARD CONTAINER -->
+          <div id="successMessage" style="display: none; margin-top: 25px;"></div>
+        </form>
+      </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+      <p class="footer-quote">🌌 "Somewhere, something incredible is waiting to be known." — Carl Sagan 🌌</p>
+      
+      <div class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="planets.html">Planets</a>
+        <a href="missions.html">Exploration</a>
+        <a href="scientists.html">Scientists</a>
+        <a href="careers.html">Careers</a>
+        <a href="quiz.html">Space Quiz</a>
+        <a href="servlet-form.html">Join Cadet Program</a>
+        <a href="login.html">Explorer Login</a>
+      </div>
+
+      <p class="footer-text">COSMOVerse Space Knowledge Challenge | Real-Time Telemetry Validation</p>
+    </footer>
+
+    <!-- JAVASCRIPT VALIDATION SCRIPT -->
+    <script src="validation.js"></script>
+    <script>
+      let currentSlideIdx = 1;
+      const totalSlides = 11;
+
+      function toggleMenu() {
+        document.getElementById('navLinks').classList.toggle('show');
+      }
+
+      function goToSlide(n) {
+        if (n < 1 || n > totalSlides) return;
+        currentSlideIdx = n;
+
+        // Hide all slides
+        document.querySelectorAll('.quiz-slide').forEach(s => s.classList.remove('active'));
+        
+        // Show target slide
+        const target = document.getElementById(`slide-${n}`);
+        if (target) target.classList.add('active');
+
+        // Update dots
+        const dots = document.querySelectorAll('.quiz-dot');
+        dots.forEach((dot, idx) => {
+          if (idx + 1 === n) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
+        });
+
+        // Update indicator text
+        const indicator = document.getElementById('slideIndicator');
+        if (indicator) {
+          indicator.innerText = n <= 10 ? `Question ${n} of 10` : 'Mission Debrief';
+        }
+
+        // Toggle Next / Submit buttons
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const submitBtn = document.getElementById('submitBtn');
+
+        if (prevBtn) prevBtn.disabled = (n === 1);
+        if (n === totalSlides) {
+          if (nextBtn) nextBtn.style.display = 'none';
+          if (submitBtn) submitBtn.style.display = 'inline-flex';
+        } else {
+          if (nextBtn) nextBtn.style.display = 'inline-flex';
+          if (submitBtn) submitBtn.style.display = 'none';
+        }
+      }
+
+      function nextSlide() {
+        if (currentSlideIdx < totalSlides) {
+          goToSlide(currentSlideIdx + 1);
+        }
+      }
+
+      function prevSlide() {
+        if (currentSlideIdx > 1) {
+          goToSlide(currentSlideIdx - 1);
+        }
+      }
+
+      function selectOption(qName, val, cardElem) {
+        // Find radio and set checked
+        const radio = cardElem.querySelector('input[type="radio"]');
+        if (radio) {
+          radio.checked = true;
+        }
+
+        // Deselect other cards in this slide
+        const parent = cardElem.closest('.quiz-options-grid');
+        if (parent) {
+          parent.querySelectorAll('.quiz-option-card').forEach(c => c.classList.remove('selected'));
+        }
+        cardElem.classList.add('selected');
+
+        // Mark question dot as answered
+        const qNum = parseInt(qName.replace('q', ''));
+        const dot = document.querySelectorAll('.quiz-dot')[qNum - 1];
+        if (dot) {
+          dot.classList.add('answered');
+        }
+
+        // Clear error
+        const errElem = document.getElementById(`${qName}Error`);
+        if (errElem) {
+          errElem.innerHTML = "✓ Answer locked in.";
+          errElem.style.color = "#5cff8d";
+        }
+
+        updateQuizProgress();
+      }
+
+      function updateQuizProgress() {
+        let count = 0;
+        const total = 12; // 3 profile + 10 questions - 1 bonus ratio
+
+        if (document.getElementById('name')?.value.trim().length > 1) count++;
+        if (document.getElementById('email')?.value.trim().includes('@')) count++;
+        if (document.getElementById('planet')?.value !== "") count++;
+
+        for (let i = 1; i <= 10; i++) {
+          if (document.querySelector(`input[name="q${i}"]:checked`)) {
+            count++;
+            const dot = document.querySelectorAll('.quiz-dot')[i - 1];
+            if (dot) dot.classList.add('answered');
+          }
+        }
+
+        const pct = Math.min(100, Math.round((count / 13) * 100));
+        const fill = document.getElementById('progressFill');
+        const text = document.getElementById('progressText');
+        const completed = document.getElementById('fieldsCompleted');
+
+        if (fill) fill.style.width = pct + '%';
+        if (text) text.innerText = pct + '%';
+        if (completed) completed.innerText = `${Math.min(12, count)} / 12 Modules Verified`;
+      }
+
+      // Initialize on DOM load
+      document.addEventListener('DOMContentLoaded', () => {
+        goToSlide(1);
+        updateQuizProgress();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COSMOVerse | Dynamic Mission Operations Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        <span class="nav-logo">COSMOVerse</span>
+      </a>
+
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Navigation">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="planets.html" class="nav-link">Planets</a></li>
+        <li><a href="missions.html" class="nav-link">Exploration</a></li>
+        <li><a href="scientists.html" class="nav-link">Scientists</a></li>
+        <li><a href="careers.html" class="nav-link">Careers</a></li>
+        <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+        <li><a href="servlet-form.html" class="nav-link">Register</a></li>
+        <li><a href="login.html" class="nav-link nav-btn">Login</a></li>
+      </ul>
+    </nav>
+
+    <!-- ================= MAIN CONTAINER ================= -->
+    <main class="page-container">
+      <section class="glass-card" style="max-width: 950px; margin: 0 auto 35px; text-align: center;">
+        <h1 class="section-title">🛰️ DYNAMIC MISSION OPERATIONS PORTAL</h1>
+        <p class="section-subtitle">Real-Time Core Engine & Spaceflight Telemetry Monitor</p>
+
+        <div style="background: rgba(138, 43, 226, 0.25); border: 1px solid var(--primary-violet); padding: 22px; border-radius: 20px; margin-bottom: 30px; font-size: 17px; line-height: 1.6;">
+            Welcome to COSMOVerse Astral Core, <strong>Shanmathy</strong>!<br>
+            Synchronized with <strong style="color: var(--primary-cyan);">Orbital Telemetry Cluster & Flight Engine</strong>.
+        </div>
+
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">SERVER UTC TIMESTAMP</div>
+                <div class="kpi-value" id="jspTime" style="font-size: 16px; color: var(--primary-cyan); font-family: var(--font-mono);">-</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">ACTIVE MISSIONS</div>
+                <div class="kpi-value" style="color: var(--accent-green);">42 In-Flight</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">REGISTERED EXPLORERS</div>
+                <div class="kpi-value" style="color: var(--accent-neon-purple);">1,250 Cadets</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">GRID STATUS</div>
+                <div class="kpi-value" style="color: var(--accent-gold);">OPERATIONAL</div>
+            </div>
+        </div>
+
+        <div class="btn-group" style="margin-top: 35px; justify-content: center;">
+            <a href="db-explorer.html" class="btn btn-secondary">← Explorer Registry</a>
+            <a href="php-explorer.html" class="btn btn-primary">Uplink Gateway →</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+      <p class="footer-quote">🌌 COSMOVerse Space Program | Dynamic Mission Portal 🌌</p>
+      
+      <div class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="planets.html">Planets</a>
+        <a href="missions.html">Exploration</a>
+        <a href="scientists.html">Scientists</a>
+        <a href="careers.html">Careers</a>
+        <a href="quiz.html">Space Quiz</a>
+        <a href="servlet-form.html">Join Cadet Program</a>
+        <a href="login.html">Explorer Login</a>
+      </div>
+
+      <p class="footer-text">COSMOVerse Planetary Exploration & Telemetry Network &copy; 2026. Mission Control Protocol.</p>
+    </footer>
+
+    <script>
+        document.getElementById("jspTime").innerText = new Date().toUTCString();
+        function toggleMenu() {
+          document.getElementById('navLinks').classList.toggle('show');
+        }
+    </script>
+</body>
+</html>

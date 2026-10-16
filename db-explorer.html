@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COSMOVerse | Interplanetary Explorer Registry</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        <span class="nav-logo">COSMOVerse</span>
+      </a>
+
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Navigation">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="planets.html" class="nav-link">Planets</a></li>
+        <li><a href="missions.html" class="nav-link">Exploration</a></li>
+        <li><a href="scientists.html" class="nav-link">Scientists</a></li>
+        <li><a href="careers.html" class="nav-link">Careers</a></li>
+        <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+        <li><a href="servlet-form.html" class="nav-link">Register</a></li>
+        <li><a href="login.html" class="nav-link nav-btn">Login</a></li>
+      </ul>
+    </nav>
+
+    <!-- ================= MAIN CONTAINER ================= -->
+    <main class="page-container">
+      <section class="glass-card explorer-container" style="max-width: 980px; margin: 0 auto 35px;">
+        <div style="text-align: center;">
+          <div class="cosmic-badge">
+            <span class="pulse-dot"></span> Interplanetary Registry Terminal
+          </div>
+          <h1 class="section-title">🗄️ INTERPLANETARY EXPLORER REGISTRY</h1>
+          <p class="section-subtitle">Deep Space Personnel Directory & Persistent Registry Engine</p>
+        </div>
+
+        <!-- TERMINAL STATUS BAR -->
+        <div class="terminal-status-bar">
+          <span>DATABASE: CLUSTER-ALPHA (PORT 3306)</span>
+          <span>QUERY ENGINE: PREPARED STATEMENT</span>
+          <span id="registryCounter">● REGISTRY: READY</span>
+        </div>
+
+        <!-- CADET ENTRY FORM -->
+        <form class="db-form" action="DatabaseExplorerServlet" method="post" style="margin-bottom: 35px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                <div class="form-group">
+                    <label for="name" class="form-label">👤 Explorer Name</label>
+                    <input type="text" id="name" name="name" class="form-input" placeholder="e.g. Shanmathy" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">📧 Orbital Email Address</label>
+                    <input type="email" id="email" name="email" class="form-input" placeholder="e.g. explorer@cosmoverse.org" required>
+                </div>
+                <div class="form-group">
+                    <label for="planet" class="form-label">🪐 Assigned Outpost</label>
+                    <select id="planet" name="planet" class="form-select" required>
+                        <option value="">Select planet</option>
+                        <option value="Mercury">Mercury Base</option>
+                        <option value="Venus">Venus Aerostat</option>
+                        <option value="Earth">Earth HQ</option>
+                        <option value="Mars">Mars Colony</option>
+                        <option value="Jupiter">Jupiter Station</option>
+                        <option value="Saturn" selected>Saturn Outpost</option>
+                        <option value="Uranus">Uranus Station</option>
+                        <option value="Neptune">Neptune Laboratory</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="interest" class="form-label">🔭 Space Specialization</label>
+                    <select id="interest" name="interest" class="form-select" required>
+                        <option value="">Select interest</option>
+                        <option value="Planetary Geology">Planetary Geology</option>
+                        <option value="Stellar Physics">Stellar Physics</option>
+                        <option value="Galaxies & Deep Space" selected>Galaxies & Deep Space</option>
+                        <option value="Astrobiology">Astrobiology</option>
+                        <option value="Orbital Mechanics">Orbital Mechanics</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="btn-group" style="margin-top: 25px; justify-content: flex-start;">
+                <button type="submit" class="btn btn-primary">💾 COMMIT RECORD TO DATABASE</button>
+                <a href="session-tracking.html" class="btn btn-secondary">📡 TELEMETRY MONITOR →</a>
+            </div>
+        </form>
+
+        <hr class="glow-hr" style="margin: 30px 0;" />
+
+        <!-- REGISTRY DIRECTORY VIEWER -->
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 18px;">
+            <h3 style="font-family: var(--font-heading); color: var(--accent-neon-purple); font-size: 20px;">
+              📋 ACTIVE REGISTRY ROSTER
+            </h3>
+            <div style="flex: 1; max-width: 380px;">
+              <input
+                type="text"
+                id="searchDbInput"
+                class="form-input"
+                style="padding: 8px 16px; font-size: 13px;"
+                placeholder="🔍 Search by name, outpost, or mission ID..."
+                oninput="filterRegistryTable()"
+              />
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Mission ID</th>
+                  <th>Explorer Name</th>
+                  <th>Email Address</th>
+                  <th>Assigned Outpost</th>
+                  <th>Specialization</th>
+                </tr>
+              </thead>
+              <tbody id="dbTableBody">
+                <!-- Dynamically loaded -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+      <p class="footer-quote">🌌 "Somewhere, something incredible is waiting to be known." — Carl Sagan 🌌</p>
+      
+      <div class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="planets.html">Planets</a>
+        <a href="missions.html">Exploration</a>
+        <a href="scientists.html">Scientists</a>
+        <a href="careers.html">Careers</a>
+        <a href="quiz.html">Space Quiz</a>
+        <a href="servlet-form.html">Join Cadet Program</a>
+        <a href="login.html">Explorer Login</a>
+      </div>
+
+      <p class="footer-text">COSMOVerse Interplanetary Database & Cadet Archive System</p>
+    </footer>
+
+    <script>
+      const defaultExplorers = [
+        { id: 1, missionId: "COSMO-10928", name: "Alex Mercer", email: "mercer@cosmoverse.org", planet: "Mars", interest: "Planetary Geology" },
+        { id: 2, missionId: "COSMO-20491", name: "Sophia Turner", email: "turner@cosmoverse.org", planet: "Jupiter", interest: "Stellar Physics" },
+        { id: 3, missionId: "COSMO-39482", name: "David Miller", email: "miller@cosmoverse.org", planet: "Saturn", interest: "Orbital Mechanics" },
+        { id: 4, missionId: "COSMO-48201", name: "Elena Rostova", email: "rostova@cosmoverse.org", planet: "Neptune", interest: "Galaxies & Deep Space" },
+        { id: 5, missionId: "COSMO-59321", name: "Shanmathy", email: "shanmathy@cosmoverse.org", planet: "Saturn", interest: "Galaxies & Deep Space" }
+      ];
+
+      function getDbRecords() {
+        try {
+          const stored = localStorage.getItem("cosmoDB");
+          if (stored) {
+            const parsed = JSON.parse(stored);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+              return parsed;
+            }
+          }
+        } catch (e) {}
+        localStorage.setItem("cosmoDB", JSON.stringify(defaultExplorers));
+        return defaultExplorers;
+      }
+
+      let dbRecords = getDbRecords();
+
+      function renderRegistryTable(data) {
+        const tbody = document.getElementById("dbTableBody");
+        tbody.innerHTML = "";
+        document.getElementById("registryCounter").innerText = `● ${data.length} CADETS REGISTERED`;
+
+        if (data.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 25px; color: var(--text-muted);">No explorer records match your query.</td></tr>`;
+          return;
+        }
+
+        data.forEach(row => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>#${row.id}</td>
+            <td><code style="color: var(--accent-neon-purple);">${row.missionId}</code></td>
+            <td style="font-weight: 700; color: #fff;">${row.name}</td>
+            <td style="color: var(--text-muted);">${row.email}</td>
+            <td style="color: var(--accent-gold); font-weight: 600;">${row.planet}</td>
+            <td><span class="data-chip" style="font-size: 11px;">${row.interest}</span></td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      function filterRegistryTable() {
+        const query = document.getElementById("searchDbInput").value.toLowerCase().trim();
+        if (!query) {
+          renderRegistryTable(dbRecords);
+          return;
+        }
+        const filtered = dbRecords.filter(r => 
+          r.name.toLowerCase().includes(query) ||
+          r.planet.toLowerCase().includes(query) ||
+          r.missionId.toLowerCase().includes(query) ||
+          r.interest.toLowerCase().includes(query)
+        );
+        renderRegistryTable(filtered);
+      }
+
+      document.querySelector('.db-form').addEventListener('submit', function(e) {
+        if (window.location.protocol === 'file:') {
+          e.preventDefault();
+          const name = document.getElementById('name').value.trim() || 'Cadet Explorer';
+          const email = document.getElementById('email').value.trim() || 'explorer@cosmoverse.org';
+          const planet = document.getElementById('planet').value || 'Saturn';
+          const interest = document.getElementById('interest').value || 'Galaxies & Deep Space';
+          const missionId = 'COSMO-' + Math.floor(Math.random() * 90000 + 10000);
+
+          const newRecord = {
+            id: dbRecords.length + 1,
+            missionId: missionId,
+            name: name,
+            email: email,
+            planet: planet,
+            interest: interest
+          };
+
+          dbRecords.unshift(newRecord);
+          localStorage.setItem("cosmoDB", JSON.stringify(dbRecords));
+          renderRegistryTable(dbRecords);
+
+          alert(`✓ Record committed successfully!\nMission ID: ${missionId}\nExplorer: ${name}\nOutpost: ${planet}`);
+          document.querySelector('.db-form').reset();
+        }
+      });
+
+      function toggleMenu() {
+        document.getElementById('navLinks').classList.toggle('show');
+      }
+
+      renderRegistryTable(dbRecords);
+    </script>
+</body>
+</html>

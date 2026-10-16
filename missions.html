@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>COSMOVerse | Space Exploration & Historic Missions</title>
+    <!-- External CSS -->
+    <link href="style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        <span class="nav-logo">COSMOVerse</span>
+      </a>
+
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Navigation">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="planets.html" class="nav-link">Planets</a></li>
+        <li><a href="missions.html" class="nav-link active">Exploration</a></li>
+        <li><a href="scientists.html" class="nav-link">Scientists</a></li>
+        <li><a href="careers.html" class="nav-link">Careers</a></li>
+        <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+        <li><a href="servlet-form.html" class="nav-link">Register</a></li>
+        <li><a href="login.html" class="nav-link nav-btn">Login</a></li>
+      </ul>
+    </nav>
+
+    <!-- ================= MAIN CONTAINER ================= -->
+    <main class="page-container">
+      <section class="glass-card" style="text-align: center;">
+        <div class="cosmic-badge">
+          <span class="pulse-dot"></span> Deep Space Mission Archives
+        </div>
+
+        <h1 class="section-title">🚀 HISTORIC SPACE MISSIONS</h1>
+        <p class="section-subtitle">Pushing the boundaries of human exploration across our cosmic neighborhood</p>
+        
+        <p style="max-width: 850px; margin: 0 auto; color: var(--text-main); font-size: 17px;">
+          Journey through humanity's most daring voyages into the deep cosmos — from early lunar touchdowns 
+          to interstellar deep-space probes, space observatories, and robotic rovers analyzing Martian soil.
+        </p>
+
+        <!-- INTERACTIVE MISSION CATEGORY FILTER -->
+        <div class="filter-bar">
+          <button type="button" class="filter-btn active" onclick="filterMissions('all', this)">✦ All Missions</button>
+          <button type="button" class="filter-btn" onclick="filterMissions('lunar', this)">🌕 Lunar Expeditions</button>
+          <button type="button" class="filter-btn" onclick="filterMissions('interstellar', this)">🛰️ Deep Space & Outer Solar</button>
+          <button type="button" class="filter-btn" onclick="filterMissions('observatory', this)">🔭 Space Telescopes</button>
+          <button type="button" class="filter-btn" onclick="filterMissions('mars', this)">🔴 Mars Surface Rovers</button>
+        </div>
+      </section>
+
+      <div class="card-grid" id="missionsGrid">
+        <!-- APOLLO 11 -->
+        <div class="feature-card mission-card" data-category="lunar">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <span class="data-chip">1969 • NASA</span>
+              <span class="data-chip" style="color: var(--accent-green); border-color: rgba(52, 211, 153, 0.4);">● COMPLETED</span>
+            </div>
+            <h3>🌕 Apollo 11</h3>
+            <p>Carried Neil Armstrong, Buzz Aldrin, and Michael Collins to the Moon, achieving the very first human landing on another celestial world on July 20, 1969.</p>
+          </div>
+          <div style="border-top: 1px solid rgba(192, 132, 252, 0.22); padding-top: 12px; font-size: 13px; color: var(--accent-gold);">
+            <b>Destination:</b> Earth's Moon | <b>Payload:</b> Lunar Module Eagle
+          </div>
+        </div>
+
+        <!-- VOYAGER -->
+        <div class="feature-card mission-card" data-category="interstellar">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <span class="data-chip">1977 • NASA / JPL</span>
+              <span class="data-chip" style="color: var(--accent-neon-purple); border-color: rgba(232, 121, 249, 0.4);">● INTERSTELLAR</span>
+            </div>
+            <h3>🛰️ Voyager 1 & 2</h3>
+            <p>Conducted close flybys of Jupiter, Saturn, Uranus, and Neptune before crossing the heliopause into the uncharted void of interstellar space.</p>
+          </div>
+          <div style="border-top: 1px solid rgba(192, 132, 252, 0.22); padding-top: 12px; font-size: 13px; color: var(--accent-gold);">
+            <b>Destination:</b> Outer Planets & Interstellar Space
+          </div>
+        </div>
+
+        <!-- HUBBLE -->
+        <div class="feature-card mission-card" data-category="observatory">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <span class="data-chip">1990 • NASA / ESA</span>
+              <span class="data-chip" style="color: var(--accent-green); border-color: rgba(52, 211, 153, 0.4);">● OPERATIONAL</span>
+            </div>
+            <h3>🔭 Hubble Telescope</h3>
+            <p>Revolutionized cosmology with crystal-clear deep-field photography, confirming the accelerated expansion of the universe and stellar nurseries.</p>
+          </div>
+          <div style="border-top: 1px solid rgba(192, 132, 252, 0.22); padding-top: 12px; font-size: 13px; color: var(--accent-gold);">
+            <b>Orbit:</b> Low Earth Orbit (540 km) | <b>Optics:</b> 2.4m Mirror
+          </div>
+        </div>
+
+        <!-- PERSEVERANCE & CURIOSITY -->
+        <div class="feature-card mission-card" data-category="mars">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <span class="data-chip">2012 / 2021 • NASA</span>
+              <span class="data-chip" style="color: var(--accent-green); border-color: rgba(52, 211, 153, 0.4);">● SURFACE ACTIVE</span>
+            </div>
+            <h3>🔴 Curiosity & Perseverance</h3>
+            <p>Nuclear-powered robotic rovers conducting chemical spectroscopy, drilling ancient lake beds, and storing core samples in Jezero and Gale craters on Mars.</p>
+          </div>
+          <div style="border-top: 1px solid rgba(192, 132, 252, 0.22); padding-top: 12px; font-size: 13px; color: var(--accent-gold);">
+            <b>Destination:</b> Martian Surface | <b>Objective:</b> Biosignatures
+          </div>
+        </div>
+
+        <!-- JWST -->
+        <div class="feature-card mission-card" data-category="observatory">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <span class="data-chip">2021 • NASA / ESA / CSA</span>
+              <span class="data-chip" style="color: var(--accent-green); border-color: rgba(52, 211, 153, 0.4);">● OPERATIONAL</span>
+            </div>
+            <h3>✨ James Webb Telescope</h3>
+            <p>Stationed at the Sun-Earth L2 Lagrange point, JWST's gold-plated beryllium mirrors capture infrared light emitted just 300 million years after the Big Bang.</p>
+          </div>
+          <div style="border-top: 1px solid rgba(192, 132, 252, 0.22); padding-top: 12px; font-size: 13px; color: var(--accent-gold);">
+            <b>Location:</b> Sun-Earth L2 (1.5M km) | <b>Optics:</b> 6.5m Array
+          </div>
+        </div>
+
+        <!-- CHANDRAYAAN -->
+        <div class="feature-card mission-card" data-category="lunar">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <span class="data-chip">2008 / 2023 • ISRO</span>
+              <span class="data-chip" style="color: var(--accent-green); border-color: rgba(52, 211, 153, 0.4);">● HISTORIC LANDING</span>
+            </div>
+            <h3>🇮🇳 Chandrayaan & Mangalyaan</h3>
+            <p>Confirmed water molecules on the Moon (Chandrayaan-1), achieved historic soft touchdown near the Moon's South Pole (Chandrayaan-3), and mapped Mars.</p>
+          </div>
+          <div style="border-top: 1px solid rgba(192, 132, 252, 0.22); padding-top: 12px; font-size: 13px; color: var(--accent-gold);">
+            <b>Destination:</b> Lunar South Pole & Martian Orbit
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+      <p class="footer-quote">🌌 "The Earth is the cradle of humanity, but mankind cannot stay in the cradle forever." — Konstantin Tsiolkovsky 🌌</p>
+      
+      <div class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="planets.html">Planets</a>
+        <a href="missions.html">Exploration</a>
+        <a href="scientists.html">Scientists</a>
+        <a href="careers.html">Careers</a>
+        <a href="quiz.html">Space Quiz</a>
+        <a href="servlet-form.html">Join Cadet Program</a>
+        <a href="login.html">Explorer Login</a>
+      </div>
+
+      <p class="footer-text">COSMOVerse Exploration Portal | Historic Space Missions</p>
+    </footer>
+
+    <script>
+      function toggleMenu() {
+        document.getElementById('navLinks').classList.toggle('show');
+      }
+
+      function filterMissions(category, btnElement) {
+        document.querySelectorAll('.filter-bar .filter-btn').forEach(btn => btn.classList.remove('active'));
+        if (btnElement) btnElement.classList.add('active');
+
+        const cards = document.querySelectorAll('.mission-card');
+        cards.forEach(card => {
+          if (category === 'all' || card.getAttribute('data-category') === category) {
+            card.style.display = 'flex';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

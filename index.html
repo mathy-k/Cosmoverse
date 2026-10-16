@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>COSMOVerse | Interactive Solar System Exploration</title>
+    <!-- External CSS -->
+    <link href="style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        <span class="nav-logo">COSMOVerse</span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        onclick="toggleMenu()"
+        aria-label="Toggle Navigation"
+      >
+        ☰
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="planets.html" class="nav-link">Planets</a></li>
+        <li><a href="missions.html" class="nav-link">Exploration</a></li>
+        <li><a href="scientists.html" class="nav-link">Scientists</a></li>
+        <li><a href="careers.html" class="nav-link">Careers</a></li>
+        <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+        <li><a href="servlet-form.html" class="nav-link">Register</a></li>
+        <li><a href="login.html" class="nav-link nav-btn">Login</a></li>
+      </ul>
+    </nav>
+
+    <!-- ================= MAIN CONTAINER ================= -->
+    <main class="page-container">
+      <!-- HERO SECTION -->
+      <section
+        class="glass-card"
+        style="text-align: center; padding: 65px 35px"
+      >
+        <div class="cosmic-badge">
+          <span class="pulse-dot"></span> Interactive Solar Exploration Platform
+        </div>
+
+        <h1 class="home-title">COSMOVerse</h1>
+        <p class="section-subtitle">
+          Journey Across the Cosmic Frontier of Our Solar System
+        </p>
+
+        <p
+          style="
+            max-width: 860px;
+            margin: 0 auto 30px;
+            font-size: 17.5px;
+            color: var(--text-main);
+            line-height: 1.8;
+          "
+        >
+          Welcome to <b>CosmoVerse</b>, an immersive educational gateway
+          designed for curious minds and space enthusiasts. Navigate planets
+          with clickable optical maps, discover legendary astronomers who
+          cracked cosmic laws, revisit historic spaceflight triumphs, and test
+          your knowledge in interactive telemetry challenges.
+        </p>
+
+        <!-- STATS CHIPS -->
+        <div
+          style="
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 35px;
+          "
+        >
+          <div class="data-chip">🪐 8 Planets Cataloged</div>
+          <div class="data-chip">☀ 1 G-Type Star (The Sun)</div>
+          <div class="data-chip">🚀 6 Landmark Space Missions</div>
+          <div class="data-chip">🔭 8 Pioneer Astronomers</div>
+          <div class="data-chip">⚡ Real-time Telemetry Quiz</div>
+        </div>
+
+        <div class="btn-group">
+          <a href="planets.html" class="btn btn-primary"
+            >🚀 Launch Solar System Map</a
+          >
+          <a href="quiz.html" class="btn btn-secondary"
+            >⚡ Take Space Challenge</a
+          >
+        </div>
+
+        <!-- LIVE COSMIC RADAR / FACT CYCLER WIDGET -->
+        <div class="cosmic-fact-radar">
+          <div class="fact-text" id="liveFactText">
+            "Voyager 1 is over 24 billion kilometers away from Earth, traveling
+            through interstellar space at 61,000 km/h."
+          </div>
+          <div style="display: flex; justify-content: center; gap: 10px">
+            <button
+              type="button"
+              class="filter-btn"
+              onclick="nextCosmicFact()"
+              style="font-size: 12.5px"
+            >
+              ↻ Cycle Cosmic Telemetry Fact
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PORTAL MODULES GRID ================= -->
+      <section style="margin-top: 40px">
+        <div style="text-align: center; margin-bottom: 25px">
+          <h2 class="section-title">Cosmic Knowledge Hub</h2>
+          <p class="section-subtitle">
+            Curated modules designed to accelerate your space education
+          </p>
+        </div>
+
+        <div class="card-grid">
+          <!-- PLANETS -->
+          <div class="feature-card">
+            <div>
+              <div class="data-chip" style="margin-bottom: 12px">
+                Visual Celestial Map
+              </div>
+              <h3>🪐 Interactive Planets</h3>
+              <p>
+                Explore an interactive optical map of the Solar System with
+                clickable coordinates for the Sun and all 8 revolving planets.
+              </p>
+            </div>
+            <a href="planets.html" class="btn btn-secondary" style="width: 100%"
+              >Explore Planets Map →</a
+            >
+          </div>
+
+          <!-- EXPLORATION -->
+          <div class="feature-card">
+            <div>
+              <div class="data-chip" style="margin-bottom: 12px">
+                Humanity's Missions
+              </div>
+              <h3>🚀 Historic Missions</h3>
+              <p>
+                Relive humanity's most audacious expeditions, from the Apollo 11
+                lunar touchdown to Voyager's interstellar journey and JWST.
+              </p>
+            </div>
+            <a
+              href="missions.html"
+              class="btn btn-secondary"
+              style="width: 100%"
+              >View Space Missions →</a
+            >
+          </div>
+
+          <!-- SCIENTISTS -->
+          <div class="feature-card">
+            <div>
+              <div class="data-chip" style="margin-bottom: 12px">
+                Pioneering Geniuses
+              </div>
+              <h3>🔭 Brilliant Minds</h3>
+              <p>
+                Meet Copernicus, Galileo, Kepler, Newton, Einstein, and pioneers
+                whose equations unlocked the secrets of gravitational motion.
+              </p>
+            </div>
+            <a
+              href="scientists.html"
+              class="btn btn-secondary"
+              style="width: 100%"
+              >Meet the Scientists →</a
+            >
+          </div>
+
+          <!-- CAREERS -->
+          <div class="feature-card">
+            <div>
+              <div class="data-chip" style="margin-bottom: 12px">
+                Future Opportunities
+              </div>
+              <h3>💼 Space Science Careers</h3>
+              <p>
+                Discover high-impact career pathways in astrophysics, propulsion
+                engineering, satellite data analytics, and space robotics.
+              </p>
+            </div>
+            <a href="careers.html" class="btn btn-secondary" style="width: 100%"
+              >Discover Careers →</a
+            >
+          </div>
+
+          <!-- QUIZ -->
+          <div
+            class="feature-card"
+            style="
+              border-color: rgba(232, 121, 249, 0.45);
+              background: rgba(48, 18, 86, 0.75);
+            "
+          >
+            <div>
+              <div
+                class="data-chip"
+                style="
+                  margin-bottom: 12px;
+                  background: rgba(232, 121, 249, 0.25);
+                  border-color: var(--accent-neon-purple);
+                  color: #fff;
+                "
+              >
+                Interactive Challenge
+              </div>
+              <h3 style="color: #ffffff">⚡ Space Knowledge Quiz</h3>
+              <p>
+                Test your astronomical acuity with live interactive validation,
+                instant feedback, and cosmic fact validation.
+              </p>
+            </div>
+            <a href="quiz.html" class="btn btn-accent" style="width: 100%"
+              >Start Space Quiz →</a
+            >
+          </div>
+
+          <!-- EXPLORER REGISTRATION -->
+          <div class="feature-card">
+            <div>
+              <div class="data-chip" style="margin-bottom: 12px">
+                Cadet Membership
+              </div>
+              <h3>👨‍🚀 Explorer Program</h3>
+              <p>
+                Enroll as an official CosmoVerse Cadet to receive your
+                personalized Mission ID, planetary assignment, and portal
+                credentials.
+              </p>
+            </div>
+            <a
+              href="servlet-form.html"
+              class="btn btn-primary"
+              style="width: 100%"
+              >Join Cadet Program →</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+      <p class="footer-quote">
+        🌌 "Somewhere, something incredible is waiting to be known." — Carl
+        Sagan 🌌
+      </p>
+
+      <div class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="planets.html">Planets</a>
+        <a href="missions.html">Exploration</a>
+        <a href="scientists.html">Scientists</a>
+        <a href="careers.html">Careers</a>
+        <a href="quiz.html">Space Quiz</a>
+        <a href="servlet-form.html">Join Cadet Program</a>
+        <a href="login.html">Explorer Login</a>
+      </div>
+
+      <!-- CORE TELEMETRY & MISSION CONTROL SYSTEMS DRAWER -->
+      <div class="footer-lab-section">
+        <div class="footer-lab-title">
+          🚀 Core Telemetry & Mission Control Systems
+        </div>
+        <div class="footer-lab-links">
+          <a href="session-tracking.html" class="footer-lab-badge"
+            >📡 Orbital Flight Session Monitor</a
+          >
+          <a href="db-explorer.html" class="footer-lab-badge"
+            >🗄️ Interplanetary Explorer Registry</a
+          >
+          <a href="xml-cosmo.html" class="footer-lab-badge"
+            >📜 Fleet Cadet Roster & XML Protocol</a
+          >
+          <a href="exam-cosmo.html" class="footer-lab-badge"
+            >🎯 Cadet Flight Certification Engine</a
+          >
+          <a href="marklist-cosmo.html" class="footer-lab-badge"
+            >📊 Academy Flight Assessment & Ranks</a
+          >
+          <a href="php-explorer.html" class="footer-lab-badge"
+            >🛰️ Deep-Space Interplanetary Uplink</a
+          >
+        </div>
+      </div>
+
+      <p class="footer-text">
+        COSMOVerse Interactive Astronomy & Space Exploration Portal
+      </p>
+    </footer>
+
+    <script>
+      function toggleMenu() {
+        document.getElementById("navLinks").classList.toggle("show");
+      }
+
+      const cosmicFacts = [
+        "Voyager 1 is over 24 billion kilometers away from Earth, traveling through interstellar space at 61,000 km/h.",
+        "Jupiter's Great Red Spot is a persistent anticyclonic storm larger than the entire diameter of Earth.",
+        "One day on Venus is longer than one Venusian year — it rotates once every 243 Earth days!",
+        "Saturn's rings are predominantly 99% pure water ice particles ranging from micrometers to meters across.",
+        "The Sun accounts for approximately 99.86% of all the mass in the entire Solar System.",
+        "Olympus Mons on Mars is a shield volcano three times the height of Mount Everest.",
+      ];
+      let factIdx = 0;
+      function nextCosmicFact() {
+        factIdx = (factIdx + 1) % cosmicFacts.length;
+        const el = document.getElementById("liveFactText");
+        if (el) {
+          el.style.opacity = "0";
+          setTimeout(() => {
+            el.innerText = `"${cosmicFacts[factIdx]}"`;
+            el.style.opacity = "1";
+          }, 250);
+        }
+      }
+      setInterval(nextCosmicFact, 7000);
+    </script>
+  </body>
+</html>

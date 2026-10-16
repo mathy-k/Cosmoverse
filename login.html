@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>COSMOVerse | Explorer Portal Login</title>
+    <!-- External CSS -->
+    <link href="style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        <span class="nav-logo">COSMOVerse</span>
+      </a>
+
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Navigation">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="planets.html" class="nav-link">Planets</a></li>
+        <li><a href="missions.html" class="nav-link">Exploration</a></li>
+        <li><a href="scientists.html" class="nav-link">Scientists</a></li>
+        <li><a href="careers.html" class="nav-link">Careers</a></li>
+        <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+        <li><a href="servlet-form.html" class="nav-link">Register</a></li>
+        <li><a href="login.html" class="nav-link nav-btn active">Login</a></li>
+      </ul>
+    </nav>
+
+    <!-- ================= MAIN CONTAINER ================= -->
+    <main class="page-container">
+      <section class="glass-card login-container" style="max-width: 580px; margin: 25px auto 40px; padding: 45px 36px;">
+        <div style="text-align: center;">
+          <div class="cosmic-badge">
+            <span class="pulse-dot"></span> Cyber-Telemetry Command Portal
+          </div>
+          <h1 class="section-title" style="font-size: 32px;">🔑 CADET & COMMANDER LOGIN</h1>
+          <p class="section-subtitle">Authenticate to access flight session telemetry & portal database</p>
+        </div>
+
+        <!-- TERMINAL STATUS BAR -->
+        <div class="terminal-status-bar">
+          <span>● PORT: 8443 (SECURE)</span>
+          <span>TLS 1.3 ENCRYPTION</span>
+          <span>AUTH: ACTIVE</span>
+        </div>
+
+        <form class="login-form" action="explorer-portal.jsp" method="post">
+          <!-- MISSION ID / EMAIL -->
+          <div class="form-group">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <label for="loginId" class="form-label">🆔 Mission ID / Orbital Email</label>
+              <button type="button" class="quick-autofill-btn" onclick="autofillDemoCadet()">
+                ⚡ Quick Demo Fill
+              </button>
+            </div>
+            <input
+              type="text"
+              id="loginId"
+              name="loginId"
+              class="form-input"
+              placeholder="e.g. COSMO-88421 or cadet@cosmoverse.org"
+              required
+            />
+          </div>
+
+          <!-- PASSCODE WITH SHOW/HIDE TOGGLE -->
+          <div class="form-group">
+            <label for="passcode" class="form-label">🔒 Security Passcode Key</label>
+            <div class="password-toggle-wrapper">
+              <input
+                type="password"
+                id="passcode"
+                name="passcode"
+                class="form-input"
+                placeholder="Enter security key..."
+                required
+                style="padding-right: 45px;"
+              />
+              <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility()" aria-label="Toggle password visibility">
+                👁️
+              </button>
+            </div>
+          </div>
+
+          <!-- ACCESS LEVEL -->
+          <div class="form-group">
+            <label for="role" class="form-label">🚀 Exploration Clearance Level</label>
+            <select id="role" name="role" class="form-select">
+              <option value="Explorer Cadet">Cadet Explorer (Flight Level 1)</option>
+              <option value="Senior Researcher">Astronomical Researcher (Level 2)</option>
+              <option value="Mission Commander">Mission Flight Commander (Full Clearance)</option>
+            </select>
+          </div>
+
+          <!-- REMEMBER CHECKBOX -->
+          <div style="display: flex; align-items: center; justify-content: space-between; margin: 15px 0 25px;">
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--text-muted); cursor: pointer;">
+              <input type="checkbox" checked style="accent-color: var(--accent-neon-purple);" />
+              Persist session cookie
+            </label>
+            <a href="servlet-form.html" style="font-size: 13px; color: var(--accent-light-purple); text-decoration: underline;">
+              Need a Mission ID?
+            </a>
+          </div>
+
+          <div class="btn-group">
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+              🚀 AUTHENTICATE & LAUNCH PORTAL →
+            </button>
+          </div>
+        </form>
+
+        <div style="text-align: center; margin-top: 25px; border-top: 1px solid var(--border-purple); padding-top: 20px;">
+          <p style="color: var(--text-muted); font-size: 14px;">
+            New cadet? Generate your official ID badge & assignment:<br />
+            <a href="servlet-form.html" style="color: var(--accent-neon-purple); font-weight: 700; text-decoration: underline;">
+              Cadet Registration & Enrolment Here
+            </a>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+      <p class="footer-quote">🌌 CosmoVerse Security & Session Control Portal 🌌</p>
+      
+      <div class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="planets.html">Planets</a>
+        <a href="missions.html">Exploration</a>
+        <a href="scientists.html">Scientists</a>
+        <a href="careers.html">Careers</a>
+        <a href="quiz.html">Space Quiz</a>
+        <a href="servlet-form.html">Join Cadet Program</a>
+        <a href="login.html">Explorer Login</a>
+      </div>
+
+      <p class="footer-text">CosmoVerse Cyber-Telemetry Command Portal & Session Security</p>
+    </footer>
+
+    <script>
+      function toggleMenu() {
+        document.getElementById('navLinks').classList.toggle('show');
+      }
+
+      function autofillDemoCadet() {
+        document.getElementById('loginId').value = 'COSMO-88421';
+        document.getElementById('passcode').value = 'CosmicKey#2026';
+        document.getElementById('role').value = 'Mission Commander';
+      }
+
+      function togglePasswordVisibility() {
+        const passField = document.getElementById('passcode');
+        if (passField.type === 'password') {
+          passField.type = 'text';
+        } else {
+          passField.type = 'password';
+        }
+      }
+
+      // Hybrid File Protocol Handler for local disk testing
+      document.querySelector('.login-form').addEventListener('submit', function(e) {
+        if (window.location.protocol === 'file:') {
+          e.preventDefault();
+          const loginId = document.getElementById('loginId').value || 'COSMO-88421';
+          const role = document.getElementById('role').value;
+          const token = 'SESS-COSMO-' + Math.floor(Math.random() * 899999 + 100000);
+
+          const container = document.querySelector('.login-container');
+          container.innerHTML = `
+            <div style="text-align: center;">
+              <div class="cosmic-badge" style="background: rgba(52, 211, 153, 0.2); border-color: var(--accent-green); color: #fff;">
+                <span class="pulse-dot" style="background: var(--accent-green);"></span> 200 OK — Authentication Succeeded
+              </div>
+              <h1 class="section-title" style="font-size: 32px;">★ ACCESS GRANTED ★</h1>
+              <p class="section-subtitle">Session Authenticated as ${role}</p>
+            </div>
+
+            <div style="background: rgba(30, 12, 60, 0.7); border: 1px solid var(--border-violet); padding: 25px; border-radius: 20px; text-align: center; margin: 25px 0; box-shadow: 0 0 25px rgba(168, 85, 247, 0.25);">
+              <p style="color: var(--accent-green); font-size: 20px; font-weight: bold; margin-bottom: 8px;">✓ Security Token Validated</p>
+              <p style="color: white; font-size: 16px;">Welcome back to command deck, <strong>${loginId}</strong>!</p>
+              <p style="color: var(--text-muted); font-size: 13.5px; margin-top: 10px; font-family: monospace;">
+                Active Session Token: <code style="color: var(--accent-neon-purple);">${token}</code>
+              </p>
+            </div>
+
+            <div class="btn-group" style="justify-content: center;">
+              <a href="session-tracking.html" class="btn btn-primary">Session Portal →</a>
+              <a href="db-explorer.html" class="btn btn-secondary">Database Explorer →</a>
+              <a href="index.html" class="btn btn-accent">Return Home</a>
+            </div>
+          `;
+        }
+      });
+    </script>
+  </body>
+</html>

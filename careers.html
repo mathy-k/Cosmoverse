@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>COSMOVerse | Space Science & Technology Careers</title>
+    <!-- External CSS -->
+    <link href="style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        <span class="nav-logo">COSMOVerse</span>
+      </a>
+
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Navigation">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="planets.html" class="nav-link">Planets</a></li>
+        <li><a href="missions.html" class="nav-link">Exploration</a></li>
+        <li><a href="scientists.html" class="nav-link">Scientists</a></li>
+        <li><a href="careers.html" class="nav-link active">Careers</a></li>
+        <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+        <li><a href="servlet-form.html" class="nav-link">Register</a></li>
+        <li><a href="login.html" class="nav-link nav-btn">Login</a></li>
+      </ul>
+    </nav>
+
+    <!-- ================= MAIN CONTAINER ================= -->
+    <main class="page-container">
+      <section class="glass-card" style="text-align: center;">
+        <div class="cosmic-badge">
+          <span class="pulse-dot"></span> Next-Generation Aerospace & Cosmic Careers
+        </div>
+
+        <h1 class="section-title">💼 SPACE SCIENCE & TECH CAREERS</h1>
+        <p class="section-subtitle">Discover your pathway to shaping humanity's future in the cosmos</p>
+        
+        <p style="max-width: 850px; margin: 0 auto; color: var(--text-main); font-size: 17px;">
+          Space exploration is no longer limited to astronauts alone. It demands multi-disciplinary talent across 
+          astrophysics, propulsion robotics, machine learning, exobiology, and real-time mission telemetry.
+        </p>
+
+        <!-- INTERACTIVE CADET CAREER COMPASS -->
+        <div class="compass-box">
+          <div style="font-family: var(--font-heading); font-size: 17px; font-weight: 700; color: var(--primary-purple);">
+            🧭 Find Your Dream Specialization:
+          </div>
+          <div class="compass-pills">
+            <button class="compass-pill active" onclick="filterCareers('all', this)">✦ All Specializations</button>
+            <button class="compass-pill" onclick="filterCareers('astrophysics', this)">🌌 Astrophysics & Cosmology</button>
+            <button class="compass-pill" onclick="filterCareers('engineering', this)">🚀 Aerospace Propulsion</button>
+            <button class="compass-pill" onclick="filterCareers('datascience', this)">📡 Satellite Telemetry & GIS</button>
+            <button class="compass-pill" onclick="filterCareers('biology', this)">🦠 Astrobiology & Soil Science</button>
+            <button class="compass-pill" onclick="filterCareers('robotics', this)">🤖 Autonomous Space Robotics</button>
+            <button class="compass-pill" onclick="filterCareers('operations', this)">🛰️ Flight Control Operations</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="card-grid" id="careersGrid">
+        <!-- ASTROPHYSICIST -->
+        <div class="feature-card career-card" data-category="astrophysics">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span class="data-chip">Physical Sciences</span>
+              <span class="data-chip" style="color: var(--accent-gold); border-color: rgba(251, 191, 36, 0.4);">$125,000 – $180,000 / yr</span>
+            </div>
+            <h3>🌌 Astrophysicist & Cosmologist</h3>
+            <p>Analyzes spectral radiation, black hole thermodynamics, gravitational waves, and dark energy to formulate mathematical models of cosmological evolution.</p>
+            <div style="margin: 12px 0; font-size: 13.5px; color: var(--accent-light-purple);">
+              <b>Focus Areas:</b> General Relativity, James Webb Spectral Data, Dark Matter Mapping
+            </div>
+          </div>
+          <div style="border-top: 1px solid var(--border-purple); padding-top: 12px; font-size: 13px; color: var(--accent-neon-purple);">
+            <b>Key Skills:</b> Quantum Mechanics • Python Astrophysics • Numerical Analysis
+          </div>
+        </div>
+
+        <!-- AEROSPACE ENGINEER -->
+        <div class="feature-card career-card" data-category="engineering">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span class="data-chip">Rocketry & Hardware</span>
+              <span class="data-chip" style="color: var(--accent-gold); border-color: rgba(251, 191, 36, 0.4);">$115,000 – $175,000 / yr</span>
+            </div>
+            <h3>🚀 Aerospace & Propulsion Engineer</h3>
+            <p>Designs cryogenic rocket engines, ion thrusters, hypersonic thermal reentry shields, and structural aerodynamic airframes for launch vehicles and orbital landers.</p>
+            <div style="margin: 12px 0; font-size: 13.5px; color: var(--accent-light-purple);">
+              <b>Focus Areas:</b> Stage Separation Dynamics, Cryogenic Propellants, Thermal Protection
+            </div>
+          </div>
+          <div style="border-top: 1px solid var(--border-purple); padding-top: 12px; font-size: 13px; color: var(--accent-neon-purple);">
+            <b>Key Skills:</b> Computational Fluid Dynamics (CFD) • Avionics • Thermodynamics
+          </div>
+        </div>
+
+        <!-- SATELLITE DATA ANALYST -->
+        <div class="feature-card career-card" data-category="datascience">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span class="data-chip">Earth Observation & Big Data</span>
+              <span class="data-chip" style="color: var(--accent-gold); border-color: rgba(251, 191, 36, 0.4);">$105,000 – $155,000 / yr</span>
+            </div>
+            <h3>📡 Satellite Data & GIS Specialist</h3>
+            <p>Processes synthetic aperture radar (SAR), multispectral imagery, and real-time orbital downlink telemetry for global climate modeling and planetary mapping.</p>
+            <div style="margin: 12px 0; font-size: 13.5px; color: var(--accent-light-purple);">
+              <b>Focus Areas:</b> Planetary Surface Cartography, Ocean Thermal Scanning, Telemetry Pipelines
+            </div>
+          </div>
+          <div style="border-top: 1px solid var(--border-purple); padding-top: 12px; font-size: 13px; color: var(--accent-neon-purple);">
+            <b>Key Skills:</b> GIS Remote Sensing • Machine Learning • Satellite Telemetry Decoders
+          </div>
+        </div>
+
+        <!-- ASTROBIOLOGIST -->
+        <div class="feature-card career-card" data-category="biology">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span class="data-chip">Life Sciences & Geochemistry</span>
+              <span class="data-chip" style="color: var(--accent-gold); border-color: rgba(251, 191, 36, 0.4);">$98,000 – $145,000 / yr</span>
+            </div>
+            <h3>🦠 Astrobiologist & Planetary Scientist</h3>
+            <p>Investigates extraterrestrial biosignatures, extremophile bacterial resilience in harsh vacuum conditions, and subsurface ocean chemistry on Europa and Enceladus.</p>
+            <div style="margin: 12px 0; font-size: 13.5px; color: var(--accent-light-purple);">
+              <b>Focus Areas:</b> Mars Soil Regolith Bio-tests, Subsurface Ocean Habitability, Hydrothermal Vents
+            </div>
+          </div>
+          <div style="border-top: 1px solid var(--border-purple); padding-top: 12px; font-size: 13px; color: var(--accent-neon-purple);">
+            <b>Key Skills:</b> Extremophile Microbiology • Spectrometry • Planetary Mineralogy
+          </div>
+        </div>
+
+        <!-- ROBOTICS SOFTWARE ENGINEER -->
+        <div class="feature-card career-card" data-category="robotics">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span class="data-chip">Computer Science & Autonomy</span>
+              <span class="data-chip" style="color: var(--accent-gold); border-color: rgba(251, 191, 36, 0.4);">$130,000 – $195,000 / yr</span>
+            </div>
+            <h3>🤖 Space Robotics & AI Developer</h3>
+            <p>Architects autonomous hazard avoidance algorithms, computer vision perception, and terrain-relative navigation systems for Martian rovers and deep space probes.</p>
+            <div style="margin: 12px 0; font-size: 13.5px; color: var(--accent-light-purple);">
+              <b>Focus Areas:</b> Rover Autonavigation, Robotic Arm Kinematics, Real-Time Radiation Hardening
+            </div>
+          </div>
+          <div style="border-top: 1px solid var(--border-purple); padding-top: 12px; font-size: 13px; color: var(--accent-neon-purple);">
+            <b>Key Skills:</b> C++ / ROS • Computer Vision • Embedded Real-Time Operating Systems (RTOS)
+          </div>
+        </div>
+
+        <!-- MISSION CONTROL OFFICER -->
+        <div class="feature-card career-card" data-category="operations">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span class="data-chip">Operations & Systems Flight</span>
+              <span class="data-chip" style="color: var(--accent-gold); border-color: rgba(251, 191, 36, 0.4);">$110,000 – $165,000 / yr</span>
+            </div>
+            <h3>🛰️ Flight Director & Mission Operations</h3>
+            <p>Monitors deep-space orbital maneuvers, orbital station life support telemetry, communication blackouts, and crew safety in 24/7 mission command centers.</p>
+            <div style="margin: 12px 0; font-size: 13.5px; color: var(--accent-light-purple);">
+              <b>Focus Areas:</b> Orbital Insertion Corridors, Telemetry Health Checks, Emergency Recovery
+            </div>
+          </div>
+          <div style="border-top: 1px solid var(--border-purple); padding-top: 12px; font-size: 13px; color: var(--accent-neon-purple);">
+            <b>Key Skills:</b> Systems Flight Architecture • Real-Time Crisis Management • Deep Space DSN
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+      <p class="footer-quote">🌌 "The Earth is the cradle of humanity, but one cannot live in a cradle forever." — Konstantin Tsiolkovsky 🌌</p>
+      
+      <div class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="planets.html">Planets</a>
+        <a href="missions.html">Exploration</a>
+        <a href="scientists.html">Scientists</a>
+        <a href="careers.html">Careers</a>
+        <a href="quiz.html">Space Quiz</a>
+        <a href="servlet-form.html">Join Cadet Program</a>
+        <a href="login.html">Explorer Login</a>
+      </div>
+
+      <p class="footer-text">COSMOVerse Careers Portal | Next-Gen Aerospace Opportunities</p>
+    </footer>
+
+    <script>
+      function toggleMenu() {
+        document.getElementById('navLinks').classList.toggle('show');
+      }
+
+      function filterCareers(category, pillElement) {
+        // Toggle active pill
+        document.querySelectorAll('.compass-pills .compass-pill').forEach(pill => pill.classList.remove('active'));
+        if (pillElement) pillElement.classList.add('active');
+
+        // Filter cards
+        const cards = document.querySelectorAll('.career-card');
+        cards.forEach(card => {
+          if (category === 'all' || card.getAttribute('data-category') === category) {
+            card.style.display = 'flex';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

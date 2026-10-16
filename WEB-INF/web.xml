@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+                             http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <display-name>Cosmoverse Web Application</display-name>
+
+    <!-- EXERCISE 5(i): SERVLET INVOCATION FROM HTML FORM -->
+    <servlet>
+        <servlet-name>ExplorerServlet</servlet-name>
+        <servlet-class>ExplorerServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ExplorerServlet</servlet-name>
+        <url-pattern>/ExplorerServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- EXERCISE 5(ii): SESSION TRACKING SERVLET -->
+    <servlet>
+        <servlet-name>SessionTrackingServlet</servlet-name>
+        <servlet-class>SessionTrackingServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SessionTrackingServlet</servlet-name>
+        <url-pattern>/SessionTrackingServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- EXERCISE 6(i): SERVLET DATABASE CONNECTIVITY (JDBC) -->
+    <servlet>
+        <servlet-name>DatabaseExplorerServlet</servlet-name>
+        <servlet-class>DatabaseExplorerServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DatabaseExplorerServlet</servlet-name>
+        <url-pattern>/DatabaseExplorerServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- WELCOME FILE -->
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>home.html</welcome-file>
+    </welcome-file-list>
+</web-app>

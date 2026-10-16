@@ -1,0 +1,10 @@
+# Editor & Workspace configs
+.vscode/
+.idea/
+*.swp
+*.log
+
+# OS generated files
+Thumbs.db
+Desktop.ini
+.DS_Store

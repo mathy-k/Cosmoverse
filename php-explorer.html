@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COSMOVerse | Deep-Space Interplanetary Uplink Network</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        <span class="nav-logo">COSMOVerse</span>
+      </a>
+
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Navigation">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="planets.html" class="nav-link">Planets</a></li>
+        <li><a href="missions.html" class="nav-link">Exploration</a></li>
+        <li><a href="scientists.html" class="nav-link">Scientists</a></li>
+        <li><a href="careers.html" class="nav-link">Careers</a></li>
+        <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+        <li><a href="servlet-form.html" class="nav-link">Register</a></li>
+        <li><a href="login.html" class="nav-link nav-btn">Login</a></li>
+      </ul>
+    </nav>
+
+    <!-- ================= MAIN CONTAINER ================= -->
+    <main class="page-container">
+      <section class="glass-card explorer-container" style="max-width: 900px; margin: 0 auto 35px;">
+        <h1 class="section-title">🛰️ DEEP-SPACE INTERPLANETARY UPLINK NETWORK</h1>
+        <p class="section-subtitle">Real-Time Astral Gateway & Explorer Telemetry Protocol</p>
+
+        <form class="php-form" action="explorer.php" method="post">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                <div class="form-group">
+                    <label for="name" class="form-label">👤 Explorer Name</label>
+                    <input type="text" id="name" name="name" class="form-input" placeholder="Enter name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">📧 Email Address</label>
+                    <input type="email" id="email" name="email" class="form-input" placeholder="Enter email" required>
+                </div>
+                <div class="form-group">
+                    <label for="planet" class="form-label">🪐 Assigned Planet</label>
+                    <select id="planet" name="planet" class="form-select" required>
+                        <option value="">Select planet</option>
+                        <option value="Mercury">Mercury</option>
+                        <option value="Venus">Venus</option>
+                        <option value="Earth">Earth</option>
+                        <option value="Mars">Mars</option>
+                        <option value="Jupiter">Jupiter</option>
+                        <option value="Saturn" selected>Saturn</option>
+                        <option value="Uranus">Uranus</option>
+                        <option value="Neptune">Neptune</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="interest" class="form-label">🔭 Space Interest</label>
+                    <select id="interest" name="interest" class="form-select" required>
+                        <option value="">Select interest</option>
+                        <option value="Planets">Planets</option>
+                        <option value="Stars">Stars</option>
+                        <option value="Galaxies" selected>Galaxies</option>
+                        <option value="Space Missions">Space Missions</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="btn-group" style="margin-top: 30px;">
+                <button type="submit" class="btn btn-primary">🚀 TRANSMIT TELEMETRY PACKET</button>
+                <a href="index.html" class="btn btn-secondary">🏠 RETURN HOME</a>
+            </div>
+        </form>
+      </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+      <p class="footer-quote">🌌 COSMOVerse Planetary Exploration & Deep-Space Gateway 🌌</p>
+      
+      <div class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="planets.html">Planets</a>
+        <a href="missions.html">Exploration</a>
+        <a href="scientists.html">Scientists</a>
+        <a href="careers.html">Careers</a>
+        <a href="quiz.html">Space Quiz</a>
+        <a href="servlet-form.html">Join Cadet Program</a>
+        <a href="login.html">Explorer Login</a>
+      </div>
+
+      <p class="footer-text">COSMOVerse Planetary Exploration & Telemetry Network &copy; 2026. Deep-Space Uplink Protocol.</p>
+    </footer>
+
+    <!-- SMART FILE PROTOCOL HANDLER FOR LOCAL DISK VERIFICATION -->
+    <script>
+        document.querySelector('.php-form').addEventListener('submit', function(e) {
+            if (window.location.protocol === 'file:') {
+                e.preventDefault();
+                const name = document.getElementById('name').value || 'Shanmathy';
+                const email = document.getElementById('email').value || 'shanmathy9902@mountzion.ac.in';
+                const planet = document.getElementById('planet').value || 'Saturn';
+                const interest = document.getElementById('interest').value || 'Galaxies';
+                const missionId = 'COSMO-PHP-' + Math.floor(Math.random() * 90000 + 10000);
+
+                let phpDbData = JSON.parse(localStorage.getItem("cosmoPHPDB") || "[]");
+                phpDbData.push({
+                    id: phpDbData.length + 1,
+                    missionId: missionId,
+                    name: name,
+                    email: email,
+                    planet: planet,
+                    interest: interest
+                });
+                localStorage.setItem("cosmoPHPDB", JSON.stringify(phpDbData));
+
+                const container = document.querySelector('.explorer-container');
+                let rowsHtml = phpDbData.map(row => `
+                    <tr>
+                        <td>${row.id}</td>
+                        <td style="font-family: monospace; color: var(--primary-cyan);">${row.missionId}</td>
+                        <td>${row.name}</td>
+                        <td>${row.email}</td>
+                        <td>${row.planet}</td>
+                        <td>${row.interest}</td>
+                    </tr>
+                `).join('');
+
+                container.innerHTML = `
+                    <h1 class="section-title">🛰️ TELEMETRY PACKET TRANSMITTED 🛰️</h1>
+                    <p class="section-subtitle">Interplanetary packet synchronized with Deep-Space Mesh</p>
+                    <div style="background: rgba(92, 255, 141, 0.15); border: 1px solid var(--accent-green); color: var(--accent-green); padding: 15px; border-radius: 14px; font-size: 15px; margin-bottom: 25px; text-align: center;">
+                        ✓ Uplink Confirmed: Telemetry packet ingested & explorer profile registered!
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Mission ID</th>
+                                    <th>Explorer Name</th>
+                                    <th>Email Address</th>
+                                    <th>Assigned Planet</th>
+                                    <th>Space Interest</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${rowsHtml}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="btn-group" style="margin-top: 30px;">
+                        <a href="php-explorer.html" class="btn btn-secondary">← Transmit Another Packet</a>
+                        <a href="index.html" class="btn btn-primary">🏠 Return to Mission Control</a>
+                    </div>
+                `;
+            }
+        });
+
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('show');
+        }
+    </script>
+</body>
+</html>

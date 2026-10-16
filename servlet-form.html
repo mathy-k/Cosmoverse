@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>COSMOVerse | Cadet Explorer Registration</title>
+    <!-- External CSS -->
+    <link href="style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        <span class="nav-logo">COSMOVerse</span>
+      </a>
+
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Navigation">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="planets.html" class="nav-link">Planets</a></li>
+        <li><a href="missions.html" class="nav-link">Exploration</a></li>
+        <li><a href="scientists.html" class="nav-link">Scientists</a></li>
+        <li><a href="careers.html" class="nav-link">Careers</a></li>
+        <li><a href="quiz.html" class="nav-link">Quiz</a></li>
+        <li><a href="servlet-form.html" class="nav-link active">Register</a></li>
+        <li><a href="login.html" class="nav-link nav-btn">Login</a></li>
+      </ul>
+    </nav>
+
+    <!-- ================= MAIN CONTAINER ================= -->
+    <main class="page-container">
+      <section class="glass-card explorer-container" style="max-width: 950px; margin: 0 auto 35px;">
+        <div style="text-align: center;">
+          <div class="cosmic-badge">
+            <span class="pulse-dot"></span> Cadet Enrolment & Orbital Dispatch Protocol
+          </div>
+          <h1 class="section-title">🚀 CADET EXPLORER ONBOARDING</h1>
+          <p class="section-subtitle">Enrol into the cosmic flight academy & generate your mission credentials</p>
+          
+          <p style="color: var(--text-main); margin-bottom: 25px; font-size: 16px;">
+            Already have an active Mission ID? <a href="login.html" style="color: var(--accent-neon-purple); font-weight: 700; text-decoration: underline;">Access Commander Login Portal →</a>
+          </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; align-items: start;">
+          <!-- ================= REGISTRATION FORM ================= -->
+          <div>
+            <form class="explorer-form" action="ExplorerServlet" method="post">
+              <!-- NAME -->
+              <div class="form-group">
+                <label for="name" class="form-label">👤 Cadet Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  class="form-input"
+                  placeholder="Enter your full name"
+                  required
+                  oninput="updateBoardingPass()"
+                />
+              </div>
+
+              <!-- EMAIL -->
+              <div class="form-group">
+                <label for="email" class="form-label">📧 Orbital Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="form-input"
+                  placeholder="e.g. cadet@cosmoverse.org"
+                  required
+                  oninput="updateBoardingPass()"
+                />
+              </div>
+
+              <!-- FAVORITE PLANET -->
+              <div class="form-group">
+                <label for="planet" class="form-label">🪐 Planetary Outpost Assignment</label>
+                <select id="planet" name="planet" class="form-select" required onchange="updateBoardingPass()">
+                  <option value="">Select destination planet</option>
+                  <option value="Mercury">Mercury (Solar Observatory Sector)</option>
+                  <option value="Venus">Venus (Atmospheric Aerostat Base)</option>
+                  <option value="Earth">Earth (Orbital Command HQ)</option>
+                  <option value="Mars">Mars (Olympus Mons Colony)</option>
+                  <option value="Jupiter">Jupiter (Galilean Moon Network)</option>
+                  <option value="Saturn">Saturn (Titan Research Outpost)</option>
+                  <option value="Uranus">Uranus (Outer Ice Ring Station)</option>
+                  <option value="Neptune">Neptune (Triton Cryo Laboratory)</option>
+                </select>
+              </div>
+
+              <!-- SPACE INTEREST -->
+              <div class="form-group">
+                <label for="interest" class="form-label">🔭 Space Specialization Track</label>
+                <select id="interest" name="interest" class="form-select" required onchange="updateBoardingPass()">
+                  <option value="">Select your scientific focus</option>
+                  <option value="Planetary Exploration">Planetary Exploration & Cartography</option>
+                  <option value="Astrophysics">Astrophysics & Deep Space Telescopes</option>
+                  <option value="Rocket Propulsion">Rocket Propulsion & Orbital Flight</option>
+                  <option value="Autonomous Robotics">Autonomous Planetary Robotics & AI</option>
+                  <option value="Astrobiology">Astrobiology & Alien Biosignatures</option>
+                </select>
+              </div>
+
+              <!-- MESSAGE -->
+              <div class="form-group">
+                <label for="message" class="form-label">💬 Mission Aspiration Statement</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  class="form-textarea"
+                  style="min-height: 80px;"
+                  placeholder="Why do you wish to voyage across the Solar System?"
+                  oninput="updateBoardingPass()"
+                ></textarea>
+              </div>
+
+              <!-- SUBMIT BUTTON -->
+              <div class="btn-group" style="margin-top: 15px;">
+                <button type="submit" class="btn btn-primary" style="flex: 1;">🚀 ENROL CADET (POST)</button>
+                <a href="login.html" class="btn btn-secondary">🔑 CADET LOGIN</a>
+              </div>
+            </form>
+          </div>
+
+          <!-- ================= LIVE HOLOGRAPHIC BOARDING PASS ================= -->
+          <div>
+            <div style="font-family: var(--font-heading); font-size: 15px; font-weight: 700; color: var(--accent-neon-purple); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+              <span>✦ LIVE HOLOGRAPHIC CADET PASS PREVIEW</span>
+            </div>
+
+            <div class="hologram-card">
+              <div class="hologram-header">
+                <div>
+                  <div style="font-family: var(--font-heading); font-size: 20px; font-weight: 900; color: #fff; letter-spacing: 1px;">
+                    COSMOVerse ACADEMY
+                  </div>
+                  <div style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);">
+                    INTERPLANETARY CADET CREDENTIAL
+                  </div>
+                </div>
+                <div style="text-align: right;">
+                  <span class="data-chip" id="previewBadge" style="background: rgba(147, 51, 234, 0.4); border-color: var(--accent-neon-purple); font-size: 11px;">
+                    ● STATUS: DRAFT
+                  </span>
+                </div>
+              </div>
+
+              <div class="hologram-grid">
+                <div>
+                  <div class="hologram-field-label">Cadet Name</div>
+                  <div class="hologram-field-value" id="previewName">Awaiting Name...</div>
+                </div>
+
+                <div>
+                  <div class="hologram-field-label">Assigned Sector</div>
+                  <div class="hologram-field-value" id="previewPlanet" style="color: var(--accent-gold);">Unassigned</div>
+                </div>
+
+                <div>
+                  <div class="hologram-field-label">Mission ID</div>
+                  <div class="hologram-field-value" id="previewMissionId" style="font-family: var(--font-mono); color: var(--primary-purple);">COSMO-59321</div>
+                </div>
+
+                <div>
+                  <div class="hologram-field-label">Domain Track</div>
+                  <div class="hologram-field-value" id="previewTrack" style="font-size: 13.5px;">General Cadet</div>
+                </div>
+              </div>
+
+              <div style="margin-top: 18px; padding-top: 14px; border-top: 1px dashed rgba(192, 132, 252, 0.3);">
+                <div class="hologram-field-label">Cadet Statement</div>
+                <div id="previewStatement" style="font-size: 13px; color: #e9d5ff; font-style: italic; margin-top: 4px;">
+                  "Eager to unlock the wonders of space exploration..."
+                </div>
+              </div>
+
+              <!-- Barcode Graphic -->
+              <div class="hologram-barcode">
+                <div class="barcode-line thick"></div>
+                <div class="barcode-line"></div>
+                <div class="barcode-line med"></div>
+                <div class="barcode-line thick"></div>
+                <div class="barcode-line"></div>
+                <div class="barcode-line med"></div>
+                <div class="barcode-line thick"></div>
+                <div class="barcode-line"></div>
+                <div class="barcode-line thick"></div>
+                <div class="barcode-line med"></div>
+                <div class="barcode-line"></div>
+                <div class="barcode-line thick"></div>
+                <div class="barcode-line med"></div>
+                <div class="barcode-line"></div>
+                <div class="barcode-line thick"></div>
+                <div class="barcode-line med"></div>
+                <div class="barcode-line thick"></div>
+                <div class="barcode-line"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+      <p class="footer-quote">🌌 CosmoVerse Space Program | Explorer Registration Portal 🌌</p>
+      
+      <div class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="planets.html">Planets</a>
+        <a href="missions.html">Exploration</a>
+        <a href="scientists.html">Scientists</a>
+        <a href="careers.html">Careers</a>
+        <a href="quiz.html">Space Quiz</a>
+        <a href="servlet-form.html">Join Cadet Program</a>
+        <a href="login.html">Explorer Login</a>
+      </div>
+
+      <p class="footer-text">CosmoVerse Academy Cadet Enrolment & Telemetry Dispatch Portal</p>
+    </footer>
+
+    <!-- LIVE BOARDING PASS LOGIC & SMART HYBRID POST SIMULATOR -->
+    <script>
+      function toggleMenu() {
+        document.getElementById('navLinks').classList.toggle('show');
+      }
+
+      function updateBoardingPass() {
+        const nameVal = document.getElementById('name').value.trim();
+        const planetVal = document.getElementById('planet').value;
+        const interestVal = document.getElementById('interest').value;
+        const messageVal = document.getElementById('message').value.trim();
+
+        document.getElementById('previewName').innerText = nameVal || 'Awaiting Name...';
+        document.getElementById('previewPlanet').innerText = planetVal || 'Unassigned';
+        document.getElementById('previewTrack').innerText = interestVal || 'General Cadet';
+        if (messageVal) {
+          document.getElementById('previewStatement').innerText = `"${messageVal}"`;
+        } else {
+          document.getElementById('previewStatement').innerText = '"Eager to unlock the wonders of space exploration..."';
+        }
+
+        const badge = document.getElementById('previewBadge');
+        if (nameVal && planetVal && interestVal) {
+          badge.innerText = '● READY FOR DISPATCH';
+          badge.style.color = 'var(--accent-green)';
+          badge.style.borderColor = 'rgba(52, 211, 153, 0.4)';
+        } else {
+          badge.innerText = '● STATUS: DRAFT';
+          badge.style.color = 'var(--text-muted)';
+          badge.style.borderColor = 'var(--accent-neon-purple)';
+        }
+      }
+
+      // Hybrid File Protocol Handler for local testing
+      document.querySelector('.explorer-form').addEventListener('submit', function(e) {
+        if (window.location.protocol === 'file:') {
+          e.preventDefault();
+          const name = document.getElementById('name').value || 'Cosmic Explorer';
+          const email = document.getElementById('email').value || 'explorer@cosmoverse.org';
+          const planet = document.getElementById('planet').value || 'Mars';
+          const interest = document.getElementById('interest').value || 'Planetary Exploration';
+          const message = document.getElementById('message').value || 'Eager to voyage across the cosmos!';
+          const missionId = 'COSMO-' + Math.floor(Math.random() * 90000 + 10000);
+
+          // Save session
+          sessionStorage.setItem("cosmoUser", JSON.stringify({ name, email, planet, interest, missionId }));
+
+          const container = document.querySelector('.explorer-container');
+          container.innerHTML = `
+            <div style="text-align: center;">
+              <div class="cosmic-badge" style="background: rgba(52, 211, 153, 0.2); border-color: var(--accent-green); color: #fff;">
+                <span class="pulse-dot" style="background: var(--accent-green);"></span> 200 OK — HTTP POST Processed
+              </div>
+              <h1 class="section-title" style="font-size: 32px;">★ CADET REGISTRATION CONFIRMED ★</h1>
+              <p class="section-subtitle">Authenticated & Logged via Orbital Dispatch Protocol (POST)</p>
+            </div>
+
+            <div class="hologram-card" style="margin-top: 30px;">
+              <div class="hologram-header">
+                <div>
+                  <div style="font-family: var(--font-heading); font-size: 22px; font-weight: 900; color: #fff;">
+                    COSMOVerse FLIGHT BADGE
+                  </div>
+                  <div style="font-size: 11px; color: var(--accent-green); font-family: var(--font-mono);">
+                    ✓ ACTIVE FLIGHT STATUS: DISPATCH APPROVED
+                  </div>
+                </div>
+                <div>
+                  <span class="data-chip" style="background: rgba(52, 211, 153, 0.25); color: #fff; border-color: var(--accent-green);">
+                    MISSION ID: ${missionId}
+                  </span>
+                </div>
+              </div>
+
+              <div class="hologram-grid">
+                <div>
+                  <div class="hologram-field-label">Explorer Name</div>
+                  <div class="hologram-field-value">${name}</div>
+                </div>
+                <div>
+                  <div class="hologram-field-label">Assigned Sector</div>
+                  <div class="hologram-field-value" style="color: var(--accent-gold);">${planet}</div>
+                </div>
+                <div>
+                  <div class="hologram-field-label">Orbital Contact</div>
+                  <div class="hologram-field-value" style="font-size: 14px;">${email}</div>
+                </div>
+                <div>
+                  <div class="hologram-field-label">Specialization</div>
+                  <div class="hologram-field-value">${interest}</div>
+                </div>
+              </div>
+
+              <div style="margin-top: 18px; padding-top: 14px; border-top: 1px dashed rgba(192, 132, 252, 0.3);">
+                <div class="hologram-field-label">Personal Exploration Statement</div>
+                <div style="font-size: 14px; color: #f3e8ff; font-style: italic; margin-top: 4px;">
+                  "${message}"
+                </div>
+              </div>
+            </div>
+
+            <div class="btn-group" style="margin-top: 35px; justify-content: center;">
+              <a href="servlet-form.html" class="btn btn-secondary">← New Registration</a>
+              <a href="login.html" class="btn btn-primary">Proceed to Cadet Login →</a>
+              <a href="session-tracking.html" class="btn btn-accent">View Session Telemetry →</a>
+            </div>
+          `;
+        }
+      });
+    </script>
+  </body>
+</html>
